@@ -118,29 +118,29 @@ function renderAllStartups() {
 function renderStartupCard(startup) {
     const card = document.createElement('div');
     card.id = `startup-${startup.id}`;
-    card.className = 'glass rounded-2xl shadow-2xl overflow-hidden transition-theme hover:shadow-pink-500/40 hover:scale-105 duration-300 animate-fade-in-up';
+    card.className = 'osmo-card shadow osmo-card transition-theme';
     // Create tag elements
     const tagsHtml = startup.tags.map(tag => 
-        `<span class="inline-block bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs px-3 py-1 rounded-full mr-2 mb-2 shadow hover:scale-110 transition-transform">${escapeHtml(tag)}</span>`
+        `<span class="osmo-badge">${escapeHtml(tag)}</span>`
     ).join('');
     card.innerHTML = `
         <div class="p-6">
-            <h4 class="text-xl font-semibold text-white mb-2">${escapeHtml(startup.startupName)}</h4>
-            <p class="text-gray-300 mb-4">${escapeHtml(startup.description)}</p>
-            <p class="text-sm text-gray-400 mb-3">
+            <h4 class="text-xl font-extrabold text-[#18181b] mb-2 tracking-tight">${escapeHtml(startup.startupName)}</h4>
+            <p class="text-[#52525b] mb-4 font-medium">${escapeHtml(startup.description)}</p>
+            <p class="text-sm text-[#52525b] mb-3">
                 <span class="font-medium">Founder:</span> ${escapeHtml(startup.founderName)}
             </p>
             <div class="mb-4 flex flex-wrap">${tagsHtml}</div>
             <div class="flex items-center justify-between space-x-2">
-                <button class="upvote-btn flex items-center space-x-1 text-pink-300 hover:text-pink-500 transition-colors" data-id="${startup.id}">
+                <button class="upvote-btn flex items-center space-x-1 text-blue-600 hover:text-blue-800 transition-colors osmo-btn px-4 py-1 text-xs" data-id="${startup.id}">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
                     </svg>
                     <span class="upvote-count">${startup.upvotes}</span>
                 </button>
-                <button class="contact-btn px-3 py-1 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-2xl text-xs font-semibold shadow hover:scale-105 transition-all" data-id="${startup.id}">📞 Contact</button>
-                <button class="partner-btn px-3 py-1 bg-gradient-to-r from-pink-500 to-purple-500 text-white rounded-2xl text-xs font-semibold shadow hover:scale-105 transition-all" data-id="${startup.id}">🤝 Request Partnership</button>
-                <span class="text-xs text-gray-400">${formatDate(startup.timestamp)}</span>
+                <button class="contact-btn osmo-btn px-4 py-1 text-xs font-semibold shadow" data-id="${startup.id}">📞 Contact</button>
+                <button class="partner-btn osmo-btn px-4 py-1 text-xs font-semibold shadow" data-id="${startup.id}">🤝 Request Partnership</button>
+                <span class="text-xs text-[#52525b]">${formatDate(startup.timestamp)}</span>
             </div>
         </div>
     `;
