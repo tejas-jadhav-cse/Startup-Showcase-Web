@@ -94,7 +94,33 @@
         margin-right: 0.5rem;
         margin-bottom: 0.5rem;
         display: inline-block;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        transition: box-shadow 0.2s, background 0.2s, color 0.2s;
     }
+    .osmo-badge:active::after {
+        content: '';
+        position: absolute;
+        left: 50%; top: 50%;
+        width: 200%; height: 200%;
+        background: rgba(59,130,246,0.15);
+        border-radius: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        animation: ripple-badge 0.4s linear;
+        z-index: 1;
+    }
+    @keyframes ripple-badge {
+        to { transform: translate(-50%, -50%) scale(1); opacity: 0; }
+    }
+    .animate-bird-float {
+        /* JS animation, class for targeting */
+    }
+    .animate-text-scramble {
+        /* JS animation, class for targeting */
+    }
+    /* Confetti styles (canvas is full screen, pointer-events-none) */
+    #confettiCanvas { pointer-events: none; }
     .osmo-hero-title {
         font-size: 3rem;
         font-weight: 900;

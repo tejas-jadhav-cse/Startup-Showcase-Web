@@ -111,17 +111,21 @@ function openPartnershipModal(startup) {
 // Render all startups
 function renderAllStartups() {
     startupGrid.innerHTML = '';
+    let totalUpvotes = 0;
+    startupIdeas.forEach(s => totalUpvotes += s.upvotes);
     startupIdeas.forEach(renderStartupCard);
+    animateCounter(document.getElementById('statStartups'), startupIdeas.length, 'Startups');
+    animateCounter(document.getElementById('statUpvotes'), totalUpvotes, 'Upvotes');
 }
 
 // Create and render a startup card
 function renderStartupCard(startup) {
     const card = document.createElement('div');
     card.id = `startup-${startup.id}`;
-    card.className = 'osmo-card shadow osmo-card transition-theme';
+    card.className = 'osmo-card shadow osmo-card transition-theme animate-fade-in-up';
     // Create tag elements
     const tagsHtml = startup.tags.map(tag => 
-        `<span class="osmo-badge">${escapeHtml(tag)}</span>`
+        `<span class="osmo-badge" data-tag="${escapeHtml(tag)}">${escapeHtml(tag)}</span>`
     ).join('');
     card.innerHTML = `
         <div class="p-6">
@@ -148,6 +152,13 @@ function renderStartupCard(startup) {
     card.querySelector('.upvote-btn').addEventListener('click', handleUpvote);
     card.querySelector('.contact-btn').addEventListener('click', () => openContactModal(startup));
     card.querySelector('.partner-btn').addEventListener('click', () => openPartnershipModal(startup));
+    // Tag click for filtering
+    card.querySelectorAll('.osmo-badge').forEach(badge => {
+        badge.addEventListener('click', (e) => {
+            filterInput.value = badge.textContent;
+            filterInput.dispatchEvent(new Event('input'));
+        });
+    });
 }
 
 // Handle upvote button click with animation
@@ -223,6 +234,10 @@ function showNotification(message) {
     notification.className = 'fixed bottom-4 right-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-3 rounded-2xl shadow-lg transform transition-all duration-300 translate-y-0 opacity-100';
     notification.textContent = message;
     document.body.appendChild(notification);
+    // Confetti burst on submit
+    if (message.toLowerCase().includes('submitted')) {
+        launchConfetti();
+    }
     setTimeout(() => {
         notification.classList.add('translate-y-10', 'opacity-0');
         setTimeout(() => {
@@ -230,6 +245,94 @@ function showNotification(message) {
         }, 300);
     }, 3000);
 }
+
+// Animate counter utility
+function animateCounter(el, target, label) {
+    if (!el) return;
+    let start = 0;
+    const duration = 700;
+    const step = Math.ceil(target / (duration / 16));
+    function update() {
+        start += step;
+        if (start >= target) {
+            el.textContent = `${target} ${label}`;
+        } else {
+            el.textContent = `${start} ${label}`;
+            requestAnimationFrame(update);
+        }
+    }
+    update();
+}
+
+// Confetti animation
+function launchConfetti() {
+    const canvas = document.getElementById('confettiCanvas');
+    if (!canvas) return;
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    canvas.style.display = 'block';
+    const ctx = canvas.getContext('2d');
+    const confetti = [];
+    const colors = ['#7f5af0', '#43e6fc', '#ff6ac1', '#3b82f6', '#fbbf24'];
+    for (let i = 0; i < 80; i++) {
+        confetti.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * -canvas.height,
+            r: Math.random() * 8 + 4,
+            d: Math.random() * 80 + 20,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            tilt: Math.random() * 10 - 10
+        });
+    }
+    let frame = 0;
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        confetti.forEach(c => {
+            ctx.beginPath();
+            ctx.arc(c.x, c.y, c.r, 0, 2 * Math.PI);
+            ctx.fillStyle = c.color;
+            ctx.fill();
+        });
+        update();
+        frame++;
+        if (frame < 60) requestAnimationFrame(draw);
+        else canvas.style.display = 'none';
+    }
+    function update() {
+        confetti.forEach(c => {
+            c.y += Math.cos(frame / 10 + c.d) + 2 + c.r / 2;
+            c.x += Math.sin(frame / 15) * 2;
+        });
+    }
+    draw();
+}
+
+// Text scramble animation for hero title
+window.addEventListener('DOMContentLoaded', () => {
+    // ...existing code...
+    const scrambleEl = document.querySelector('.animate-text-scramble');
+    if (scrambleEl) {
+        const chars = '!<>-_\/[]{}—=+*^?#________';
+        const text = scrambleEl.textContent;
+        let frame = 0;
+        let scramble = '';
+        function scrambleStep() {
+            scramble = text.split('').map((c, i) => {
+                if (i < frame) return c;
+                return chars[Math.floor(Math.random() * chars.length)];
+            }).join('');
+            scrambleEl.textContent = scramble;
+            frame++;
+            if (frame <= text.length) {
+                setTimeout(scrambleStep, 30);
+            } else {
+                scrambleEl.textContent = text;
+            }
+        }
+        scrambleStep();
+    }
+    // ...existing code...
+});
 
 // Entrance animation utility
 const style = document.createElement('style');
