@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Startup Showcase</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Custom styles -->
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .transition-theme {
+                transition: background-color 0.3s ease, color 0.3s ease;
+            }
+        }
+    </style>
+</head>
+<body class="bg-white dark:bg-gray-900 transition-theme">
+    <!-- Navbar -->
+    <nav class="bg-white dark:bg-gray-800 shadow-md transition-theme">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-indigo-600 dark:text-indigo-400">Student Startup Showcase</h1>
+            <button id="darkModeToggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-theme">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-700 dark:text-gray-300 hidden dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-700 dark:text-gray-300 block dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-indigo-500 to-purple-600 text-white py-12">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">Share Your Startup Ideas</h2>
+            <p class="text-lg md:text-xl mb-6 max-w-3xl mx-auto">Got a brilliant startup idea? Share it with the community and get feedback from fellow student entrepreneurs!</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Filter Input (Optional Bonus) -->
+        <div class="mb-8">
+            <label for="filter" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Filter by tag or keyword:</label>
+            <input type="text" id="filter" class="w-full md:w-1/3 px-4 py-2 border rounded-lg border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-theme" placeholder="Enter keyword or tag...">
+        </div>
+
+        <!-- Form Section -->
+        <div class="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6 mb-8 transition-theme">
+            <h3 class="text-2xl font-semibold mb-4 text-gray-800 dark:text-gray-200">Submit Your Startup Idea</h3>
+            <form id="startupForm">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="startupName" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Startup Name</label>
+                        <input type="text" id="startupName" name="startupName" required class="w-full px-4 py-2 border rounded-lg border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-theme" placeholder="Enter startup name">
+                    </div>
+                    <div>
+                        <label for="founderName" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Founder Name</label>
+                        <input type="text" id="founderName" name="founderName" required class="w-full px-4 py-2 border rounded-lg border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-theme" placeholder="Enter founder name">
+                    </div>
+                    <div class="md:col-span-2">
+                        <label for="description" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Description</label>
+                        <textarea id="description" name="description" required rows="4" class="w-full px-4 py-2 border rounded-lg border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-theme" placeholder="Describe your startup idea"></textarea>
+                    </div>
+                    <div class="md:col-span-2">
+                        <label for="tags" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Tags (comma-separated)</label>
+                        <input type="text" id="tags" name="tags" required class="w-full px-4 py-2 border rounded-lg border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-theme" placeholder="e.g. tech, education, healthcare">
+                    </div>
+                </div>
+                <div class="mt-6">
+                    <button type="submit" class="px-6 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg transition-colors duration-200 shadow-md hover:shadow-lg">
+                        Submit Idea
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Startup Cards Grid -->
+        <h3 class="text-2xl font-semibold mb-4 text-gray-800 dark:text-gray-200">Startup Ideas</h3>
+        <div id="startupGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Startup cards will be added here via JavaScript -->
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-100 dark:bg-gray-800 mt-8 py-6 transition-theme">
+        <div class="container mx-auto px-4 text-center text-gray-600 dark:text-gray-400">
+            <p>&copy; 2025 Student Startup Showcase</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="app.js"></script>
+</body>
+</html>
