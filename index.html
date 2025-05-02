@@ -3,23 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Startup Showcase</title>
+    <title>Startup Nest</title>
     <!-- Tailwind CSS via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Custom styles -->
-    <style type="text/tailwindcss">
-        @layer utilities {
-            .transition-theme {
-                transition: background-color 0.3s ease, color 0.3s ease;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
-<body class="bg-white dark:bg-gray-900 transition-theme">
+<body class="gradient-animate min-h-screen dark bg-gray-900 transition-theme">
     <!-- Navbar -->
-    <nav class="bg-white dark:bg-gray-800 shadow-md transition-theme">
+    <nav class="glass shadow-lg transition-theme fixed w-full z-30 top-0 left-0">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <h1 class="text-2xl font-bold text-indigo-600 dark:text-indigo-400">Student Startup Showcase</h1>
+            <div class="flex items-center space-x-3">
+                <!-- Bird Logo SVG -->
+                <span class="inline-block align-middle">
+                    <svg width="36" height="36" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8 32C12 24 24 8 40 8C36 16 28 32 8 32Z" fill="url(#birdGradient)"/>
+                        <path d="M8 32C16 32 32 40 40 40" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+                        <defs>
+                            <linearGradient id="birdGradient" x1="8" y1="8" x2="40" y2="32" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#7f5af0"/>
+                                <stop offset="1" stop-color="#ff6ac1"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </span>
+                <h1 class="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">Startup Nest</h1>
+            </div>
             <button id="darkModeToggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-theme">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-700 dark:text-gray-300 hidden dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
@@ -32,10 +40,13 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="bg-gradient-to-r from-indigo-500 to-purple-600 text-white py-12">
-        <div class="container mx-auto px-4 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4">Share Your Startup Ideas</h2>
-            <p class="text-lg md:text-xl mb-6 max-w-3xl mx-auto">Got a brilliant startup idea? Share it with the community and get feedback from fellow student entrepreneurs!</p>
+    <section class="flex items-center justify-center min-h-[60vh] pt-32 pb-12">
+        <div class="text-center">
+            <h2 class="text-4xl md:text-5xl font-extrabold mb-4 bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent animate-fade-in-up">Launch your ideas into the sky</h2>
+            <p class="text-lg md:text-xl mb-8 max-w-2xl mx-auto text-gray-300 animate-fade-in-up delay-100">Showcase your student startup, connect with partners, and let your vision take flight in the Startup Nest.</p>
+            <button id="openSubmitModal" class="px-8 py-3 rounded-2xl bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold shadow-lg hover:scale-105 hover:from-pink-500 hover:to-purple-500 transition-all duration-300 animate-fade-in-up delay-200">
+                Submit Your Startup Idea
+            </button>
         </div>
     </section>
 
@@ -46,51 +57,23 @@
             <label for="filter" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Filter by tag or keyword:</label>
             <input type="text" id="filter" class="w-full md:w-1/3 px-4 py-2 border rounded-lg border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-theme" placeholder="Enter keyword or tag...">
         </div>
-
-        <!-- Form Section -->
-        <div class="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6 mb-8 transition-theme">
-            <h3 class="text-2xl font-semibold mb-4 text-gray-800 dark:text-gray-200">Submit Your Startup Idea</h3>
-            <form id="startupForm">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label for="startupName" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Startup Name</label>
-                        <input type="text" id="startupName" name="startupName" required class="w-full px-4 py-2 border rounded-lg border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-theme" placeholder="Enter startup name">
-                    </div>
-                    <div>
-                        <label for="founderName" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Founder Name</label>
-                        <input type="text" id="founderName" name="founderName" required class="w-full px-4 py-2 border rounded-lg border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-theme" placeholder="Enter founder name">
-                    </div>
-                    <div class="md:col-span-2">
-                        <label for="description" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Description</label>
-                        <textarea id="description" name="description" required rows="4" class="w-full px-4 py-2 border rounded-lg border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-theme" placeholder="Describe your startup idea"></textarea>
-                    </div>
-                    <div class="md:col-span-2">
-                        <label for="tags" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Tags (comma-separated)</label>
-                        <input type="text" id="tags" name="tags" required class="w-full px-4 py-2 border rounded-lg border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-theme" placeholder="e.g. tech, education, healthcare">
-                    </div>
-                </div>
-                <div class="mt-6">
-                    <button type="submit" class="px-6 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg transition-colors duration-200 shadow-md hover:shadow-lg">
-                        Submit Idea
-                    </button>
-                </div>
-            </form>
-        </div>
-
         <!-- Startup Cards Grid -->
         <h3 class="text-2xl font-semibold mb-4 text-gray-800 dark:text-gray-200">Startup Ideas</h3>
         <div id="startupGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <!-- Startup cards will be added here via JavaScript -->
         </div>
     </main>
-
     <!-- Footer -->
-    <footer class="bg-gray-100 dark:bg-gray-800 mt-8 py-6 transition-theme">
+    <footer class="bg-gray-100 dark:bg-gray-800 mt-8 py-8 transition-theme">
         <div class="container mx-auto px-4 text-center text-gray-600 dark:text-gray-400">
-            <p>&copy; 2025 Student Startup Showcase</p>
+            <p class="text-lg font-semibold mb-2">Thank you for watching 🚀</p>
+            <div class="flex justify-center space-x-4 mb-2">
+                <a href="https://github.com/" target="_blank" class="hover:text-pink-500 transition-colors"><svg class="inline h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.373 0 12c0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.726-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.09-.745.083-.729.083-.729 1.205.085 1.84 1.237 1.84 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.305.762-1.605-2.665-.305-5.466-1.334-5.466-5.93 0-1.31.468-2.38 1.236-3.22-.124-.304-.535-1.527.117-3.176 0 0 1.008-.322 3.3 1.23.96-.267 1.98-.399 3-.404 1.02.005 2.04.137 3 .404 2.29-1.552 3.297-1.23 3.297-1.23.653 1.649.242 2.872.12 3.176.77.84 1.235 1.91 1.235 3.22 0 4.61-2.803 5.624-5.475 5.92.43.37.823 1.102.823 2.222 0 1.606-.015 2.898-.015 3.293 0 .32.216.694.825.576C20.565 21.796 24 17.298 24 12c0-6.627-5.373-12-12-12z"/></svg></a>
+                <a href="https://twitter.com/" target="_blank" class="hover:text-pink-500 transition-colors"><svg class="inline h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557a9.93 9.93 0 01-2.828.775 4.932 4.932 0 002.165-2.724c-.951.564-2.005.974-3.127 1.195a4.92 4.92 0 00-8.384 4.482C7.691 8.095 4.066 6.13 1.64 3.161c-.542.93-.856 2.01-.857 3.17 0 2.188 1.115 4.117 2.823 5.254a4.904 4.904 0 01-2.229-.616c-.054 2.281 1.581 4.415 3.949 4.89a4.936 4.936 0 01-2.224.084c.627 1.956 2.444 3.377 4.6 3.417A9.867 9.867 0 010 21.543a13.94 13.94 0 007.548 2.209c9.058 0 14.009-7.513 14.009-14.009 0-.213-.005-.425-.014-.636A10.012 10.012 0 0024 4.557z"/></svg></a>
+            </div>
+            <p class="text-xs">&copy; 2025 Startup Nest</p>
         </div>
     </footer>
-
     <!-- JavaScript -->
     <script src="app.js"></script>
 </body>
