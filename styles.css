@@ -154,4 +154,45 @@
         border-color: #3b82f6;
         outline: none;
     }
+    .dark .osmo-bg {
+        background: #000 !important;
+    }
+    .dark .osmo-navbar,
+    .dark .osmo-footer {
+        background: #000 !important;
+        color: #efeeec !important;
+        border-color: #222 !important;
+    }
+    .dark .osmo-card {
+        background: #18181b !important;
+        color: #efeeec !important;
+        border-color: #222 !important;
+    }
+    .dark .osmo-btn, .dark .showcase-btn {
+        background: #efeeec !important;
+        color: #000 !important;
+        border: none !important;
+    }
+    .dark .osmo-btn:hover, .dark .showcase-btn:hover {
+        background: #fff !important;
+        color: #000 !important;
+    }
+    .dark .osmo-input {
+        background: #18181b !important;
+        color: #efeeec !important;
+        border-color: #333 !important;
+    }
+    .dark .osmo-badge {
+        background: #222 !important;
+        color: #efeeec !important;
+    }
+    .dark .osmo-hero-title {
+        color: #efeeec !important;
+    }
+    .dark .osmo-hero-desc {
+        color: #bdbdbd !important;
+    }
+    .dark #heroGradientBg {
+        opacity: 0.18;
+    }
 }

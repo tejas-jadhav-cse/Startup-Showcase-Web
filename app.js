@@ -9,13 +9,32 @@ const filterInput = document.getElementById('filter');
 const darkModeToggle = document.getElementById('darkModeToggle');
 const openSubmitModalBtn = document.getElementById('openSubmitModal');
 
-// Check for saved dark mode preference
-if (localStorage.getItem('darkMode') === 'enabled') {
+// Make dark mode default
+if (!localStorage.getItem('darkMode') || localStorage.getItem('darkMode') === 'enabled') {
     document.documentElement.classList.add('dark');
+    localStorage.setItem('darkMode', 'enabled');
+} else {
+    document.documentElement.classList.remove('dark');
 }
 
-// Dark mode toggle functionality
+// Dark mode toggle functionality with animation
+const darkModeIcon = document.getElementById('darkModeIcon');
 darkModeToggle.addEventListener('click', () => {
+    // Animate button
+    darkModeToggle.animate([
+        { transform: 'rotate(0deg) scale(1)' },
+        { transform: 'rotate(20deg) scale(1.2)' },
+        { transform: 'rotate(-20deg) scale(1.2)' },
+        { transform: 'rotate(0deg) scale(1)' }
+    ], { duration: 400 });
+    // Animate icon
+    if (darkModeIcon) {
+        darkModeIcon.animate([
+            { transform: 'scale(1)' },
+            { transform: 'scale(1.3) rotate(15deg)' },
+            { transform: 'scale(1)' }
+        ], { duration: 400 });
+    }
     if (document.documentElement.classList.contains('dark')) {
         document.documentElement.classList.remove('dark');
         localStorage.setItem('darkMode', 'disabled');
