@@ -217,3 +217,12 @@
         background: #ff6a47;
     }
 }
+
+/* Hide scrollbar for all browsers */
+html, body {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+}
+html::-webkit-scrollbar, body::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
