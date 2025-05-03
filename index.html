@@ -48,26 +48,34 @@
     <!-- Animated Gradient Hero Background -->
     <div id="heroGradientBg" class="absolute top-0 left-0 w-full h-[70vh] z-0 gradient-animate pointer-events-none"></div>
     <!-- Navbar -->
-    <nav class="osmo-navbar fixed w-full z-30 top-0 left-0">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+    <nav class="gradient-navbar">
+        <div class="container mx-auto">
             <div class="flex items-center space-x-4">
                 <!-- Bird Logo SVG with floating animation -->
                 <span class="inline-block align-middle animate-bird-float">
                     <svg id="birdLogo" width="40" height="40" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M8 32C12 24 24 8 40 8C36 16 28 32 8 32Z" fill="#3b82f6"/>
-                        <path d="M8 32C16 32 32 40 40 40" stroke="#18181b" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M8 32C16 32 32 40 40 40" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
                     </svg>
                 </span>
                 <div class="flex items-center space-x-2">
-                  <h1 class="text-2xl tracking-tight flex items-center" style="color:#efeeec;">Sandip Startup Launchpad</h1>
+                  <h1 class="text-2xl tracking-tight flex items-center" style="color:#ffffff;">Sandip Startup Launchpad</h1>
                   <span class="sect-craft-badge">Craft by SECT Chapter</span>
                 </div>
             </div>
-            <button id="darkModeToggle" class="p-2 rounded-full hover:bg-gray-100 transition-theme border border-transparent">
-                <svg id="darkModeIcon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-700 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                </svg>
-            </button>
+            <div class="flex items-center">
+                <div class="nav-links">
+                    <a href="#home" class="nav-link">Home</a>
+                    <a href="#ideas" class="nav-link">Ideas</a>
+                    <a href="#submit" class="nav-link">Submit</a>
+                    <a href="#contact" class="nav-link">Contact</a>
+                </div>
+                <button id="darkModeToggle" class="p-2 rounded-full hover:bg-gray-800 transition-theme border border-transparent ml-4">
+                    <svg id="darkModeIcon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                </button>
+            </div>
         </div>
     </nav>
 

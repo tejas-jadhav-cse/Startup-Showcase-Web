@@ -201,7 +201,7 @@
         color: #fff;
         border-radius: 0.6rem;
         font-size: 0.82rem;
-        font-weight: 700;
+        font-weight: 400;
         padding: 0.18rem 0.7rem 0.18rem 0.7rem;
         display: flex;
         align-items: center;
@@ -215,6 +215,74 @@
     .sect-craft-badge:hover {
         box-shadow: 0 2px 8px 0 rgba(255,76,36,0.18);
         background: #ff6a47;
+    }
+}
+
+/* Gradient Overlay Navbar */
+.gradient-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 50;
+    padding: 1rem 2rem;
+    color: #fff;
+    background: none;
+}
+.gradient-navbar::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: linear-gradient(to bottom, #000000 0%, rgba(0,0,0,0.8) 80%, transparent 100%);
+}
+.gradient-navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.gradient-navbar .nav-links {
+    display: flex;
+    gap: 2rem;
+}
+.gradient-navbar .nav-link {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 1.1rem;
+    font-family: 'PP Neue Montreal', sans-serif;
+    transition: color 0.2s;
+    position: relative;
+}
+.gradient-navbar .nav-link:hover,
+.gradient-navbar .nav-link:focus {
+    color: #43e6fc;
+}
+.gradient-navbar .nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: #43e6fc;
+    transition: width 0.3s;
+}
+.gradient-navbar .nav-link:hover::after {
+    width: 100%;
+}
+@media (max-width: 768px) {
+    .gradient-navbar {
+        padding: 1rem;
+    }
+    .gradient-navbar .container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .gradient-navbar .nav-links {
+        margin-top: 1rem;
+        gap: 1rem;
     }
 }
 
