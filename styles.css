@@ -235,7 +235,13 @@
     top: 0; left: 0; right: 0; bottom: 0;
     z-index: -1;
     pointer-events: none;
-    background: linear-gradient(to bottom, #000000 0%, rgba(0,0,0,0.8) 80%, transparent 100%);
+    background: linear-gradient(to bottom, 
+        rgba(1,1,1,0.8) 0%, 
+        rgba(1,1,1,0.65) 20%,
+        rgba(0,0,0,0.45) 40%, 
+        rgba(0,0,0,0.25) 65%, 
+        rgba(0,0,0,0.1) 85%, 
+        transparent 100%);
 }
 .gradient-navbar .container {
     display: flex;
@@ -252,25 +258,14 @@
     font-weight: 400;
     font-size: 1.1rem;
     font-family: 'PP Neue Montreal', sans-serif;
-    transition: color 0.2s;
+    transition: color 0.2s, text-shadow 0.2s;
     position: relative;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 .gradient-navbar .nav-link:hover,
 .gradient-navbar .nav-link:focus {
     color: #43e6fc;
-}
-.gradient-navbar .nav-link::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: -4px;
-    left: 0;
-    background-color: #43e6fc;
-    transition: width 0.3s;
-}
-.gradient-navbar .nav-link:hover::after {
-    width: 100%;
+    text-shadow: 0 1px 4px rgba(67, 230, 252, 0.4);
 }
 @media (max-width: 768px) {
     .gradient-navbar {
