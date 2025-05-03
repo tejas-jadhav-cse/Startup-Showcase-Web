@@ -52,7 +52,7 @@ function openModal(contentHtml) {
     modalBg.className = 'fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60 backdrop-blur-sm animate-fade-in-up';
     modalBg.innerHTML = `
         <div class="glass rounded-2xl shadow-2xl p-8 max-w-lg w-full relative animate-fade-in-up">
-            <button class="absolute top-3 right-3 text-gray-400 hover:text-pink-400 text-2xl font-bold" id="closeModalBtn">&times;</button>
+            <button class="absolute top-3 right-3 text-gray-400 hover:text-pink-400 text-2xl" id="closeModalBtn">&times;</button>
             ${contentHtml}
         </div>
     `;
@@ -72,7 +72,7 @@ function closeModal() {
 // Move form into modal
 openSubmitModalBtn.addEventListener('click', () => {
     openModal(`
-        <h3 class='text-2xl font-semibold mb-4 text-gray-100'>Submit Your Startup Idea</h3>
+        <h3 class='text-2xl mb-4 text-gray-100'>Submit Your Startup Idea</h3>
         <form id='modalStartupForm'>
             <div class='grid grid-cols-1 gap-4'>
                 <input type='text' id='modalStartupName' placeholder='Startup Name' required class='px-4 py-2 rounded-lg bg-gray-900 text-white border border-gray-700 focus:ring-2 focus:ring-pink-500 transition-theme'>
@@ -112,16 +112,16 @@ openSubmitModalBtn.addEventListener('click', () => {
 // Contact and Partnership modals
 function openContactModal(startup) {
     openModal(`
-        <h3 class='text-xl font-bold mb-2 text-pink-400'>Contact Founder</h3>
-        <p class='mb-4 text-gray-200'>Send a message to <span class='font-semibold'>${escapeHtml(startup.founderName)}</span> about <span class='font-semibold'>${escapeHtml(startup.startupName)}</span>.</p>
+        <h3 class='text-xl mb-2 text-pink-400'>Contact Founder</h3>
+        <p class='mb-4 text-gray-200'>Send a message to <span>${escapeHtml(startup.founderName)}</span> about <span>${escapeHtml(startup.startupName)}</span>.</p>
         <textarea id='contactMsg' rows='3' class='w-full px-3 py-2 rounded-lg bg-gray-900 text-white border border-gray-700 mb-4' placeholder='Your message...'></textarea>
         <button class='px-5 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-2xl shadow hover:scale-105 transition-all' onclick='closeModal()'>Send</button>
     `);
 }
 function openPartnershipModal(startup) {
     openModal(`
-        <h3 class='text-xl font-bold mb-2 text-purple-400'>Request Partnership</h3>
-        <p class='mb-4 text-gray-200'>Request a partnership with <span class='font-semibold'>${escapeHtml(startup.startupName)}</span>.</p>
+        <h3 class='text-xl mb-2 text-purple-400'>Request Partnership</h3>
+        <p class='mb-4 text-gray-200'>Request a partnership with <span>${escapeHtml(startup.startupName)}</span>.</p>
         <textarea id='partnerMsg' rows='3' class='w-full px-3 py-2 rounded-lg bg-gray-900 text-white border border-gray-700 mb-4' placeholder='Your proposal...'></textarea>
         <button class='px-5 py-2 bg-gradient-to-r from-pink-500 to-purple-500 text-white rounded-2xl shadow hover:scale-105 transition-all' onclick='closeModal()'>Send</button>
     `);
@@ -148,10 +148,10 @@ function renderStartupCard(startup) {
     ).join('');
     card.innerHTML = `
         <div class="p-6">
-            <h4 class="text-xl font-extrabold text-[#18181b] mb-2 tracking-tight">${escapeHtml(startup.startupName)}</h4>
-            <p class="text-[#52525b] mb-4 font-medium">${escapeHtml(startup.description)}</p>
+            <h4 class="text-xl mb-2 tracking-tight text-[#18181b]">${escapeHtml(startup.startupName)}</h4>
+            <p class="text-[#52525b] mb-4 font-normal">${escapeHtml(startup.description)}</p>
             <p class="text-sm text-[#52525b] mb-3">
-                <span class="font-medium">Founder:</span> ${escapeHtml(startup.founderName)}
+                <span>Founder:</span> ${escapeHtml(startup.founderName)}
             </p>
             <div class="mb-4 flex flex-wrap">${tagsHtml}</div>
             <div class="flex items-center justify-between space-x-2">
@@ -161,8 +161,8 @@ function renderStartupCard(startup) {
                     </svg>
                     <span class="upvote-count">${startup.upvotes}</span>
                 </button>
-                <button class="contact-btn osmo-btn px-4 py-1 text-xs font-semibold shadow" data-id="${startup.id}">📞 Contact</button>
-                <button class="partner-btn osmo-btn px-4 py-1 text-xs font-semibold shadow" data-id="${startup.id}">🤝 Request Partnership</button>
+                <button class="contact-btn osmo-btn px-4 py-1 text-xs shadow" data-id="${startup.id}">📞 Contact</button>
+                <button class="partner-btn osmo-btn px-4 py-1 text-xs shadow" data-id="${startup.id}">🤝 Request Partnership</button>
                 <span class="text-xs text-[#52525b]">${formatDate(startup.timestamp)}</span>
             </div>
         </div>
