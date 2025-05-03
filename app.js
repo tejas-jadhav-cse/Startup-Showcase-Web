@@ -151,11 +151,11 @@ function renderStartupCard(startup) {
             <h4 class="text-xl mb-2 tracking-tight text-[#18181b]">${escapeHtml(startup.startupName)}</h4>
             <p class="text-[#52525b] mb-4 font-normal">${escapeHtml(startup.description)}</p>
             <p class="text-sm text-[#52525b] mb-3">
-                <span>Founder:</span> ${escapeHtml(startup.founderName)}
+                <span style="font-weight:400">Founder:</span> ${escapeHtml(startup.founderName)}
             </p>
             <div class="mb-4 flex flex-wrap">${tagsHtml}</div>
             <div class="flex items-center justify-between space-x-2">
-                <button class="upvote-btn flex items-center space-x-1 text-blue-600 hover:text-blue-800 transition-colors osmo-btn px-4 py-1 text-xs" data-id="${startup.id}">
+                <button class="upvote-btn flex items-center space-x-1 text-blue-600 hover:text-blue-800 transition-colors osmo-btn px-4 py-1 text-xs" data-id="${startup.id}" style="font-weight:400;">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
                     </svg>
