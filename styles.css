@@ -226,7 +226,7 @@
     width: 100%;
     z-index: 50;
     padding: 1rem 2rem;
-    color: #fff;
+    color: #ffffff;
     background: none;
 }
 .gradient-navbar::before {
@@ -290,6 +290,34 @@ html::-webkit-scrollbar, body::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera */
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* --- Begin CodePen Hero Background Styles --- */
 :root {
   --stripe-color: #fff;
@@ -339,7 +367,10 @@ html::-webkit-scrollbar, body::-webkit-scrollbar {
   background-image: var(--stripes), var(--rainbow);
   background-size: 300%, 200%;
   background-position: 50% 50%, 50% 50%;
-  filter: blur(10px) invert(100%);
+  filter: blur(10px)
+    opacity(50%)
+    saturate(200%)
+    brightness(0.8);
   mask-image: radial-gradient(ellipse at 100% 0%, black 40%, transparent 70%);
   animation: smoothBg 60s linear infinite;
   background-attachment: fixed;
@@ -353,8 +384,7 @@ html::-webkit-scrollbar, body::-webkit-scrollbar {
   background-image: var(--stripes), var(--rainbow);
   background-size: 200%, 100%;
   background-position: 50% 50%, 50% 50%;
-  filter: blur(10px) invert(100%);
-  opacity: 0.7;
+  filter: blur(10px) opacity(50%) saturate(200%);
   pointer-events: none;
 }
 
