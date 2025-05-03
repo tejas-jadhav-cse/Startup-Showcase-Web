@@ -45,52 +45,55 @@
     </style>
 </head>
 <body class="osmo-bg min-h-screen relative">
-    <!-- Animated Gradient Hero Background -->
-    <div id="heroGradientBg" class="absolute top-0 left-0 w-full h-[70vh] z-0 gradient-animate pointer-events-none"></div>
-    <!-- Navbar -->
-    <nav class="gradient-navbar">
-        <div class="container mx-auto">
-            <div class="flex items-center space-x-4">
-                <!-- Bird Logo SVG with floating animation -->
-                <span class="inline-block align-middle animate-bird-float">
-                    <svg id="birdLogo" width="40" height="40" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M8 32C12 24 24 8 40 8C36 16 28 32 8 32Z" fill="#3b82f6"/>
-                        <path d="M8 32C16 32 32 40 40 40" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
-                    </svg>
-                </span>
-                <div class="flex items-center space-x-2">
-                  <h1 class="text-2xl tracking-tight flex items-center" style="color:#ffffff;">Sandip Startup Launchpad</h1>
-                  <span class="sect-craft-badge">Craft by SECT Chapter</span>
+    <!-- Wrapper Section for Hero Background and Hero Content -->
+    <section class="wrapper">
+        <div class="hero"></div>
+        <!-- Navbar -->
+        <nav class="gradient-navbar">
+            <div class="container mx-auto">
+                <div class="flex items-center space-x-4">
+                    <!-- Bird Logo SVG with floating animation -->
+                    <span class="inline-block align-middle animate-bird-float">
+                        <svg id="birdLogo" width="40" height="40" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8 32C12 24 24 8 40 8C36 16 28 32 8 32Z" fill="#3b82f6"/>
+                            <path d="M8 32C16 32 32 40 40 40" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </span>
+                    <div class="flex items-center space-x-2">
+                      <h1 class="text-2xl tracking-tight flex items-center" style="color:#ffffff;">Sandip Startup Launchpad</h1>
+                      <span class="sect-craft-badge">Craft by SECT Chapter</span>
+                    </div>
+                </div>
+                <div class="flex items-center">
+                    <div class="nav-links">
+                        <a href="#home" class="nav-link">Home</a>
+                        <a href="#ideas" class="nav-link">Ideas</a>
+                        <a href="#submit" class="nav-link">Submit</a>
+                        <a href="#contact" class="nav-link">Contact</a>
+                    </div>
+                    <button id="darkModeToggle" class="p-2 rounded-full hover:bg-gray-800 transition-theme border border-transparent ml-4">
+                        <svg id="darkModeIcon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                    </button>
                 </div>
             </div>
-            <div class="flex items-center">
-                <div class="nav-links">
-                    <a href="#home" class="nav-link">Home</a>
-                    <a href="#ideas" class="nav-link">Ideas</a>
-                    <a href="#submit" class="nav-link">Submit</a>
-                    <a href="#contact" class="nav-link">Contact</a>
-                </div>
-                <button id="darkModeToggle" class="p-2 rounded-full hover:bg-gray-800 transition-theme border border-transparent ml-4">
-                    <svg id="darkModeIcon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                    </svg>
-                </button>
-            </div>
-        </div>
-    </nav>
+        </nav>
 
-    <!-- Hero Section -->
-    <section class="flex items-center justify-center min-h-[60vh] pt-40 pb-16 relative z-10">
-        <div class="text-center max-w-2xl mx-auto">
-            <h2 class="osmo-hero-title mb-6" style="font-size: 3.5rem;">Start building Startup people remember</h2>
-            <p class="osmo-hero-desc" style="font-size: 1.6rem;">Showcase your student startup, connect with partners, and let your vision take flight in the Startup Nest.</p>
-            <button id="openSubmitModal" class="showcase-btn" style="font-weight: 400; font-size: 1.35rem;">Submit Your Startup Idea</button>
-            <div id="liveStats" class="mt-6 flex justify-center gap-6 text-lg font-normal text-[#3b82f6]" style="font-size: 1.35rem;">
-                <span id="statStartups">0 Startups</span>
-                <span id="statUpvotes">0 Upvotes</span>
+        <!-- Hero Section -->
+        <section class="flex items-center justify-center min-h-[60vh] pt-40 pb-16 relative z-10">
+            <div class="text-center max-w-2xl mx-auto">
+                <h2 class="osmo-hero-title mb-6" style="font-size: 3.5rem;">Start building Startup people remember</h2>
+                <p class="osmo-hero-desc" style="font-size: 1.6rem;">Showcase your student startup, connect with partners, and let your vision take flight in the Startup Nest.</p>
+                <button id="openSubmitModal" class="showcase-btn" style="font-weight: 400; font-size: 1.35rem;">Submit Your Startup Idea</button>
+                <div id="liveStats" class="mt-6 flex justify-center gap-6 text-lg font-normal text-[#3b82f6]" style="font-size: 1.35rem;">
+                    <span id="statStartups">0 Startups</span>
+                    <span id="statUpvotes">0 Upvotes</span>
+                </div>
             </div>
-        </div>
+        </section>
     </section>
+    <!-- End Wrapper Section -->
 
     <!-- Main Content -->
     <main class="container mx-auto px-4 py-8">
