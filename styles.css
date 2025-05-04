@@ -320,7 +320,7 @@ html::-webkit-scrollbar, body::-webkit-scrollbar {
 
 /* --- Begin CodePen Hero Background Styles --- */
 :root {
-  --stripe-color: #fff;
+  --stripe-color: #000000;
   --bg: var(--stripe-color);
   --maincolor: var(--bg);
 }
@@ -382,7 +382,7 @@ html::-webkit-scrollbar, body::-webkit-scrollbar {
   position: absolute;
   inset: 0;
   background-image: var(--stripes), var(--rainbow);
-  background-size: 200%, 100%;
+  background-size: 200%, 00%;
   background-position: 50% 50%, 50% 50%;
   filter: blur(10px) opacity(50%) saturate(200%);
   pointer-events: none;
