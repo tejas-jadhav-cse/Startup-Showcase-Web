@@ -484,8 +484,42 @@
     flex-flow: column;
     gap: 4.5%;
     text-align: center;
-    mix-blend-mode: difference;
-    filter: invert(1);
+    z-index: 10; /* Ensures content is above the gradient background but below the navbar */
+    padding-top: 6rem; /* Adds space below the fixed navbar */
+}
+
+.content .osmo-hero-title {
+    color: #ffffff;
+    margin-bottom: 1.5rem;
+    filter: none; /* Remove any existing filter */
+    mix-blend-mode: normal; /* Override any existing blend mode */
+}
+
+.content .osmo-hero-desc {
+    color: #ffffff;
+    opacity: 0.9;
+    margin-bottom: 2rem;
+}
+
+.content #liveStats {
+    color: #ffffff;
+    opacity: 0.9;
+    font-weight: 500;
+}
+
+/* Adjust button to stand out on gradient background */
+.content .showcase-btn {
+    background: #ffffff;
+    color: #18181b;
+    border: none;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+}
+
+.content .showcase-btn:hover {
+    background: #f0f0f0;
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
 }
 
 .h1--scalingSize {
