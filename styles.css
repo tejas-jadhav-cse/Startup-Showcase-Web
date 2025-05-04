@@ -216,7 +216,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 50;
+    z-index: 100; /* Increased z-index to ensure navbar is above all content */
     padding: 1rem 2rem;
     color: #ffffff;
     background: none;
@@ -270,8 +270,8 @@
 
 /* --- 5.3 Typography Components --- */
 .osmo-hero-title {
-    font-size: 3rem;
-    font-weight: 900;
+    font-size: 6.0rem; /* Increased from 3rem to 6.0rem */
+    font-weight: 400; /* Changed from 900 (bold) to 400 (normal) */
     color: #18181b;
     letter-spacing: -0.03em;
     line-height: 1.1;
