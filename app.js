@@ -694,3 +694,471 @@ window.addEventListener('DOMContentLoaded', () => {
     
     renderAllStartups();
 });
+
+// ==========================================================================
+// 10. Featured Startup Functionality
+// ==========================================================================
+
+/**
+ * Select and display a featured startup from the available startup ideas
+ */
+function updateFeaturedStartup() {
+    if (startupIdeas.length === 0) return;
+    
+    // Sort by upvotes and select the highest one
+    const sortedStartups = [...startupIdeas].sort((a, b) => b.upvotes - a.upvotes);
+    const featured = sortedStartups[0];
+    
+    // Update the featured section
+    document.getElementById('featuredName').textContent = featured.startupName;
+    document.getElementById('featuredFounder').textContent = featured.founderName;
+    document.getElementById('featuredDesc').textContent = featured.description;
+    document.getElementById('featuredMetric').textContent = featured.upvotes;
+    
+    // Clear and update tags
+    const tagsContainer = document.getElementById('featuredTags');
+    tagsContainer.innerHTML = '';
+    featured.tags.forEach(tag => {
+        const tagEl = document.createElement('span');
+        tagEl.className = 'osmo-badge';
+        tagEl.textContent = tag;
+        tagsContainer.appendChild(tagEl);
+    });
+    
+    // Set up view details button
+    document.getElementById('viewFeaturedBtn').onclick = () => {
+        // Find and scroll to the featured startup card
+        const card = document.getElementById(`startup-${featured.id}`);
+        if (card) {
+            card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            
+            // Highlight the card with animation
+            card.classList.add('highlight-pulse');
+            setTimeout(() => card.classList.remove('highlight-pulse'), 2000);
+        }
+    };
+}
+
+// ==========================================================================
+// 11. Testimonials Carousel
+// ==========================================================================
+
+let currentTestimonial = 0;
+const testimonialSlider = document.getElementById('testimonialSlider');
+const testimonialSlides = document.querySelectorAll('.testimonial-slide');
+const testimonialDots = document.getElementById('testimonialDots');
+const totalTestimonials = testimonialSlides.length;
+
+// Initialize testimonial dots
+if (testimonialDots) {
+    testimonialDots.innerHTML = '';
+    for (let i = 0; i < totalTestimonials; i++) {
+        const dot = document.createElement('button');
+        dot.className = `w-3 h-3 rounded-full ${i === 0 ? 'bg-purple-500' : 'bg-gray-300 dark:bg-gray-600'}`;
+        dot.onclick = () => moveToTestimonial(i);
+        testimonialDots.appendChild(dot);
+    }
+}
+
+/**
+ * Move the testimonial slider to show the specified testimonial
+ * @param {number} index - The index of the testimonial to show
+ */
+function moveToTestimonial(index) {
+    if (index < 0) index = totalTestimonials - 1;
+    if (index >= totalTestimonials) index = 0;
+    
+    currentTestimonial = index;
+    
+    if (testimonialSlider) {
+        testimonialSlider.style.transform = `translateX(-${currentTestimonial * 100}%)`;
+        
+        // Update dots
+        const dots = testimonialDots.querySelectorAll('button');
+        dots.forEach((dot, i) => {
+            dot.className = `w-3 h-3 rounded-full ${i === currentTestimonial ? 'bg-purple-500' : 'bg-gray-300 dark:bg-gray-600'}`;
+        });
+    }
+}
+
+// Set up testimonial carousel navigation
+document.getElementById('prevTestimonial')?.addEventListener('click', () => {
+    moveToTestimonial(currentTestimonial - 1);
+});
+
+document.getElementById('nextTestimonial')?.addEventListener('click', () => {
+    moveToTestimonial(currentTestimonial + 1);
+});
+
+// Auto-advance the testimonials
+setInterval(() => {
+    if (document.visibilityState === 'visible') {
+        moveToTestimonial(currentTestimonial + 1);
+    }
+}, 6000);
+
+// ==========================================================================
+// 12. FAQ Accordion
+// ==========================================================================
+
+const faqItems = document.querySelectorAll('.faq-item');
+
+faqItems.forEach(item => {
+    const question = item.querySelector('.faq-question');
+    const answer = item.querySelector('.faq-answer');
+    const icon = item.querySelector('.faq-icon');
+    
+    question.addEventListener('click', () => {
+        // Toggle current FAQ item
+        answer.classList.toggle('hidden');
+        icon.style.transform = answer.classList.contains('hidden') ? 'rotate(0)' : 'rotate(180deg)';
+        
+        // Close other FAQ items
+        faqItems.forEach(otherItem => {
+            if (otherItem !== item) {
+                const otherAnswer = otherItem.querySelector('.faq-answer');
+                const otherIcon = otherItem.querySelector('.faq-icon');
+                
+                if (!otherAnswer.classList.contains('hidden')) {
+                    otherAnswer.classList.add('hidden');
+                    otherIcon.style.transform = 'rotate(0)';
+                }
+            }
+        });
+    });
+});
+
+// ==========================================================================
+// 13. Analytics Dashboard
+// ==========================================================================
+
+// Function to populate dashboard metrics
+function updateDashboard() {
+    const totalStartups = startupIdeas.length;
+    
+    let totalUpvotes = 0;
+    let totalViews = 0;
+    let totalPartnerships = 0;
+    
+    startupIdeas.forEach(startup => {
+        totalUpvotes += startup.upvotes;
+        
+        // Simulate view counts (in a real app, you would track these)
+        const viewCount = Math.floor(startup.upvotes * 3.5 + Math.random() * 20);
+        totalViews += viewCount;
+        
+        // Simulate partnership counts
+        const partnershipCount = Math.floor(startup.upvotes * 0.2);
+        totalPartnerships += partnershipCount;
+    });
+    
+    // Update dashboard metrics with animation
+    animateCounter(document.getElementById('dashboardTotalStartups'), totalStartups, '');
+    animateCounter(document.getElementById('dashboardTotalUpvotes'), totalUpvotes, '');
+    animateCounter(document.getElementById('dashboardTotalViews'), totalViews, '');
+    animateCounter(document.getElementById('dashboardTotalPartnerships'), totalPartnerships, '');
+    
+    // If we have a growth chart element, update it
+    const growthChartEl = document.getElementById('growthChart');
+    if (growthChartEl) {
+        renderGrowthChart(growthChartEl, 'weekly');
+    }
+}
+
+// Chart toggle event listeners
+document.getElementById('weeklyView')?.addEventListener('click', function() {
+    this.className = 'px-4 py-2 text-sm rounded-full bg-blue-500 text-white';
+    document.getElementById('monthlyView').className = 'px-4 py-2 text-sm rounded-full bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300';
+    document.getElementById('yearlyView').className = 'px-4 py-2 text-sm rounded-full bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300';
+    renderGrowthChart(document.getElementById('growthChart'), 'weekly');
+});
+
+document.getElementById('monthlyView')?.addEventListener('click', function() {
+    this.className = 'px-4 py-2 text-sm rounded-full bg-blue-500 text-white';
+    document.getElementById('weeklyView').className = 'px-4 py-2 text-sm rounded-full bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300';
+    document.getElementById('yearlyView').className = 'px-4 py-2 text-sm rounded-full bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300';
+    renderGrowthChart(document.getElementById('growthChart'), 'monthly');
+});
+
+document.getElementById('yearlyView')?.addEventListener('click', function() {
+    this.className = 'px-4 py-2 text-sm rounded-full bg-blue-500 text-white';
+    document.getElementById('weeklyView').className = 'px-4 py-2 text-sm rounded-full bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300';
+    document.getElementById('monthlyView').className = 'px-4 py-2 text-sm rounded-full bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300';
+    renderGrowthChart(document.getElementById('growthChart'), 'yearly');
+});
+
+/**
+ * Render a growth chart in the specified canvas element
+ * @param {HTMLCanvasElement} canvas - The canvas element to render the chart
+ * @param {string} timeframe - The timeframe to display: 'weekly', 'monthly', or 'yearly'
+ */
+function renderGrowthChart(canvas, timeframe) {
+    if (!canvas || !canvas.getContext) return;
+    
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    // Set up chart dimensions
+    const padding = 40;
+    const width = canvas.width - 2 * padding;
+    const height = canvas.height - 2 * padding;
+    
+    // Get data based on timeframe
+    let labels, startupData, upvoteData;
+    
+    switch (timeframe) {
+        case 'weekly':
+            labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+            startupData = [2, 3, 5, 4, 6, 8, 7];
+            upvoteData = [5, 8, 12, 15, 20, 25, 28];
+            break;
+        case 'monthly':
+            labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            startupData = [5, 8, 12, 15, 18, 22, 27, 32, 38, 45, 52, 60];
+            upvoteData = [15, 25, 40, 60, 85, 110, 140, 180, 220, 265, 320, 380];
+            break;
+        case 'yearly':
+            labels = ['2020', '2021', '2022', '2023', '2024', '2025'];
+            startupData = [12, 45, 85, 130, 210, 380];
+            upvoteData = [45, 120, 250, 480, 720, 1250];
+            break;
+    }
+    
+    // Draw the chart axes
+    ctx.beginPath();
+    ctx.moveTo(padding, padding);
+    ctx.lineTo(padding, canvas.height - padding);
+    ctx.lineTo(canvas.width - padding, canvas.height - padding);
+    ctx.strokeStyle = document.documentElement.classList.contains('dark') ? '#4B5563' : '#E5E7EB';
+    ctx.stroke();
+    
+    // Calculate step sizes
+    const xStep = width / (labels.length - 1);
+    const maxData = Math.max(...upvoteData);
+    const yScale = height / maxData;
+    
+    // Draw X-axis labels
+    ctx.font = '12px Arial';
+    ctx.textAlign = 'center';
+    ctx.fillStyle = document.documentElement.classList.contains('dark') ? '#D1D5DB' : '#6B7280';
+    
+    labels.forEach((label, i) => {
+        const x = padding + i * xStep;
+        ctx.fillText(label, x, canvas.height - padding + 20);
+    });
+    
+    // Draw startup data line
+    ctx.beginPath();
+    startupData.forEach((value, i) => {
+        const x = padding + i * xStep;
+        const y = canvas.height - padding - value * yScale;
+        
+        if (i === 0) {
+            ctx.moveTo(x, y);
+        } else {
+            ctx.lineTo(x, y);
+        }
+    });
+    ctx.strokeStyle = '#3B82F6'; // Blue
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    
+    // Draw upvote data line
+    ctx.beginPath();
+    upvoteData.forEach((value, i) => {
+        const x = padding + i * xStep;
+        const y = canvas.height - padding - value * yScale;
+        
+        if (i === 0) {
+            ctx.moveTo(x, y);
+        } else {
+            ctx.lineTo(x, y);
+        }
+    });
+    ctx.strokeStyle = '#7F5AF0'; // Purple
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    
+    // Draw data points for startups
+    startupData.forEach((value, i) => {
+        const x = padding + i * xStep;
+        const y = canvas.height - padding - value * yScale;
+        
+        ctx.beginPath();
+        ctx.arc(x, y, 5, 0, Math.PI * 2);
+        ctx.fillStyle = '#3B82F6';
+        ctx.fill();
+    });
+    
+    // Draw data points for upvotes
+    upvoteData.forEach((value, i) => {
+        const x = padding + i * xStep;
+        const y = canvas.height - padding - value * yScale;
+        
+        ctx.beginPath();
+        ctx.arc(x, y, 5, 0, Math.PI * 2);
+        ctx.fillStyle = '#7F5AF0';
+        ctx.fill();
+    });
+    
+    // Draw legend
+    const legendY = padding / 2;
+    
+    // Startup legend
+    ctx.beginPath();
+    ctx.rect(padding, legendY - 5, 15, 2);
+    ctx.fillStyle = '#3B82F6';
+    ctx.fill();
+    ctx.fillText('Startups', padding + 25, legendY);
+    
+    // Upvote legend
+    ctx.beginPath();
+    ctx.rect(padding + 100, legendY - 5, 15, 2);
+    ctx.fillStyle = '#7F5AF0';
+    ctx.fill();
+    ctx.fillText('Upvotes', padding + 125, legendY);
+}
+
+// ==========================================================================
+// 14. Subscription Form
+// ==========================================================================
+
+const subscriptionForm = document.getElementById('subscriptionForm');
+
+if (subscriptionForm) {
+    subscriptionForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        // Get form data
+        const firstName = document.getElementById('firstName').value;
+        const lastName = document.getElementById('lastName').value;
+        const email = document.getElementById('email').value;
+        
+        // Get selected interests
+        const interests = [];
+        document.querySelectorAll('input[name="interests"]:checked').forEach(checkbox => {
+            interests.push(checkbox.value);
+        });
+        
+        // In a real application, you would send this data to your server
+        console.log('Subscription data:', { firstName, lastName, email, interests });
+        
+        // Show success notification
+        showNotification(`Thanks for subscribing, ${firstName}! We'll keep you updated on the latest startup news.`);
+        
+        // Reset the form
+        subscriptionForm.reset();
+    });
+}
+
+// ==========================================================================
+// 15. Mobile Navigation
+// ==========================================================================
+
+/**
+ * Initialize mobile navigation menu
+ */
+function initMobileNav() {
+    const navLinks = document.querySelector('.nav-links');
+    const hamburgerBtn = document.createElement('button');
+    hamburgerBtn.className = 'md:hidden p-2 rounded-lg hover:bg-gray-800 transition-theme';
+    hamburgerBtn.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+    `;
+    
+    // Add the hamburger button to the navbar
+    const navbarContainer = document.querySelector('.gradient-navbar .container');
+    if (navbarContainer) {
+        navbarContainer.insertBefore(hamburgerBtn, navLinks);
+        
+        // On smaller screens, hide nav links by default and show on hamburger click
+        if (window.innerWidth < 768) {
+            navLinks.classList.add('hidden');
+            navLinks.classList.add('flex-col');
+            navLinks.classList.add('mt-4');
+        }
+        
+        hamburgerBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('hidden');
+            
+            // Animate hamburger button
+            hamburgerBtn.animate([
+                { transform: 'scale(1)' },
+                { transform: 'scale(1.2)' },
+                { transform: 'scale(1)' }
+            ], { duration: 300 });
+        });
+        
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 768) {
+                navLinks.classList.remove('hidden');
+                navLinks.classList.remove('flex-col');
+                navLinks.classList.remove('mt-4');
+            } else {
+                navLinks.classList.add('hidden');
+                navLinks.classList.add('flex-col');
+                navLinks.classList.add('mt-4');
+            }
+        });
+    }
+}
+
+// ==========================================================================
+// 16. Theme-Specific CSS Variable Updater
+// ==========================================================================
+
+/**
+ * Update CSS variables based on current theme
+ */
+function updateThemeVariables() {
+    const isDark = document.documentElement.classList.contains('dark');
+    
+    // Update chart if it exists
+    const growthChartEl = document.getElementById('growthChart');
+    if (growthChartEl) {
+        const activeButton = document.querySelector('.bg-blue-500');
+        if (activeButton) {
+            const timeframe = activeButton.id.replace('View', '');
+            renderGrowthChart(growthChartEl, timeframe);
+        } else {
+            renderGrowthChart(growthChartEl, 'weekly');
+        }
+    }
+}
+
+// Listen for dark mode toggle to update theme-specific elements
+document.getElementById('darkModeToggle')?.addEventListener('click', () => {
+    // Wait for the DOM to update with the new theme
+    setTimeout(updateThemeVariables, 100);
+});
+
+// ==========================================================================
+// 17. Initialize Additional Features
+// ==========================================================================
+
+// Initialize all the new features when the DOM is loaded
+window.addEventListener('DOMContentLoaded', () => {
+    // Text scramble and other existing code...
+    
+    // Initialize new features
+    updateFeaturedStartup();
+    initMobileNav();
+    updateDashboard();
+    updateThemeVariables();
+    
+    // Add CSS for the highlight pulse effect
+    const style = document.createElement('style');
+    style.innerHTML = `
+        @keyframes highlight-pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(127, 90, 240, 0); }
+            50% { box-shadow: 0 0 0 10px rgba(127, 90, 240, 0.3); }
+        }
+        .highlight-pulse {
+            animation: highlight-pulse 1s ease-in-out 2;
+        }
+    `;
+    document.head.appendChild(style);
+});

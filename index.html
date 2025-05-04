@@ -115,6 +115,459 @@
     </section>
     <!-- End Hero Section -->
 
+    <!-- Featured Startup Section -->
+    <section class="py-16 relative overflow-hidden">
+        <div class="container mx-auto px-4">
+            <div class="mb-10 text-center">
+                <span class="inline-block px-4 py-1 rounded-full bg-blue-100 text-blue-600 mb-3 dark:bg-blue-900 dark:text-blue-300">Featured Startup</span>
+                <h2 class="text-3xl font-bold mb-2 text-[#18181b]">Spotlight Project</h2>
+                <p class="text-lg text-[#52525b] max-w-2xl mx-auto">Our featured startup that's currently gaining traction and making waves in the innovation space.</p>
+            </div>
+            
+            <div id="featuredStartup" class="max-w-5xl mx-auto glass relative p-8 rounded-3xl border border-gray-100 dark:border-gray-800">
+                <div class="absolute -top-4 -left-4 bg-blue-500 text-white rounded-full w-16 h-16 flex items-center justify-center text-xl font-bold">
+                    <span>★</span>
+                </div>
+                <div class="flex flex-col md:flex-row gap-8">
+                    <div class="w-full md:w-1/3">
+                        <div class="aspect-square rounded-2xl bg-gradient-to-br from-blue-400 to-violet-500 flex items-center justify-center overflow-hidden">
+                            <svg id="featuredLogo" class="w-32 h-32" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="40" cy="40" r="35" stroke="#ffffff" stroke-width="2"/>
+                                <path d="M25 32C30 24 45 20 55 28" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+                                <path d="M55 52C50 60 35 64 25 56" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+                                <circle cx="25" cy="40" r="8" fill="#ffffff"/>
+                                <circle cx="55" cy="40" r="8" fill="#ffffff"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="w-full md:w-2/3">
+                        <h3 id="featuredName" class="text-2xl font-bold mb-2 text-[#18181b]">Loading Featured Startup...</h3>
+                        <p class="text-sm mb-3 text-blue-500 dark:text-blue-400">Founded by <span id="featuredFounder" class="font-medium">Startup Founder</span></p>
+                        <p id="featuredDesc" class="text-[#52525b] mb-6 font-normal">Loading description...</p>
+                        
+                        <div class="mb-6">
+                            <div id="featuredTags" class="flex flex-wrap gap-2">
+                                <!-- Tags will be added dynamically -->
+                                <span class="osmo-badge animate-pulse">Loading...</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex flex-wrap gap-4 items-center">
+                            <div class="flex items-center">
+                                <div class="text-4xl font-semibold text-blue-500 dark:text-blue-400"><span id="featuredMetric">0</span></div>
+                                <div class="text-sm ml-2 text-[#52525b]">Upvotes</div>
+                            </div>
+                            <button id="viewFeaturedBtn" class="framer-btn px-5 py-2 text-sm">View Details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Carousel Section -->
+    <section class="py-16 bg-black dark:bg-black">
+        <div class="container mx-auto px-4">
+            <div class="mb-10 text-center">
+                <span class="inline-block px-4 py-1 rounded-full bg-purple-100 text-purple-600 mb-3 dark:bg-purple-900 dark:text-purple-300">Testimonials</span>
+                <h2 class="text-3xl font-bold mb-2 text-[#18181b] dark:text-white">What Founders Say</h2>
+                <p class="text-lg text-[#52525b] dark:text-gray-300 max-w-2xl mx-auto">Hear from the entrepreneurs who've been part of our startup showcase community.</p>
+            </div>
+            
+            <div class="relative max-w-5xl mx-auto">
+                <!-- Testimonial carousel container -->
+                <div id="testimonialCarousel" class="overflow-hidden">
+                    <div id="testimonialSlider" class="flex transition-transform duration-500 ease-in-out">
+                        <!-- Testimonial 1 -->
+                        <div class="testimonial-slide w-full flex-shrink-0 px-4">
+                            <div class="glass p-8 rounded-2xl">
+                                <div class="flex items-center mb-6">
+                                    <div class="w-16 h-16 rounded-full overflow-hidden bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center text-white text-xl font-bold mr-4">
+                                        RK
+                                    </div>
+                                    <div>
+                                        <h4 class="text-xl font-semibold">Riya Kumar</h4>
+                                        <p class="text-purple-500 dark:text-purple-400">EcoTech Solutions</p>
+                                    </div>
+                                    <div class="ml-auto">
+                                        <svg class="w-10 h-10 text-purple-200 dark:text-purple-900" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <p class="text-lg text-[#52525b] dark:text-gray-300">"This platform gave us the visibility we needed. After showcasing our startup, we connected with investors who believed in our vision and secured our first round of funding!"</p>
+                                <div class="mt-6 flex">
+                                    <div class="flex text-yellow-400">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                        </svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                        </svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                        </svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                        </svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Testimonial 2 -->
+                        <div class="testimonial-slide w-full flex-shrink-0 px-4">
+                            <div class="glass p-8 rounded-2xl">
+                                <div class="flex items-center mb-6">
+                                    <div class="w-16 h-16 rounded-full overflow-hidden bg-gradient-to-r from-blue-500 to-cyan-500 flex items-center justify-center text-white text-xl font-bold mr-4">
+                                        AM
+                                    </div>
+                                    <div>
+                                        <h4 class="text-xl font-semibold">Arjun Mehta</h4>
+                                        <p class="text-blue-500 dark:text-blue-400">CloudTask AI</p>
+                                    </div>
+                                    <div class="ml-auto">
+                                        <svg class="w-10 h-10 text-blue-200 dark:text-blue-900" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <p class="text-lg text-[#52525b] dark:text-gray-300">"The networking opportunities here are incredible. We met our technical co-founder through a connection we made at the showcase event. Now our team is complete and we're growing faster than ever."</p>
+                                <div class="mt-6 flex">
+                                    <div class="flex text-yellow-400">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                        </svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                        </svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                        </svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                        </svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Testimonial 3 -->
+                        <div class="testimonial-slide w-full flex-shrink-0 px-4">
+                            <div class="glass p-8 rounded-2xl">
+                                <div class="flex items-center mb-6">
+                                    <div class="w-16 h-16 rounded-full overflow-hidden bg-gradient-to-r from-green-500 to-teal-500 flex items-center justify-center text-white text-xl font-bold mr-4">
+                                        SG
+                                    </div>
+                                    <div>
+                                        <h4 class="text-xl font-semibold">Sanya Gupta</h4>
+                                        <p class="text-green-500 dark:text-green-400">HealthPulse</p>
+                                    </div>
+                                    <div class="ml-auto">
+                                        <svg class="w-10 h-10 text-green-200 dark:text-green-900" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <p class="text-lg text-[#52525b] dark:text-gray-300">"As a healthcare startup, we needed specialized mentorship. The SECT community connected us with industry experts who helped refine our business model and navigate regulations. Our app is now helping thousands of patients."</p>
+                                <div class="mt-6 flex">
+                                    <div class="flex text-yellow-400">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                        </svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                        </svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                        </svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                        </svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Carousel Navigation -->
+                <div class="mt-8 flex justify-center gap-2">
+                    <button id="prevTestimonial" class="p-2 rounded-full bg-white dark:bg-gray-800 shadow hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-700 dark:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </button>
+                    <div class="flex gap-2" id="testimonialDots">
+                        <button class="w-3 h-3 rounded-full bg-purple-500"></button>
+                        <button class="w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-600"></button>
+                        <button class="w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-600"></button>
+                    </div>
+                    <button id="nextTestimonial" class="p-2 rounded-full bg-white dark:bg-gray-800 shadow hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-700 dark:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-16 bg-black dark:bg-black">
+        <div class="container mx-auto px-4">
+            <div class="mb-10 text-center">
+                <span class="inline-block px-4 py-1 rounded-full bg-pink-100 text-pink-600 mb-3 dark:bg-pink-900 dark:text-pink-300">FAQ</span>
+                <h2 class="text-3xl font-bold mb-2 text-[#18181b] dark:text-white">Frequently Asked Questions</h2>
+                <p class="text-lg text-[#52525b] dark:text-gray-300 max-w-2xl mx-auto">Get answers to common questions about our startup showcase platform.</p>
+            </div>
+
+            <div class="max-w-4xl mx-auto">
+                <div class="space-y-6" id="faqAccordion">
+                    <!-- FAQ Item 1 -->
+                    <div class="faq-item glass rounded-xl overflow-hidden">
+                        <button class="faq-question w-full flex justify-between items-center p-6 focus:outline-none">
+                            <span class="text-lg font-medium text-gray-900 dark:text-white">How do I submit my startup idea?</span>
+                            <svg class="faq-icon w-6 h-6 text-gray-600 dark:text-gray-300 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        <div class="faq-answer px-6 pb-6 hidden">
+                            <p class="text-[#52525b] dark:text-gray-300">
+                                Click on the "Submit Your Startup Idea" button on the home page. Fill out the form with your startup name, founder information, description, and relevant tags. Once submitted, your idea will appear in the startup showcase grid for others to view and upvote.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ Item 2 -->
+                    <div class="faq-item glass rounded-xl overflow-hidden">
+                        <button class="faq-question w-full flex justify-between items-center p-6 focus:outline-none">
+                            <span class="text-lg font-medium text-gray-900 dark:text-white">How are featured startups selected?</span>
+                            <svg class="faq-icon w-6 h-6 text-gray-600 dark:text-gray-300 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        <div class="faq-answer px-6 pb-6 hidden">
+                            <p class="text-[#52525b] dark:text-gray-300">
+                                Featured startups are selected based on a combination of factors including upvotes, engagement metrics, and innovation potential. Our team reviews the most promising ideas regularly and selects those that demonstrate exceptional creativity, feasibility, and impact for the spotlight section.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ Item 3 -->
+                    <div class="faq-item glass rounded-xl overflow-hidden">
+                        <button class="faq-question w-full flex justify-between items-center p-6 focus:outline-none">
+                            <span class="text-lg font-medium text-gray-900 dark:text-white">Can I update my startup information after submission?</span>
+                            <svg class="faq-icon w-6 h-6 text-gray-600 dark:text-gray-300 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        <div class="faq-answer px-6 pb-6 hidden">
+                            <p class="text-[#52525b] dark:text-gray-300">
+                                Yes! You can update your startup information at any time. Just contact our team through the "Contact" link in the navigation menu, and we'll assist you in making the necessary changes to keep your startup information current and accurate.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ Item 4 -->
+                    <div class="faq-item glass rounded-xl overflow-hidden">
+                        <button class="faq-question w-full flex justify-between items-center p-6 focus:outline-none">
+                            <span class="text-lg font-medium text-gray-900 dark:text-white">What kind of networking opportunities are available?</span>
+                            <svg class="faq-icon w-6 h-6 text-gray-600 dark:text-gray-300 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        <div class="faq-answer px-6 pb-6 hidden">
+                            <p class="text-[#52525b] dark:text-gray-300">
+                                Our platform offers multiple networking opportunities. You can directly contact founders through the "Contact" button on startup cards, propose partnerships via the "Partner" button, and attend our regular virtual and in-person networking events. We also facilitate connections with mentors, investors, and industry experts for startups with high potential.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ Item 5 -->
+                    <div class="faq-item glass rounded-xl overflow-hidden">
+                        <button class="faq-question w-full flex justify-between items-center p-6 focus:outline-none">
+                            <span class="text-lg font-medium text-gray-900 dark:text-white">Is there any cost to showcase my startup?</span>
+                            <svg class="faq-icon w-6 h-6 text-gray-600 dark:text-gray-300 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        <div class="faq-answer px-6 pb-6 hidden">
+                            <p class="text-[#52525b] dark:text-gray-300">
+                                No, showcasing your startup idea on our platform is completely free for all students and early-stage founders. We believe in fostering innovation without barriers and providing equal opportunities for all entrepreneurs to present their ideas to our community of peers, mentors, and potential investors.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Subscription Form Section -->
+    <section class="py-16 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-1/3 h-full">
+            <div class="w-full h-full bg-gradient-to-l from-blue-500/10 to-transparent"></div>
+        </div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-3xl mx-auto">
+                <div class="glass p-8 md:p-10 rounded-3xl border border-gray-100 dark:border-gray-800">
+                    <div class="text-center mb-8">
+                        <span class="inline-block px-4 py-1 rounded-full bg-indigo-100 text-indigo-600 mb-3 dark:bg-indigo-900 dark:text-indigo-300">Stay Updated</span>
+                        <h2 class="text-3xl font-bold mb-2 text-[#18181b] dark:text-white">Subscribe for Updates</h2>
+                        <p class="text-lg text-[#52525b] dark:text-gray-300">Get the latest news, events, and featured startup announcements straight to your inbox.</p>
+                    </div>
+                    
+                    <form id="subscriptionForm" class="space-y-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="firstName" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">First Name</label>
+                                <input type="text" id="firstName" name="firstName" class="osmo-input w-full" placeholder="John" required>
+                            </div>
+                            <div>
+                                <label for="lastName" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Last Name</label>
+                                <input type="text" id="lastName" name="lastName" class="osmo-input w-full" placeholder="Doe" required>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email Address</label>
+                            <input type="email" id="email" name="email" class="osmo-input w-full" placeholder="john@example.com" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Interests</label>
+                            <div class="flex flex-wrap gap-3">
+                                <label class="inline-flex items-center">
+                                    <input type="checkbox" name="interests" value="tech" class="form-checkbox h-5 w-5 text-blue-500">
+                                    <span class="ml-2 text-sm text-gray-700 dark:text-gray-300">Tech</span>
+                                </label>
+                                <label class="inline-flex items-center">
+                                    <input type="checkbox" name="interests" value="health" class="form-checkbox h-5 w-5 text-green-500">
+                                    <span class="ml-2 text-sm text-gray-700 dark:text-gray-300">Health</span>
+                                </label>
+                                <label class="inline-flex items-center">
+                                    <input type="checkbox" name="interests" value="education" class="form-checkbox h-5 w-5 text-purple-500">
+                                    <span class="ml-2 text-sm text-gray-700 dark:text-gray-300">Education</span>
+                                </label>
+                                <label class="inline-flex items-center">
+                                    <input type="checkbox" name="interests" value="sustainability" class="form-checkbox h-5 w-5 text-teal-500">
+                                    <span class="ml-2 text-sm text-gray-700 dark:text-gray-300">Sustainability</span>
+                                </label>
+                                <label class="inline-flex items-center">
+                                    <input type="checkbox" name="interests" value="finance" class="form-checkbox h-5 w-5 text-yellow-500">
+                                    <span class="ml-2 text-sm text-gray-700 dark:text-gray-300">Finance</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="flex justify-center pt-4">
+                            <button type="submit" class="framer-btn px-8 py-3 text-base">Subscribe Now</button>
+                        </div>
+                    </form>
+                    
+                    <div class="mt-6 text-center text-sm text-gray-500 dark:text-gray-400">
+                        By subscribing, you agree to receive updates from our startup showcase community. We respect your privacy and will never share your information.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events Timeline Section -->
+    <section class="py-16 bg-black dark:bg-black">
+        <div class="container mx-auto px-4">
+            <div class="mb-10 text-center">
+                <span class="inline-block px-4 py-1 rounded-full bg-amber-100 text-amber-600 mb-3 dark:bg-amber-900 dark:text-amber-300">Upcoming Events</span>
+                <h2 class="text-3xl font-bold mb-2 text-[#18181b] dark:text-white">Startup Events Timeline</h2>
+                <p class="text-lg text-[#52525b] dark:text-gray-300 max-w-2xl mx-auto">Mark your calendar for these exciting entrepreneurial opportunities.</p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="timeline relative">
+                    <!-- Timeline line -->
+                    <div class="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-amber-400 via-purple-500 to-blue-500 rounded"></div>
+                    
+                    <!-- Timeline items -->
+                    <div class="timeline-items space-y-16 relative">
+                        <!-- Event 1 -->
+                        <div class="timeline-item flex flex-col sm:flex-row items-center">
+                            <div class="sm:w-1/2 sm:pr-8 sm:text-right mb-4 sm:mb-0">
+                                <div class="glass p-6 rounded-2xl inline-block">
+                                    <div class="date-badge mb-2">May 15, 2025</div>
+                                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Pitch Competition</h3>
+                                    <p class="text-[#52525b] dark:text-gray-300">Present your startup idea to a panel of judges and win funding opportunities.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-point w-10 h-10 rounded-full bg-amber-500 border-4 border-white dark:border-gray-900 shadow z-10 flex items-center justify-center">
+                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" />
+                                </svg>
+                            </div>
+                            <div class="sm:w-1/2 sm:pl-8"></div>
+                        </div>
+                        
+                        <!-- Event 2 -->
+                        <div class="timeline-item flex flex-col sm:flex-row items-center">
+                            <div class="sm:w-1/2 sm:pr-8"></div>
+                            <div class="timeline-point w-10 h-10 rounded-full bg-purple-500 border-4 border-white dark:border-gray-900 shadow z-10 flex items-center justify-center">
+                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                                </svg>
+                            </div>
+                            <div class="sm:w-1/2 sm:pl-8 mb-4 sm:mb-0">
+                                <div class="glass p-6 rounded-2xl inline-block">
+                                    <div class="date-badge mb-2">June 21, 2025</div>
+                                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Networking Mixer</h3>
+                                    <p class="text-[#52525b] dark:text-gray-300">Connect with fellow founders, mentors, and investors in a casual setting.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Event 3 -->
+                        <div class="timeline-item flex flex-col sm:flex-row items-center">
+                            <div class="sm:w-1/2 sm:pr-8 sm:text-right mb-4 sm:mb-0">
+                                <div class="glass p-6 rounded-2xl inline-block">
+                                    <div class="date-badge mb-2">July 10, 2025</div>
+                                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Workshop Series</h3>
+                                    <p class="text-[#52525b] dark:text-gray-300">Learn from industry experts on business model development and growth strategies.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-point w-10 h-10 rounded-full bg-blue-500 border-4 border-white dark:border-gray-900 shadow z-10 flex items-center justify-center">
+                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                                </svg>
+                            </div>
+                            <div class="sm:w-1/2 sm:pl-8"></div>
+                        </div>
+                        
+                        <!-- Event 4 -->
+                        <div class="timeline-item flex flex-col sm:flex-row items-center">
+                            <div class="sm:w-1/2 sm:pr-8"></div>
+                            <div class="timeline-point w-10 h-10 rounded-full bg-pink-500 border-4 border-white dark:border-gray-900 shadow z-10 flex items-center justify-center">
+                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                                </svg>
+                            </div>
+                            <div class="sm:w-1/2 sm:pl-8">
+                                <div class="glass p-6 rounded-2xl inline-block">
+                                    <div class="date-badge mb-2">August 28, 2025</div>
+                                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Demo Day</h3>
+                                    <p class="text-[#52525b] dark:text-gray-300">Showcase your product to a crowd of investors, industry leaders, and potential customers.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Main Content Area -->
     <main class="container mx-auto px-4 py-8">
         <!-- Filter Input -->
