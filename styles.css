@@ -26,6 +26,68 @@
 }
 
 /* ==========================================================================
+   1.1 Custom Cursor
+   ========================================================================== */
+
+/* Hide the default cursor */
+html, body, * {
+    cursor: none;
+}
+
+/* Cursor elements base styles */
+.cursor-dot,
+.cursor-dot-outline {
+    pointer-events: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    opacity: 0;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    z-index: 9999;
+}
+
+/* Dot cursor inner element */
+.cursor-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #7f5af0;
+}
+
+/* Dot cursor outline element */
+.cursor-dot-outline {
+    width: 40px;
+    height: 40px;
+    background-color: rgba(127, 90, 240, 0.5);
+}
+
+/* Dark mode cursor colors */
+.dark .cursor-dot {
+    background-color: #fff;
+}
+
+.dark .cursor-dot-outline {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Pulse animation for the cursor */
+@keyframes pulse {
+    from { width: 50px; height: 50px; }
+    to { width: 60px; height: 60px; }
+}
+
+/* Click animation for the cursor */
+.cursor-dot.active {
+    animation: bounce 0.5s ease;
+}
+
+@keyframes bounce {
+    0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
+}
+
+/* ==========================================================================
    2. Component Styles - Visual Elements
    ========================================================================== */
 
