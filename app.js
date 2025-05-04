@@ -416,23 +416,26 @@ filterInput.addEventListener('input', () => {
 // 7. UI Utilities & Helper Functions
 // ==========================================================================
 
-// Go to Top button implementation
-const goTopBtn = document.createElement('button');
-goTopBtn.innerHTML = '<svg class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"/></svg>';
-goTopBtn.className = 'fixed bottom-8 right-8 z-50 p-3 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg opacity-0 pointer-events-none transition-all duration-300';
-goTopBtn.title = 'Go to Top';
-document.body.appendChild(goTopBtn);
-
-goTopBtn.onclick = () => window.scrollTo({top: 0, behavior: 'smooth'});
+// Return to Top button implementation
+const returnToTopBtn = document.getElementById('returnToTop');
 
 window.addEventListener('scroll', () => {
     if (window.scrollY > 300) {
-        goTopBtn.classList.remove('opacity-0', 'pointer-events-none');
-        goTopBtn.classList.add('opacity-100');
+        returnToTopBtn.style.opacity = '1';
+        returnToTopBtn.style.transform = 'translateY(0)';
+        returnToTopBtn.style.pointerEvents = 'auto';
     } else {
-        goTopBtn.classList.add('opacity-0', 'pointer-events-none');
-        goTopBtn.classList.remove('opacity-100');
+        returnToTopBtn.style.opacity = '0';
+        returnToTopBtn.style.transform = 'translateY(20px)';
+        returnToTopBtn.style.pointerEvents = 'none';
     }
+});
+
+returnToTopBtn.addEventListener('click', () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
 });
 
 // Enable smooth scrolling
