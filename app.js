@@ -320,22 +320,30 @@ function renderStartupCard(startup) {
     
     card.innerHTML = `
         <div class="p-6">
-            <h4 class="text-xl mb-2 tracking-tight text-[#18181b]">${escapeHtml(startup.startupName)}</h4>
+            <div class="flex justify-between items-start mb-2">
+                <h4 class="text-xl tracking-tight text-[#18181b]">${escapeHtml(startup.startupName)}</h4>
+                <span class="startup-date date-badge" data-id="${startup.id}">${formatDate(startup.timestamp)}</span>
+            </div>
             <p class="text-[#52525b] mb-4 font-normal">${escapeHtml(startup.description)}</p>
             <p class="text-sm text-[#52525b] mb-3">
                 <span style="font-weight:400">Founder:</span> ${escapeHtml(startup.founderName)}
             </p>
             <div class="mb-4 flex flex-wrap">${tagsHtml}</div>
-            <div class="flex items-center justify-between space-x-2">
-                <button class="upvote-btn flex items-center space-x-1 text-blue-600 hover:text-blue-800 transition-colors osmo-btn px-4 py-1 text-xs" data-id="${startup.id}" style="font-weight:400;">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div class="card-actions flex items-center justify-between gap-2">
+                <button class="upvote-btn card-btn flex items-center gap-1" data-id="${startup.id}">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
                     </svg>
                     <span class="upvote-count">${startup.upvotes}</span>
                 </button>
-                <button class="contact-btn osmo-btn px-4 py-1 text-xs shadow" data-id="${startup.id}">📞 Contact</button>
-                <button class="partner-btn osmo-btn px-4 py-1 text-xs shadow" data-id="${startup.id}">🤝 Request Partnership</button>
-                <span class="text-xs text-[#52525b]">${formatDate(startup.timestamp)}</span>
+                <button class="contact-btn card-btn" data-id="${startup.id}">
+                    <span class="btn-icon">📞</span>
+                    <span class="btn-text">Contact</span>
+                </button>
+                <button class="partner-btn card-btn" data-id="${startup.id}">
+                    <span class="btn-icon">🤝</span>
+                    <span class="btn-text">Partner</span>
+                </button>
             </div>
         </div>
     `;
@@ -431,13 +439,55 @@ window.addEventListener('scroll', () => {
 document.documentElement.style.scrollBehavior = 'smooth';
 
 /**
- * Format date for display
+ * Format date for display with responsive options
  * @param {string} dateString - ISO date string
+ * @param {boolean} compact - Whether to use compact format for small screens
  * @returns {string} Formatted date string
  */
 function formatDate(dateString) {
-    const options = { year: 'numeric', month: 'short', day: 'numeric' };
-    return new Date(dateString).toLocaleDateString(undefined, options);
+    const date = new Date(dateString);
+    
+    // Check if we should use compact format based on screen width
+    const isSmallScreen = window.innerWidth < 640;
+    
+    // Different format options based on screen size
+    const options = isSmallScreen 
+        ? { month: 'short', day: 'numeric' } 
+        : { year: 'numeric', month: 'short', day: 'numeric' };
+    
+    return date.toLocaleDateString(undefined, options);
+}
+
+// Add window resize listener to update dates when screen size changes
+window.addEventListener('resize', debounce(() => {
+    // Update all date displays when screen size changes
+    if (startupIdeas.length > 0) {
+        document.querySelectorAll('.startup-date').forEach(dateElement => {
+            const id = parseInt(dateElement.getAttribute('data-id'));
+            const startup = startupIdeas.find(s => s.id === id);
+            if (startup) {
+                dateElement.textContent = formatDate(startup.timestamp);
+            }
+        });
+    }
+}, 250));
+
+/**
+ * Debounce function to limit how often a function is called
+ * @param {Function} func - Function to debounce
+ * @param {number} wait - Time to wait in ms
+ * @returns {Function} Debounced function
+ */
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
 }
 
 /**

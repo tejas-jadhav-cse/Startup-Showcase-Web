@@ -207,6 +207,143 @@ html, body, * {
     transform: scale(1.04);
 }
 
+/* --- 4.2.1 Card Action Buttons --- */
+.card-actions {
+    flex-wrap: nowrap;
+    width: 100%;
+}
+
+.card-btn {
+    background: #efeeec;
+    color: #374151;
+    font-size: 0.875rem;
+    font-weight: 500;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.5rem;
+    border: none;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.375rem;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.card-btn:hover {
+    background: #e6e6e3; /* Slightly darker shade of white for hover */
+    color: #3b82f6;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(59, 130, 246, 0.15);
+}
+
+.card-btn:active {
+    transform: translateY(1px);
+}
+
+.card-btn .btn-icon {
+    font-size: 0.9rem;
+}
+
+.upvote-btn {
+    background: #efeeec;
+    color: #4f46e5;
+}
+
+.upvote-btn:hover {
+    background: #e6e6e3;
+    color: #4338ca;
+}
+
+.contact-btn {
+    background: #efeeec;
+    color: #047857;
+}
+
+.contact-btn:hover {
+    background: #e6e6e3;
+    color: #065f46;
+}
+
+.partner-btn {
+    background: #efeeec;
+    color: #1d4ed8;
+}
+
+.partner-btn:hover {
+    background: #e6e6e3;
+    color: #1e40af;
+}
+
+/* Dark mode styles for card buttons */
+.dark .card-btn {
+    background: #27272a;
+    color: #efeeec;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.dark .card-btn:hover {
+    background: #3f3f46;
+    color: #93c5fd;
+}
+
+.dark .upvote-btn {
+    background: #27272a;
+    color: #a5b4fc;
+}
+
+.dark .upvote-btn:hover {
+    background: #3730a3;
+    color: #c7d2fe;
+}
+
+.dark .contact-btn {
+    background: #27272a;
+    color: #a7f3d0;
+}
+
+.dark .contact-btn:hover {
+    background: #065f46;
+    color: #d1fae5;
+}
+
+.dark .partner-btn {
+    background: #27272a;
+    color: #93c5fd;
+}
+
+.dark .partner-btn:hover {
+    background: #1e40af;
+    color: #bfdbfe;
+}
+
+/* Responsive styles for buttons */
+@media (max-width: 480px) {
+    .card-btn {
+        padding: 0.375rem 0.5rem;
+        font-size: 0.75rem;
+    }
+    
+    .card-btn .btn-text {
+        display: none;
+    }
+    
+    .card-btn .btn-icon {
+        margin: 0;
+        font-size: 1rem;
+    }
+    
+    .upvote-btn svg {
+        height: 1rem;
+        width: 1rem;
+    }
+    
+    .card-actions {
+        justify-content: space-around;
+    }
+}
+
 /* --- 4.3 Badge Styles --- */
 .osmo-badge {
     background: #f3f4f6;
@@ -222,6 +359,55 @@ html, body, * {
     position: relative;
     overflow: hidden;
     transition: box-shadow 0.2s, background 0.2s, color 0.2s;
+}
+
+/* New styles for date badge */
+.date-badge {
+    font-size: 0.8rem;
+    color: #6b7280;
+    background: #f3f4f6;
+    padding: 0.2rem 0.8rem;
+    border-radius: 0.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.date-badge:before {
+    content: "🗓️";
+    margin-right: 0.35rem;
+    font-size: 0.9rem;
+}
+
+.osmo-card:hover .date-badge {
+    background: #e6effe;
+    color: #3b82f6;
+}
+
+/* Dark mode styles for date badge */
+.dark .date-badge {
+    background: #27272a;
+    color: #d1d5db;
+}
+
+.dark .osmo-card:hover .date-badge {
+    background: #3b82f620;
+    color: #93c5fd;
+}
+
+@media (max-width: 640px) {
+    .date-badge {
+        padding: 0.15rem 0.5rem;
+        font-size: 0.75rem;
+    }
+    
+    .date-badge:before {
+        margin-right: 0.25rem;
+        font-size: 0.8rem;
+    }
 }
 
 .osmo-badge:active::after {
