@@ -1,3 +1,12 @@
+/**
+ * Student Startup Showcase
+ * Main application JavaScript
+ */
+
+// ==========================================================================
+// 1. Data Management & Initialization
+// ==========================================================================
+
 // Store startup ideas in memory and localStorage
 let startupIdeas = JSON.parse(localStorage.getItem('startupIdeas') || '[]');
 let nextId = startupIdeas.length ? Math.max(...startupIdeas.map(s => s.id)) + 1 : 1;
@@ -8,6 +17,10 @@ const startupGrid = document.getElementById('startupGrid');
 const filterInput = document.getElementById('filter');
 const darkModeToggle = document.getElementById('darkModeToggle');
 const openSubmitModalBtn = document.getElementById('openSubmitModal');
+
+// ==========================================================================
+// 2. Theme Management (Light/Dark Mode)
+// ==========================================================================
 
 // Make dark mode default
 if (!localStorage.getItem('darkMode') || localStorage.getItem('darkMode') === 'enabled') {
@@ -27,6 +40,7 @@ darkModeToggle.addEventListener('click', () => {
         { transform: 'rotate(-20deg) scale(1.2)' },
         { transform: 'rotate(0deg) scale(1)' }
     ], { duration: 400 });
+    
     // Animate icon
     if (darkModeIcon) {
         darkModeIcon.animate([
@@ -35,6 +49,8 @@ darkModeToggle.addEventListener('click', () => {
             { transform: 'scale(1)' }
         ], { duration: 400 });
     }
+    
+    // Toggle dark mode class and save preference
     if (document.documentElement.classList.contains('dark')) {
         document.documentElement.classList.remove('dark');
         localStorage.setItem('darkMode', 'disabled');
@@ -44,10 +60,19 @@ darkModeToggle.addEventListener('click', () => {
     }
 });
 
-// Modal system
+// ==========================================================================
+// 3. Modal System
+// ==========================================================================
+
 let activeModal = null;
+
+/**
+ * Open a modal with custom HTML content
+ * @param {string} contentHtml - HTML content to display in the modal
+ */
 function openModal(contentHtml) {
     if (activeModal) closeModal();
+    
     const modalBg = document.createElement('div');
     modalBg.className = 'fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60 backdrop-blur-sm animate-fade-in-up';
     modalBg.innerHTML = `
@@ -56,11 +81,16 @@ function openModal(contentHtml) {
             ${contentHtml}
         </div>
     `;
+    
     document.body.appendChild(modalBg);
     document.body.style.overflow = 'hidden';
     activeModal = modalBg;
     modalBg.querySelector('#closeModalBtn').onclick = closeModal;
 }
+
+/**
+ * Close the currently active modal
+ */
 function closeModal() {
     if (activeModal) {
         activeModal.remove();
@@ -69,7 +99,11 @@ function closeModal() {
     }
 }
 
-// Move form into modal
+// ==========================================================================
+// 4. Form Handling & Submission
+// ==========================================================================
+
+// Move form into modal for startup idea submission
 openSubmitModalBtn.addEventListener('click', () => {
     openModal(`
         <h3 class='text-2xl mb-4 text-gray-100'>Submit Your Startup Idea</h3>
@@ -85,13 +119,17 @@ openSubmitModalBtn.addEventListener('click', () => {
             </div>
         </form>
     `);
+    
+    // Handle form submission
     document.getElementById('modalStartupForm').onsubmit = (e) => {
         e.preventDefault();
+        
         const startupName = document.getElementById('modalStartupName').value.trim();
         const founderName = document.getElementById('modalFounderName').value.trim();
         const description = document.getElementById('modalDescription').value.trim();
         const tagsInput = document.getElementById('modalTags').value.trim();
         const tags = tagsInput.split(',').map(tag => tag.trim()).filter(tag => tag !== '');
+        
         const newStartup = {
             id: nextId++,
             startupName,
@@ -101,6 +139,7 @@ openSubmitModalBtn.addEventListener('click', () => {
             upvotes: 0,
             timestamp: new Date().toISOString()
         };
+        
         startupIdeas.unshift(newStartup);
         localStorage.setItem('startupIdeas', JSON.stringify(startupIdeas));
         renderAllStartups();
@@ -118,6 +157,7 @@ function openContactModal(startup) {
         <button class='px-5 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-2xl shadow hover:scale-105 transition-all' onclick='closeModal()'>Send</button>
     `);
 }
+
 function openPartnershipModal(startup) {
     openModal(`
         <h3 class='text-xl mb-2 text-purple-400'>Request Partnership</h3>
@@ -127,25 +167,39 @@ function openPartnershipModal(startup) {
     `);
 }
 
-// Render all startups
+// ==========================================================================
+// 5. Startup Card Rendering
+// ==========================================================================
+
+/**
+ * Render all startup ideas to the grid
+ */
 function renderAllStartups() {
     startupGrid.innerHTML = '';
+    
     let totalUpvotes = 0;
     startupIdeas.forEach(s => totalUpvotes += s.upvotes);
+    
     startupIdeas.forEach(renderStartupCard);
+    
     animateCounter(document.getElementById('statStartups'), startupIdeas.length, 'Startups');
     animateCounter(document.getElementById('statUpvotes'), totalUpvotes, 'Upvotes');
 }
 
-// Create and render a startup card
+/**
+ * Create and render a single startup card
+ * @param {Object} startup - The startup idea object
+ */
 function renderStartupCard(startup) {
     const card = document.createElement('div');
     card.id = `startup-${startup.id}`;
     card.className = 'osmo-card shadow osmo-card transition-theme animate-fade-in-up';
+    
     // Create tag elements
     const tagsHtml = startup.tags.map(tag => 
         `<span class="osmo-badge" data-tag="${escapeHtml(tag)}">${escapeHtml(tag)}</span>`
     ).join('');
+    
     card.innerHTML = `
         <div class="p-6">
             <h4 class="text-xl mb-2 tracking-tight text-[#18181b]">${escapeHtml(startup.startupName)}</h4>
@@ -167,10 +221,14 @@ function renderStartupCard(startup) {
             </div>
         </div>
     `;
+    
     startupGrid.appendChild(card);
+    
+    // Add event listeners to card buttons
     card.querySelector('.upvote-btn').addEventListener('click', handleUpvote);
     card.querySelector('.contact-btn').addEventListener('click', () => openContactModal(startup));
     card.querySelector('.partner-btn').addEventListener('click', () => openPartnershipModal(startup));
+    
     // Tag click for filtering
     card.querySelectorAll('.osmo-badge').forEach(badge => {
         badge.addEventListener('click', (e) => {
@@ -180,15 +238,25 @@ function renderStartupCard(startup) {
     });
 }
 
-// Handle upvote button click with animation
+// ==========================================================================
+// 6. Interaction Handlers
+// ==========================================================================
+
+/**
+ * Handle upvote button click with animation
+ * @param {Event} e - Click event
+ */
 function handleUpvote(e) {
     const button = e.currentTarget;
     const id = parseInt(button.getAttribute('data-id'));
     const startup = startupIdeas.find(s => s.id === id);
+    
     if (startup) {
         startup.upvotes++;
         localStorage.setItem('startupIdeas', JSON.stringify(startupIdeas));
         button.querySelector('.upvote-count').textContent = startup.upvotes;
+        
+        // Animation
         button.classList.add('scale-125', 'text-pink-500');
         setTimeout(() => {
             button.classList.remove('scale-125', 'text-pink-500');
@@ -196,32 +264,41 @@ function handleUpvote(e) {
     }
 }
 
-// Debounced filter
+// Debounced filter for search functionality
 let filterTimeout;
 filterInput.addEventListener('input', () => {
     clearTimeout(filterTimeout);
     filterTimeout = setTimeout(() => {
         const filterText = filterInput.value.toLowerCase().trim();
+        
         startupIdeas.forEach(startup => {
             const cardElement = document.getElementById(`startup-${startup.id}`);
             if (!cardElement) return;
+            
             const matchesFilter =
                 startup.startupName.toLowerCase().includes(filterText) ||
                 startup.description.toLowerCase().includes(filterText) ||
                 startup.founderName.toLowerCase().includes(filterText) ||
                 startup.tags.some(tag => tag.toLowerCase().includes(filterText));
+            
             cardElement.style.display = matchesFilter ? 'block' : 'none';
         });
     }, 200);
 });
 
-// Go to Top button
+// ==========================================================================
+// 7. UI Utilities & Helper Functions
+// ==========================================================================
+
+// Go to Top button implementation
 const goTopBtn = document.createElement('button');
 goTopBtn.innerHTML = '<svg class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"/></svg>';
 goTopBtn.className = 'fixed bottom-8 right-8 z-50 p-3 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg opacity-0 pointer-events-none transition-all duration-300';
 goTopBtn.title = 'Go to Top';
 document.body.appendChild(goTopBtn);
-goTopBtn.onclick = () => window.scrollTo({top:0, behavior:'smooth'});
+
+goTopBtn.onclick = () => window.scrollTo({top: 0, behavior: 'smooth'});
+
 window.addEventListener('scroll', () => {
     if (window.scrollY > 300) {
         goTopBtn.classList.remove('opacity-0', 'pointer-events-none');
@@ -232,31 +309,45 @@ window.addEventListener('scroll', () => {
     }
 });
 
+// Enable smooth scrolling
 document.documentElement.style.scrollBehavior = 'smooth';
 
-// Helper function to format date
+/**
+ * Format date for display
+ * @param {string} dateString - ISO date string
+ * @returns {string} Formatted date string
+ */
 function formatDate(dateString) {
     const options = { year: 'numeric', month: 'short', day: 'numeric' };
     return new Date(dateString).toLocaleDateString(undefined, options);
 }
 
-// Helper function to escape HTML to prevent XSS
+/**
+ * Escape HTML to prevent XSS attacks
+ * @param {string} str - Input string to escape
+ * @returns {string} Escaped HTML string
+ */
 function escapeHtml(str) {
     const div = document.createElement('div');
     div.textContent = str;
     return div.innerHTML;
 }
 
-// Show notification message (optional)
+/**
+ * Show notification message with optional confetti effect
+ * @param {string} message - Message to display
+ */
 function showNotification(message) {
     const notification = document.createElement('div');
     notification.className = 'fixed bottom-4 right-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-3 rounded-2xl shadow-lg transform transition-all duration-300 translate-y-0 opacity-100';
     notification.textContent = message;
     document.body.appendChild(notification);
+    
     // Confetti burst on submit
     if (message.toLowerCase().includes('submitted')) {
         launchConfetti();
     }
+    
     setTimeout(() => {
         notification.classList.add('translate-y-10', 'opacity-0');
         setTimeout(() => {
@@ -265,12 +356,19 @@ function showNotification(message) {
     }, 3000);
 }
 
-// Animate counter utility
+/**
+ * Animate counter with incrementing numbers
+ * @param {HTMLElement} el - Element to update
+ * @param {number} target - Target number to count to
+ * @param {string} label - Label to append after the number
+ */
 function animateCounter(el, target, label) {
     if (!el) return;
+    
     let start = 0;
     const duration = 700;
     const step = Math.ceil(target / (duration / 16));
+    
     function update() {
         start += step;
         if (start >= target) {
@@ -280,19 +378,29 @@ function animateCounter(el, target, label) {
             requestAnimationFrame(update);
         }
     }
+    
     update();
 }
 
-// Confetti animation
+// ==========================================================================
+// 8. Visual Effects & Animations
+// ==========================================================================
+
+/**
+ * Launch confetti animation effect
+ */
 function launchConfetti() {
     const canvas = document.getElementById('confettiCanvas');
     if (!canvas) return;
+    
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     canvas.style.display = 'block';
+    
     const ctx = canvas.getContext('2d');
     const confetti = [];
     const colors = ['#7f5af0', '#43e6fc', '#ff6ac1', '#3b82f6', '#fbbf24'];
+    
     for (let i = 0; i < 80; i++) {
         confetti.push({
             x: Math.random() * canvas.width,
@@ -303,7 +411,9 @@ function launchConfetti() {
             tilt: Math.random() * 10 - 10
         });
     }
+    
     let frame = 0;
+    
     function draw() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         confetti.forEach(c => {
@@ -312,48 +422,59 @@ function launchConfetti() {
             ctx.fillStyle = c.color;
             ctx.fill();
         });
+        
         update();
         frame++;
+        
         if (frame < 60) requestAnimationFrame(draw);
         else canvas.style.display = 'none';
     }
+    
     function update() {
         confetti.forEach(c => {
             c.y += Math.cos(frame / 10 + c.d) + 2 + c.r / 2;
             c.x += Math.sin(frame / 15) * 2;
         });
     }
+    
     draw();
 }
 
+// ==========================================================================
+// 9. Initial Setup & Initialization
+// ==========================================================================
+
 // Text scramble animation for hero title
 window.addEventListener('DOMContentLoaded', () => {
-    // ...existing code...
+    // Text scramble effect
     const scrambleEl = document.querySelector('.animate-text-scramble');
     if (scrambleEl) {
         const chars = '!<>-_\/[]{}—=+*^?#________';
         const text = scrambleEl.textContent;
         let frame = 0;
         let scramble = '';
+        
         function scrambleStep() {
             scramble = text.split('').map((c, i) => {
                 if (i < frame) return c;
                 return chars[Math.floor(Math.random() * chars.length)];
             }).join('');
+            
             scrambleEl.textContent = scramble;
             frame++;
+            
             if (frame <= text.length) {
                 setTimeout(scrambleStep, 30);
             } else {
                 scrambleEl.textContent = text;
             }
         }
+        
         scrambleStep();
     }
-    // ...existing code...
 });
 
-// Entrance animation utility
+// Entrance animation utility - add to document head
 const style = document.createElement('style');
 style.innerHTML = `
 @keyframes fade-in-up {0%{opacity:0;transform:translateY(40px);}100%{opacity:1;transform:translateY(0);}}
@@ -387,6 +508,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 upvotes: 18
             }
         ];
+        
         samples.forEach(sample => {
             const startup = {
                 ...sample,
@@ -395,7 +517,9 @@ window.addEventListener('DOMContentLoaded', () => {
             };
             startupIdeas.push(startup);
         });
+        
         localStorage.setItem('startupIdeas', JSON.stringify(startupIdeas));
     }
+    
     renderAllStartups();
 });

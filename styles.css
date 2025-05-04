@@ -1,224 +1,216 @@
+/* ==========================================================================
+   Startup Showcase Web - Main Stylesheet
+   Organized by component types and functionality
+   ========================================================================== */
+
+/* ==========================================================================
+   1. Base & Utility Styles
+   ========================================================================== */
+
 @layer utilities {
+    /* Transition Effects */
     .transition-theme {
         transition: background-color 0.3s, color 0.3s, border 0.3s, box-shadow 0.3s;
     }
-    .glass {
-        background: rgba(30, 41, 59, 0.55);
-        backdrop-filter: blur(24px) saturate(180%);
-        -webkit-backdrop-filter: blur(24px) saturate(180%);
-        border-radius: 2rem;
-        border: 1.5px solid rgba(255,255,255,0.18);
-        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+
+    /* Scrollbar Hiding for all browsers */
+    html, body {
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE and Edge */
     }
-    .gradient-animate {
-        background: linear-gradient(270deg, #7f5af0, #43e6fc, #ff6ac1, #7f5af0);
-        background-size: 600% 600%;
-        animation: gradientBG 16s ease infinite;
-    }
-    @keyframes gradientBG {
-        0% {background-position:0% 50%}
-        50% {background-position:100% 50%}
-        100% {background-position:0% 50%}
-    }
-    .framer-card {
-        border-radius: 2rem;
-        border: 2px solid rgba(255,255,255,0.18);
-        background: rgba(30, 41, 59, 0.55);
-        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18), 0 0 0 2px transparent;
-        transition: box-shadow 0.3s, border 0.3s, transform 0.3s;
-    }
-    .framer-card:hover {
-        box-shadow: 0 12px 40px 0 rgba(127,90,240,0.18), 0 0 0 2px #ff6ac1;
-        border-color: #ff6ac1;
-        transform: translateY(-4px) scale(1.03);
-    }
-    .framer-btn {
-        border-radius: 2rem;
-        background: linear-gradient(90deg, #7f5af0 0%, #43e6fc 50%, #ff6ac1 100%);
-        background-size: 200% 200%;
-        color: #fff;
-        font-weight: 700;
-        box-shadow: 0 4px 24px 0 rgba(127,90,240,0.18);
-        border: 2px solid transparent;
-        transition: background 0.4s, box-shadow 0.3s, border 0.3s, transform 0.3s;
-    }
-    .framer-btn:hover {
-        background-position: 100% 0;
-        box-shadow: 0 8px 32px 0 rgba(255,106,193,0.18);
-        border-color: #43e6fc;
-        transform: scale(1.05);
-    }
-    .osmo-bg {
-        background: #f8f9fb;
-    }
-    .osmo-navbar {
-        background: #fff;
-        border-bottom: 1px solid #e5e7eb;
-        box-shadow: 0 2px 8px 0 rgba(16, 30, 54, 0.03);
-    }
-    .osmo-card {
-        background: #fff;
-        border-radius: 1.5rem;
-        box-shadow: 0 4px 24px 0 rgba(16, 30, 54, 0.07);
-        border: 1px solid #ececec;
-        transition: box-shadow 0.2s, transform 0.2s;
-    }
-    .osmo-card:hover {
-        box-shadow: 0 8px 32px 0 rgba(16, 30, 54, 0.12);
-        transform: translateY(-2px) scale(1.01);
-    }
-    .osmo-btn {
-        background: #18181b;
-        color: #fff;
-        border-radius: 9999px;
-        font-weight: 700;
-        font-size: 1.1rem;
-        padding: 0.75rem 2.5rem;
-        box-shadow: 0 2px 8px 0 rgba(16, 30, 54, 0.07);
-        border: none;
-        transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
-    }
-    .osmo-btn:hover {
-        background: #3b82f6;
-        color: #fff;
-        box-shadow: 0 4px 16px 0 rgba(59, 130, 246, 0.12);
-        transform: scale(1.04);
-    }
-    .osmo-badge {
-        background: #f3f4f6;
-        color: #18181b;
-        border-radius: 9999px;
-        font-size: 0.85rem;
-        font-weight: 600;
-        padding: 0.25rem 1rem;
-        margin-right: 0.5rem;
-        margin-bottom: 0.5rem;
-        display: inline-block;
-        cursor: pointer;
-        position: relative;
-        overflow: hidden;
-        transition: box-shadow 0.2s, background 0.2s, color 0.2s;
-    }
-    .osmo-badge:active::after {
-        content: '';
-        position: absolute;
-        left: 50%; top: 50%;
-        width: 200%; height: 200%;
-        background: rgba(59,130,246,0.15);
-        border-radius: 50%;
-        transform: translate(-50%, -50%) scale(0);
-        animation: ripple-badge 0.4s linear;
-        z-index: 1;
-    }
-    @keyframes ripple-badge {
-        to { transform: translate(-50%, -50%) scale(1); opacity: 0; }
-    }
-    .animate-bird-float {
-        /* JS animation, class for targeting */
-    }
-    .animate-text-scramble {
-        /* JS animation, class for targeting */
-    }
-    /* Confetti styles (canvas is full screen, pointer-events-none) */
-    #confettiCanvas { pointer-events: none; }
-    .osmo-hero-title {
-        font-size: 3rem;
-        font-weight: 900;
-        color: #18181b;
-        letter-spacing: -0.03em;
-        line-height: 1.1;
-    }
-    .osmo-hero-desc {
-        font-size: 1.35rem;
-        color: #52525b;
-        font-weight: 500;
-        margin-bottom: 2.5rem;
-    }
-    .osmo-footer {
-        background: #fff;
-        color: #52525b;
-        border-top: 1px solid #ececec;
-        font-size: 1rem;
-        padding: 2rem 0;
-    }
-    .osmo-input {
-        background: #fff;
-        border: 1px solid #ececec;
-        border-radius: 0.75rem;
-        padding: 0.75rem 1.25rem;
-        font-size: 1rem;
-        color: #18181b;
-        transition: border 0.2s;
-    }
-    .osmo-input:focus {
-        border-color: #3b82f6;
-        outline: none;
-    }
-    .dark .osmo-bg {
-        background: #000 !important;
-    }
-    .dark .osmo-navbar,
-    .dark .osmo-footer {
-        background: #000 !important;
-        color: #efeeec !important;
-        border-color: #222 !important;
-    }
-    .dark .osmo-card {
-        background: #18181b !important;
-        color: #efeeec !important;
-        border-color: #222 !important;
-    }
-    .dark .osmo-btn, .dark .showcase-btn {
-        background: #efeeec !important;
-        color: #000 !important;
-        border: none !important;
-    }
-    .dark .osmo-btn:hover, .dark .showcase-btn:hover {
-        background: #fff !important;
-        color: #000 !important;
-    }
-    .dark .osmo-input {
-        background: #18181b !important;
-        color: #efeeec !important;
-        border-color: #333 !important;
-    }
-    .dark .osmo-badge {
-        background: #222 !important;
-        color: #efeeec !important;
-    }
-    .dark .osmo-hero-title {
-        color: #efeeec !important;
-    }
-    .dark .osmo-hero-desc {
-        color: #bdbdbd !important;
-    }
-    .dark #heroGradientBg {
-        opacity: 0.18;
-    }
-    /* Badge for Crafted by SECT Chapter in navbar */
-    .sect-craft-badge {
-        background: #ff4c24;
-        color: #fff;
-        border-radius: 0.6rem;
-        font-size: 0.82rem;
-        font-weight: 400;
-        padding: 0.18rem 0.7rem 0.18rem 0.7rem;
-        display: flex;
-        align-items: center;
-        height: 1.5rem;
-        box-shadow: 0 1px 4px 0 rgba(255,76,36,0.08);
-        letter-spacing: 0.01em;
-        margin-right: 0.2rem;
-        margin-left: 0.1rem;
-        transition: box-shadow 0.18s, background 0.18s;
-    }
-    .sect-craft-badge:hover {
-        box-shadow: 0 2px 8px 0 rgba(255,76,36,0.18);
-        background: #ff6a47;
+
+    html::-webkit-scrollbar, 
+    body::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, Opera */
     }
 }
 
-/* Gradient Overlay Navbar */
+/* ==========================================================================
+   2. Component Styles - Visual Elements
+   ========================================================================== */
+
+/* --- 2.1 Glass Effect --- */
+.glass {
+    background: rgba(30, 41, 59, 0.55);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border-radius: 2rem;
+    border: 1.5px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+}
+
+/* --- 2.2 Gradient Animations --- */
+.gradient-animate {
+    background: linear-gradient(270deg, #7f5af0, #43e6fc, #ff6ac1, #7f5af0);
+    background-size: 600% 600%;
+    animation: gradientBG 16s ease infinite;
+}
+
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* ==========================================================================
+   3. Card Components
+   ========================================================================== */
+
+/* --- 3.1 Framer-style Card --- */
+.framer-card {
+    border-radius: 2rem;
+    border: 2px solid rgba(255, 255, 255, 0.18);
+    background: rgba(30, 41, 59, 0.55);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18), 0 0 0 2px transparent;
+    transition: box-shadow 0.3s, border 0.3s, transform 0.3s;
+}
+
+.framer-card:hover {
+    box-shadow: 0 12px 40px 0 rgba(127, 90, 240, 0.18), 0 0 0 2px #ff6ac1;
+    border-color: #ff6ac1;
+    transform: translateY(-4px) scale(1.03);
+}
+
+/* --- 3.2 Osmo-style Card --- */
+.osmo-card {
+    background: #fff;
+    border-radius: 1.5rem;
+    box-shadow: 0 4px 24px 0 rgba(16, 30, 54, 0.07);
+    border: 1px solid #ececec;
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.osmo-card:hover {
+    box-shadow: 0 8px 32px 0 rgba(16, 30, 54, 0.12);
+    transform: translateY(-2px) scale(1.01);
+}
+
+/* ==========================================================================
+   4. Button Components
+   ========================================================================== */
+
+/* --- 4.1 Framer-style Button --- */
+.framer-btn {
+    border-radius: 2rem;
+    background: linear-gradient(90deg, #7f5af0 0%, #43e6fc 50%, #ff6ac1 100%);
+    background-size: 200% 200%;
+    color: #fff;
+    font-weight: 700;
+    box-shadow: 0 4px 24px 0 rgba(127, 90, 240, 0.18);
+    border: 2px solid transparent;
+    transition: background 0.4s, box-shadow 0.3s, border 0.3s, transform 0.3s;
+}
+
+.framer-btn:hover {
+    background-position: 100% 0;
+    box-shadow: 0 8px 32px 0 rgba(255, 106, 193, 0.18);
+    border-color: #43e6fc;
+    transform: scale(1.05);
+}
+
+/* --- 4.2 Osmo-style Button --- */
+.osmo-btn {
+    background: #18181b;
+    color: #fff;
+    border-radius: 9999px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    padding: 0.75rem 2.5rem;
+    box-shadow: 0 2px 8px 0 rgba(16, 30, 54, 0.07);
+    border: none;
+    transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+
+.osmo-btn:hover {
+    background: #3b82f6;
+    color: #fff;
+    box-shadow: 0 4px 16px 0 rgba(59, 130, 246, 0.12);
+    transform: scale(1.04);
+}
+
+/* --- 4.3 Badge Styles --- */
+.osmo-badge {
+    background: #f3f4f6;
+    color: #18181b;
+    border-radius: 9999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 0.25rem 1rem;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    display: inline-block;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: box-shadow 0.2s, background 0.2s, color 0.2s;
+}
+
+.osmo-badge:active::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 200%;
+    height: 200%;
+    background: rgba(59, 130, 246, 0.15);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    animation: ripple-badge 0.4s linear;
+    z-index: 1;
+}
+
+@keyframes ripple-badge {
+    to {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0;
+    }
+}
+
+/* --- 4.4 SECT Badge --- */
+.sect-craft-badge {
+    background: #ff4c24;
+    color: #fff;
+    border-radius: 0.6rem;
+    font-size: 0.82rem;
+    font-weight: 400;
+    padding: 0.18rem 0.7rem 0.18rem 0.7rem;
+    display: flex;
+    align-items: center;
+    height: 1.5rem;
+    box-shadow: 0 1px 4px 0 rgba(255, 76, 36, 0.08);
+    letter-spacing: 0.01em;
+    margin-right: 0.2rem;
+    margin-left: 0.1rem;
+    transition: box-shadow 0.18s, background 0.18s;
+}
+
+.sect-craft-badge:hover {
+    box-shadow: 0 2px 8px 0 rgba(255, 76, 36, 0.18);
+    background: #ff6a47;
+}
+
+/* ==========================================================================
+   5. Layout & Structural Components
+   ========================================================================== */
+
+/* --- 5.1 Background Styles --- */
+.osmo-bg {
+    background: #f8f9fb;
+}
+
+/* --- 5.2 Navbar Styles --- */
+.osmo-navbar {
+    background: #fff;
+    border-bottom: 1px solid #e5e7eb;
+    box-shadow: 0 2px 8px 0 rgba(16, 30, 54, 0.03);
+}
+
 .gradient-navbar {
     position: fixed;
     top: 0;
@@ -229,29 +221,36 @@
     color: #ffffff;
     background: none;
 }
+
 .gradient-navbar::before {
     content: '';
     position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     z-index: -1;
     pointer-events: none;
     background: linear-gradient(to bottom, 
-        rgba(1,1,1,0.8) 0%, 
-        rgba(1,1,1,0.65) 20%,
-        rgba(0,0,0,0.45) 40%, 
-        rgba(0,0,0,0.25) 65%, 
-        rgba(0,0,0,0.1) 85%, 
+        rgba(1, 1, 1, 0.8) 0%, 
+        rgba(1, 1, 1, 0.65) 20%,
+        rgba(0, 0, 0, 0.45) 40%, 
+        rgba(0, 0, 0, 0.25) 65%, 
+        rgba(0, 0, 0, 0.1) 85%, 
         transparent 100%);
 }
+
 .gradient-navbar .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
+
 .gradient-navbar .nav-links {
     display: flex;
     gap: 2rem;
 }
+
 .gradient-navbar .nav-link {
     color: #fff;
     text-decoration: none;
@@ -262,226 +261,312 @@
     position: relative;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
+
 .gradient-navbar .nav-link:hover,
 .gradient-navbar .nav-link:focus {
     color: #43e6fc;
     text-shadow: 0 1px 4px rgba(67, 230, 252, 0.4);
 }
+
+/* --- 5.3 Typography Components --- */
+.osmo-hero-title {
+    font-size: 3rem;
+    font-weight: 900;
+    color: #18181b;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+}
+
+.osmo-hero-desc {
+    font-size: 1.35rem;
+    color: #52525b;
+    font-weight: 500;
+    margin-bottom: 2.5rem;
+}
+
+/* --- 5.4 Footer --- */
+.osmo-footer {
+    background: #fff;
+    color: #52525b;
+    border-top: 1px solid #ececec;
+    font-size: 1rem;
+    padding: 2rem 0;
+}
+
+/* --- 5.5 Form Elements --- */
+.osmo-input {
+    background: #fff;
+    border: 1px solid #ececec;
+    border-radius: 0.75rem;
+    padding: 0.75rem 1.25rem;
+    font-size: 1rem;
+    color: #18181b;
+    transition: border 0.2s;
+}
+
+.osmo-input:focus {
+    border-color: #3b82f6;
+    outline: none;
+}
+
+/* --- 5.6 Animation Utility Classes --- */
+.animate-bird-float {
+    /* JS animation, class for targeting */
+}
+
+.animate-text-scramble {
+    /* JS animation, class for targeting */
+}
+
+/* --- 5.7 Canvas Elements --- */
+#confettiCanvas {
+    pointer-events: none;
+}
+
+/* ==========================================================================
+   6. Dark Mode Styles
+   ========================================================================== */
+
+.dark .osmo-bg {
+    background: #000 !important;
+}
+
+.dark .osmo-navbar,
+.dark .osmo-footer {
+    background: #000 !important;
+    color: #efeeec !important;
+    border-color: #222 !important;
+}
+
+.dark .osmo-card {
+    background: #18181b !important;
+    color: #efeeec !important;
+    border-color: #222 !important;
+}
+
+.dark .osmo-btn,
+.dark .showcase-btn {
+    background: #efeeec !important;
+    color: #000 !important;
+    border: none !important;
+}
+
+.dark .osmo-btn:hover,
+.dark .showcase-btn:hover {
+    background: #fff !important;
+    color: #000 !important;
+}
+
+.dark .osmo-input {
+    background: #18181b !important;
+    color: #efeeec !important;
+    border-color: #333 !important;
+}
+
+.dark .osmo-badge {
+    background: #222 !important;
+    color: #efeeec !important;
+}
+
+.dark .osmo-hero-title {
+    color: #efeeec !important;
+}
+
+.dark .osmo-hero-desc {
+    color: #bdbdbd !important;
+}
+
+.dark #heroGradientBg {
+    opacity: 0.18;
+}
+
+/* ==========================================================================
+   7. Responsive Styles
+   ========================================================================== */
+
 @media (max-width: 768px) {
     .gradient-navbar {
         padding: 1rem;
     }
+    
     .gradient-navbar .container {
         flex-direction: column;
         align-items: flex-start;
     }
+    
     .gradient-navbar .nav-links {
         margin-top: 1rem;
         gap: 1rem;
     }
 }
 
-/* Hide scrollbar for all browsers */
-html, body {
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE and Edge */
-}
-html::-webkit-scrollbar, body::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera */
-}
+/* ==========================================================================
+   8. Hero Background Styles (From CodePen)
+   ========================================================================== */
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* --- Begin CodePen Hero Background Styles --- */
 :root {
-  --stripe-color: #000000;
-  --bg: var(--stripe-color);
-  --maincolor: var(--bg);
+    --stripe-color: #000000;
+    --bg: var(--stripe-color);
+    --maincolor: var(--bg);
 }
 
 @keyframes smoothBg {
-  from {
-    background-position: 50% 50%, 50% 50%;
-  }
-  to {
-    background-position: 350% 50%, 350% 50%;
-  }
+    from {
+        background-position: 50% 50%, 50% 50%;
+    }
+    to {
+        background-position: 350% 50%, 350% 50%;
+    }
 }
 
 .wrapper {
-  width: 100%;
-  height: auto;
-  position: relative;
+    width: 100%;
+    height: auto;
+    position: relative;
 }
 
 .hero {
-  width: 100%;
-  height: 100%;
-  min-height: 100vh;
-  position: relative;
-  display: flex;
-  place-content: center;
-  place-items: center;
-  --stripes: repeating-linear-gradient(
-    100deg,
-    var(--stripe-color) 0%,
-    var(--stripe-color) 7%,
-    transparent 10%,
-    transparent 12%,
-    var(--stripe-color) 16%
-  );
-  --rainbow: repeating-linear-gradient(
-    100deg,
-    #60a5fa 10%,
-    #e879f9 15%,
-    #60a5fa 20%,
-    #5eead4 25%,
-    #60a5fa 30%
-  );
-  background-image: var(--stripes), var(--rainbow);
-  background-size: 300%, 200%;
-  background-position: 50% 50%, 50% 50%;
-  filter: blur(10px)
-    opacity(50%)
-    saturate(200%)
-    brightness(0.8);
-  mask-image: radial-gradient(ellipse at 100% 0%, black 40%, transparent 70%);
-  animation: smoothBg 60s linear infinite;
-  background-attachment: fixed;
-  mix-blend-mode: difference;
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    place-content: center;
+    place-items: center;
+    --stripes: repeating-linear-gradient(
+        100deg,
+        var(--stripe-color) 0%,
+        var(--stripe-color) 7%,
+        transparent 10%,
+        transparent 12%,
+        var(--stripe-color) 16%
+    );
+    --rainbow: repeating-linear-gradient(
+        100deg,
+        #60a5fa 10%,
+        #e879f9 15%,
+        #60a5fa 20%,
+        #5eead4 25%,
+        #60a5fa 30%
+    );
+    background-image: var(--stripes), var(--rainbow);
+    background-size: 300%, 200%;
+    background-position: 50% 50%, 50% 50%;
+    filter: blur(10px)
+        opacity(50%)
+        saturate(200%)
+        brightness(0.8);
+    mask-image: radial-gradient(ellipse at 100% 0%, black 40%, transparent 70%);
+    animation: smoothBg 60s linear infinite;
+    background-attachment: fixed;
+    mix-blend-mode: difference;
 }
 
 .hero::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: var(--stripes), var(--rainbow);
-  background-size: 200%, 00%;
-  background-position: 50% 50%, 50% 50%;
-  filter: blur(10px) opacity(50%) saturate(200%);
-  pointer-events: none;
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: var(--stripes), var(--rainbow);
+    background-size: 200%, 00%;
+    background-position: 50% 50%, 50% 50%;
+    filter: blur(10px) opacity(50%) saturate(200%);
+    pointer-events: none;
 }
 
 .content {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  place-content: center;
-  place-items: center;
-  flex-flow: column;
-  gap: 4.5%;
-  text-align: center;
-  mix-blend-mode: difference;
-  filter: invert(1);
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    place-content: center;
+    place-items: center;
+    flex-flow: column;
+    gap: 4.5%;
+    text-align: center;
+    mix-blend-mode: difference;
+    filter: invert(1);
 }
 
 .h1--scalingSize {
-  font-size: calc(1rem - -5vw);
-  position: relative;
+    font-size: calc(1rem - -5vw);
+    position: relative;
 }
 
 .h1--scalingSize::before {
-  content: attr(data-text);
-  position: absolute;
-  inset: 0;
-  background: white;
-  text-shadow: 0 0 1px #ffffff;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-color: white;
-  -webkit-mask: linear-gradient(#000 0 0) luminance;
-  mask: linear-gradient(#000 0 0) luminance, alpha;
-  backdrop-filter: blur(19px) brightness(12.5);
-  -webkit-text-stroke: 1px white;
-  display: flex;
-  margin: auto;
-  z-index: 1;
-  pointer-events: none;
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    background: white;
+    text-shadow: 0 0 1px #ffffff;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-color: white;
+    -webkit-mask: linear-gradient(#000 0 0) luminance;
+    mask: linear-gradient(#000 0 0) luminance, alpha;
+    backdrop-filter: blur(19px) brightness(12.5);
+    -webkit-text-stroke: 1px white;
+    display: flex;
+    margin: auto;
+    z-index: 1;
+    pointer-events: none;
 }
 
 #switch {
-  appearance: none;
-  -webkit-appearance: none;
-  opacity: 0;
+    appearance: none;
+    -webkit-appearance: none;
+    opacity: 0;
 }
 
 [for="switch"] {
-  cursor: pointer;
-  transition: 0.15s linear(0 0%, 0.16 16.85%, 0.32 31.73%, 1 100%);
-  will-change: transform, font-weight;
-  padding: 0.5rem;
+    cursor: pointer;
+    transition: 0.15s linear(0 0%, 0.16 16.85%, 0.32 31.73%, 1 100%);
+    will-change: transform, font-weight;
+    padding: 0.5rem;
 }
 
 [for="switch"]:where(:hover, :active, :focus-within) {
-  transition: 0.3s ease;
-  animation: animSwitch 0.2s alternate;
+    transition: 0.3s ease;
+    animation: animSwitch 0.2s alternate;
 }
 
 @keyframes animSwitch {
-  50% {
-    transform: scale(1.2);
-    font-weight: 900;
-  }
+    50% {
+        transform: scale(1.2);
+        font-weight: 900;
+    }
 }
 
 .icon {
-  width: 1lh;
-  height: 1lh;
-  aspect-ratio: 1/1;
-  padding: 0.25em 0.35rem;
-  border-radius: calc(1px / 0);
-  border: 1px dashed;
+    width: 1lh;
+    height: 1lh;
+    aspect-ratio: 1/1;
+    padding: 0.25em 0.35rem;
+    border-radius: calc(1px / 0);
+    border: 1px dashed;
 }
 
 @property --blink-opacity {
-  syntax: "<number>";
-  inherits: false;
-  initial-value: 1;
+    syntax: "<number>";
+    inherits: false;
+    initial-value: 1;
 }
 
 @keyframes blink-animation {
-  0%, 100% {
-    opacity: var(--blink-opacity, 1);
-  }
-  50% {
-    opacity: 0;
-  }
+    0%, 100% {
+        opacity: var(--blink-opacity, 1);
+    }
+    50% {
+        opacity: 0;
+    }
 }
 
 :has(:checked) {
-  --stripe-color: #000;
+    --stripe-color: #000;
 }
+
 :has(:checked) .hero,
 :has(:checked) .hero::after {
-  filter: blur(10px) opacity(50%) saturate(200%);
+    filter: blur(10px) opacity(50%) saturate(200%);
 }
-/* --- End CodePen Hero Background Styles --- */
 
