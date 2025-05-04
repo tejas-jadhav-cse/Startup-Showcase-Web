@@ -25,6 +25,17 @@
     }
 }
 
+/* Text selection style */
+::selection {
+    background-color: #ff4c24;
+    color: #ffffff;
+}
+
+::-moz-selection {
+    background-color: #ff4c24;
+    color: #ffffff;
+}
+
 /* ==========================================================================
    1.1 Custom Cursor
    ========================================================================== */
@@ -236,7 +247,7 @@ html, body, * {
 
 /* --- 4.4 SECT Badge --- */
 .sect-craft-badge {
-    background: #ff4c24;
+    background: #3b82f6; /* Changed from #ff4c24 (ORANGE) to #357DED (BLUE) */
     color: #fff;
     border-radius: 0.6rem;
     font-size: 0.82rem;
