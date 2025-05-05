@@ -4,6 +4,22 @@
  */
 
 // ==========================================================================
+// Security Features - Disable right-click and backlink tracking
+// ==========================================================================
+
+// Disable right-click menu
+document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+    return false;
+});
+
+// Disable backlink tracking by setting referrer policy
+const meta = document.createElement('meta');
+meta.name = 'referrer';
+meta.content = 'no-referrer';
+document.head.appendChild(meta);
+
+// ==========================================================================
 // 0. Custom Cursor Implementation
 // ==========================================================================
 
