@@ -1076,63 +1076,43 @@ if (subscriptionForm) {
  */
 function initMobileNav() {
     const navLinks = document.querySelector('.nav-links');
-    const hamburgerBtn = document.createElement('button');
-    hamburgerBtn.className = 'md:hidden p-2 rounded-lg hover:bg-gray-800 transition-theme fixed right-4 top-4 z-50 bg-gray-900 bg-opacity-50 backdrop-blur-sm';
-    hamburgerBtn.innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
-    `;
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
     
-    // Add the hamburger button to the navbar
-    const navbarContainer = document.querySelector('.gradient-navbar .container');
-    if (navbarContainer) {
-        navbarContainer.insertBefore(hamburgerBtn, navLinks);
-        
-        // On smaller screens, hide nav links by default and show on hamburger click
-        if (window.innerWidth < 768) {
-            navLinks.classList.add('hidden');
-            navLinks.classList.add('flex-col');
-            navLinks.classList.add('absolute');
-            navLinks.classList.add('top-16');
-            navLinks.classList.add('right-4');
-            navLinks.classList.add('bg-gray-900');
-            navLinks.classList.add('bg-opacity-90');
-            navLinks.classList.add('backdrop-blur-md');
-            navLinks.classList.add('p-4');
-            navLinks.classList.add('rounded-lg');
-            navLinks.classList.add('shadow-xl');
-            navLinks.classList.add('z-50');
-            navLinks.classList.add('space-y-3');
-            navLinks.classList.add('w-48');
-            navLinks.classList.add('border');
-            navLinks.classList.add('border-gray-700');
-        }
-        
-        hamburgerBtn.addEventListener('click', () => {
-            navLinks.classList.toggle('hidden');
+    if (mobileMenuToggle) {
+        mobileMenuToggle.addEventListener('click', () => {
+            if (navLinks.classList.contains('hidden')) {
+                // Show menu
+                navLinks.classList.remove('hidden');
+                navLinks.classList.add('showing');
+                setTimeout(() => {
+                    navLinks.classList.remove('showing');
+                }, 300);
+            } else {
+                // Hide menu
+                navLinks.classList.add('hiding');
+                setTimeout(() => {
+                    navLinks.classList.add('hidden');
+                    navLinks.classList.remove('hiding');
+                }, 300);
+            }
             
             // Animate hamburger button
-            hamburgerBtn.animate([
+            mobileMenuToggle.animate([
                 { transform: 'scale(1)' },
                 { transform: 'scale(1.2)' },
                 { transform: 'scale(1)' }
             ], { duration: 300 });
-            
-            // Add slide-in animation to the menu
-            if (!navLinks.classList.contains('hidden')) {
-                navLinks.animate([
-                    { transform: 'translateX(20px)', opacity: 0 },
-                    { transform: 'translateX(0)', opacity: 1 }
-                ], { duration: 200, easing: 'ease-out' });
-            }
         });
         
         // Close mobile menu when clicking a nav link
         navLinks.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', () => {
                 if (window.innerWidth < 768) {
-                    navLinks.classList.add('hidden');
+                    navLinks.classList.add('hiding');
+                    setTimeout(() => {
+                        navLinks.classList.add('hidden');
+                        navLinks.classList.remove('hiding');
+                    }, 300);
                 }
             });
         });
@@ -1140,19 +1120,42 @@ function initMobileNav() {
         // Handle window resize
         window.addEventListener('resize', () => {
             if (window.innerWidth >= 768) {
-                navLinks.classList.remove('hidden', 'flex-col', 'absolute', 'top-16', 'right-4', 
-                                          'bg-gray-900', 'bg-opacity-90', 'backdrop-blur-md', 
-                                          'p-4', 'rounded-lg', 'shadow-xl', 'z-50', 'space-y-3',
-                                          'w-48', 'border', 'border-gray-700');
-            } else {
-                navLinks.classList.add('hidden', 'flex-col', 'absolute', 'top-16', 'right-4', 
-                                       'bg-gray-900', 'bg-opacity-90', 'backdrop-blur-md', 
-                                       'p-4', 'rounded-lg', 'shadow-xl', 'z-50', 'space-y-3',
-                                       'w-48', 'border', 'border-gray-700');
+                navLinks.classList.remove('hidden');
+                navLinks.classList.remove('hiding', 'showing');
+            } else if (!navLinks.classList.contains('showing') && !navLinks.classList.contains('hiding')) {
+                navLinks.classList.add('hidden');
             }
         });
     }
+    
+    // Initialize nav scroll effect
+    initNavScroll();
 }
+
+/**
+ * Add scroll effect to the navigation bar
+ */
+function initNavScroll() {
+    const navbar = document.querySelector('.gradient-navbar');
+    
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+    
+    // Set initial state based on scroll position
+    if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+    }
+}
+
+// Initialize mobile navigation
+document.addEventListener('DOMContentLoaded', function() {
+    initMobileNav();
+});
 
 // ==========================================================================
 // 16. Theme-Specific CSS Variable Updater

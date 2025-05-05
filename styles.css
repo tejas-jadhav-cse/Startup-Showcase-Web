@@ -486,7 +486,10 @@ html, body, * {
     padding: 1rem 2rem;
     color: #ffffff;
     background: none;
+    transition: background 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
+
+
 
 .gradient-navbar::before {
     content: '';
@@ -504,7 +507,9 @@ html, body, * {
         rgba(0, 0, 0, 0.25) 65%, 
         rgba(0, 0, 0, 0.1) 85%, 
         transparent 100%);
+    transition: opacity 0.3s ease;
 }
+
 
 .gradient-navbar .container {
     display: flex;
@@ -512,9 +517,11 @@ html, body, * {
     align-items: center;
 }
 
+/* Navigation links styles */
 .gradient-navbar .nav-links {
     display: flex;
     gap: 2rem;
+    transition: all 0.3s ease;
 }
 
 .gradient-navbar .nav-link {
@@ -523,15 +530,81 @@ html, body, * {
     font-weight: 400;
     font-size: 1.1rem;
     font-family: 'PP Neue Montreal', sans-serif;
-    transition: color 0.2s, text-shadow 0.2s;
+    transition: color 0.2s, text-shadow 0.2s, transform 0.2s;
     position: relative;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    padding: 0.25rem 0;
 }
 
 .gradient-navbar .nav-link:hover,
 .gradient-navbar .nav-link:focus {
     color: #43e6fc;
     text-shadow: 0 1px 4px rgba(67, 230, 252, 0.4);
+    transform: translateY(-1px);
+}
+
+/* Active nav link style */
+.gradient-navbar .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 0;
+    height: 2px;
+    background: #43e6fc;
+    transition: width 0.3s ease;
+}
+
+.gradient-navbar .nav-link:hover::after,
+.gradient-navbar .nav-link.active::after {
+    width: 100%;
+}
+
+/* Mobile menu toggle button styles */
+#mobileMenuToggle {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: background 0.2s, transform 0.2s;
+}
+
+#mobileMenuToggle:hover {
+    background: rgba(59, 130, 246, 0.3);
+    transform: scale(1.05);
+}
+
+#mobileMenuToggle:active {
+    transform: scale(0.95);
+}
+
+/* Mobile menu animation */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideOut {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+}
+
+.nav-links.showing {
+    animation: slideIn 0.3s forwards;
+}
+
+.nav-links.hiding {
+    animation: slideOut 0.3s forwards;
 }
 
 /* --- 5.3 Typography Components --- */
