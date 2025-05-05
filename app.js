@@ -1079,13 +1079,16 @@ function initMobileNav() {
     const mobileMenuToggle = document.getElementById('mobileMenuToggle');
     
     if (mobileMenuToggle && navLinks) {
-        // Set initial state based on screen size
+        // Set initial state: always hidden on mobile, visible on desktop
         if (window.innerWidth < 768) {
             navLinks.classList.add('hidden');
         } else {
+            // Remove 'fixed' positioning style for desktop
+            navLinks.classList.remove('fixed');
             navLinks.classList.remove('hidden');
         }
         
+        // Toggle menu on hamburger click
         mobileMenuToggle.addEventListener('click', () => {
             if (navLinks.classList.contains('hidden')) {
                 // Show menu
@@ -1127,9 +1130,11 @@ function initMobileNav() {
         // Handle window resize
         window.addEventListener('resize', () => {
             if (window.innerWidth >= 768) {
+                // For desktop: Show menu and remove fixed positioning
                 navLinks.classList.remove('hidden');
                 navLinks.classList.remove('hiding', 'showing');
             } else if (!navLinks.classList.contains('showing') && !navLinks.classList.contains('hiding')) {
+                // For mobile: Hide menu when resizing from desktop to mobile
                 navLinks.classList.add('hidden');
             }
         });
