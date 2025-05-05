@@ -131,7 +131,7 @@
                         </button>
                         
                         <!-- Navigation Links - Always hidden on mobile, visible on desktop -->
-                        <div id="nav-links" class="nav-links hidden md:flex fixed md:relative md:top-auto md:right-auto top-16 right-4 bg-gray-900 bg-opacity-90 md:bg-transparent backdrop-blur-md md:backdrop-filter-none p-4 md:p-0 rounded-lg shadow-xl md:shadow-none z-50 flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-6 w-48 md:w-auto border border-gray-700 md:border-0">
+                        <div id="nav-links" class="nav-links hidden md:flex md:relative md:top-auto md:right-auto md:bg-transparent md:backdrop-filter-none md:p-0 md:rounded-none md:shadow-none md:flex-row md:space-x-6 md:w-auto md:border-0 flex-col space-y-3 w-48 border border-gray-700 bg-gray-900 bg-opacity-90 backdrop-blur-md p-4 rounded-lg shadow-xl z-50 top-16 right-4 fixed">
                             <a href="#home" class="nav-link">Home</a>
                             <a href="#ideas" class="nav-link">Ideas</a>
                             <a href="#submit" class="nav-link">Submit</a>
@@ -672,6 +672,53 @@
     
     <!-- JavaScript -->
     <script src="app.js"></script>
+    
+    <!-- Inline Animation Script -->
+    <script>
+    // Bird floating animation
+    const bird = document.querySelector('.animate-bird-float');
+    if (bird) {
+        bird.animate([
+            { transform: 'translateY(0px)' },
+            { transform: 'translateY(-12px)' },
+            { transform: 'translateY(0px)' }
+        ], {
+            duration: 2600,
+            iterations: Infinity,
+            easing: 'ease-in-out'
+        });
+    }
+    
+    // Social icon hover animation
+    document.querySelectorAll('.social-icon').forEach(icon => {
+        icon.addEventListener('mouseenter', () => {
+            icon.animate([
+                { transform: 'scale(1)' },
+                { transform: 'scale(1.2) rotate(-8deg)' },
+                { transform: 'scale(1)' }
+            ], { duration: 400 });
+        });
+    });
+
+    // Mobile menu toggle logic
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const navLinks = document.getElementById('nav-links');
+    function closeMenuOnResize() {
+        if (window.innerWidth >= 768) {
+            navLinks.classList.remove('hidden');
+        } else {
+            navLinks.classList.add('hidden');
+        }
+    }
+    if (mobileMenuToggle && navLinks) {
+        mobileMenuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('hidden');
+        });
+        // Hide menu on mobile by default
+        closeMenuOnResize();
+        window.addEventListener('resize', closeMenuOnResize);
+    }
+    </script>
     
     <!-- Inline Animation Script -->
     <script>
