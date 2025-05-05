@@ -157,30 +157,30 @@
         <div class="container mx-auto px-4">
             <div class="mb-10 text-center">
                 <span class="inline-block px-4 py-1 rounded-full bg-blue-100 text-blue-600 mb-3 dark:bg-blue-900 dark:text-blue-300">Featured Startup</span>
-                <h2 class="text-3xl font-bold mb-2 text-[#18181b]">Spotlight Project</h2>
-                <p class="text-lg text-[#52525b] max-w-2xl mx-auto">Our featured startup that's currently gaining traction and making waves in the innovation space.</p>
+                <h2 class="text-3xl font-bold mb-2 text-[#18181b] dark:text-white">Spotlight Project</h2>
+                <p class="text-lg text-[#52525b] dark:text-gray-300 max-w-2xl mx-auto">Our featured startup that's currently gaining traction and making waves in the innovation space.</p>
             </div>
             
-            <div id="featuredStartup" class="max-w-5xl mx-auto glass relative p-8 rounded-3xl border border-gray-100 dark:border-gray-800">
-                <div class="absolute -top-4 -left-4 bg-blue-500 text-white rounded-full w-16 h-16 flex items-center justify-center text-xl font-bold">
+            <div id="featuredStartup" class="max-w-5xl mx-auto glass relative p-6 sm:p-8 rounded-3xl border border-gray-100 dark:border-gray-800 transition-all duration-300 hover:shadow-xl">
+                <div class="absolute -top-4 -left-4 bg-blue-500 text-white rounded-full w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center text-lg sm:text-xl font-bold">
                     <span>★</span>
                 </div>
-                <div class="flex flex-col md:flex-row gap-8">
+                <div class="flex flex-col md:flex-row gap-6 sm:gap-8">
                     <div class="w-full md:w-1/3">
-                        <div class="aspect-square rounded-2xl bg-gradient-to-br from-blue-400 to-violet-500 flex items-center justify-center overflow-hidden">
-                            <svg id="featuredLogo" class="w-32 h-32" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="40" cy="40" r="35" stroke="#ffffff" stroke-width="2"/>
-                                <path d="M25 32C30 24 45 20 55 28" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
-                                <path d="M55 52C50 60 35 64 25 56" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
-                                <circle cx="25" cy="40" r="8" fill="#ffffff"/>
-                                <circle cx="55" cy="40" r="8" fill="#ffffff"/>
-                            </svg>
+                        <div class="aspect-square rounded-2xl overflow-hidden shadow-lg">
+                            <img 
+                                src="Assets/pexels-pixabay-415829.jpg" 
+                                alt="Featured Startup Image" 
+                                class="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
+                                loading="lazy"
+                                onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%25%22 height=%22100%25%22 viewBox=%220 0 1 1%22%3E%3Crect width=%221%22 height=%221%22 fill=%22%234B5563%22/%3E%3C/svg%3E';"
+                            >
                         </div>
                     </div>
                     <div class="w-full md:w-2/3">
-                        <h3 id="featuredName" class="text-2xl font-bold mb-2 text-[#18181b]">Loading Featured Startup...</h3>
+                        <h3 id="featuredName" class="text-xl sm:text-2xl font-bold mb-2 text-[#18181b] dark:text-white">Loading Featured Startup...</h3>
                         <p class="text-sm mb-3 text-blue-500 dark:text-blue-400">Founded by <span id="featuredFounder" class="font-medium">Startup Founder</span></p>
-                        <p id="featuredDesc" class="text-[#52525b] mb-6 font-normal">Loading description...</p>
+                        <p id="featuredDesc" class="text-[#52525b] dark:text-gray-300 mb-6 font-normal line-clamp-3 sm:line-clamp-none">Loading description...</p>
                         
                         <div class="mb-6">
                             <div id="featuredTags" class="flex flex-wrap gap-2">
@@ -191,10 +191,10 @@
                         
                         <div class="flex flex-wrap gap-4 items-center">
                             <div class="flex items-center">
-                                <div class="text-4xl font-semibold text-blue-500 dark:text-blue-400"><span id="featuredMetric">0</span></div>
-                                <div class="text-sm ml-2 text-[#52525b]">Upvotes</div>
+                                <div class="text-3xl sm:text-4xl font-semibold text-blue-500 dark:text-blue-400"><span id="featuredMetric">0</span></div>
+                                <div class="text-xs sm:text-sm ml-2 text-[#52525b] dark:text-gray-300">Upvotes</div>
                             </div>
-                            <button id="viewFeaturedBtn" class="framer-btn px-5 py-2 text-sm">View Details</button>
+                            <button id="viewFeaturedBtn" class="framer-btn px-4 sm:px-5 py-2 text-sm">View Details</button>
                         </div>
                     </div>
                 </div>
@@ -554,7 +554,7 @@
                             <div class="sm:w-1/2 sm:pr-8"></div>
                             <div class="timeline-point w-10 h-10 rounded-full bg-purple-500 border-4 border-white dark:border-gray-900 shadow z-10 flex items-center justify-center">
                                 <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 119.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                                 </svg>
                             </div>
                             <div class="sm:w-1/2 sm:pl-8 mb-4 sm:mb-0">
