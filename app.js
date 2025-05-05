@@ -1078,7 +1078,14 @@ function initMobileNav() {
     const navLinks = document.querySelector('.nav-links');
     const mobileMenuToggle = document.getElementById('mobileMenuToggle');
     
-    if (mobileMenuToggle) {
+    if (mobileMenuToggle && navLinks) {
+        // Set initial state based on screen size
+        if (window.innerWidth < 768) {
+            navLinks.classList.add('hidden');
+        } else {
+            navLinks.classList.remove('hidden');
+        }
+        
         mobileMenuToggle.addEventListener('click', () => {
             if (navLinks.classList.contains('hidden')) {
                 // Show menu
