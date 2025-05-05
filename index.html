@@ -2,8 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Sandip Startup Launchpad - A platform for student entrepreneurs to showcase their innovative startup ideas">
+    <meta name="theme-color" content="#3b82f6">
+    <meta property="og:title" content="Sandip Startup Launchpad by SECT">
+    <meta property="og:description" content="Showcase your student startup, connect with partners, and let your vision take flight in the Startup Hub.">
+    <meta property="og:type" content="website">
     <title>Sandip Startup Launchpad by SECT</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,6 +30,8 @@
         /* Base Typography */
         html, body { 
             font-family: 'PP Neue Montreal', 'Inter', sans-serif; 
+            scroll-behavior: smooth;
+            overflow-x: hidden;
         }
         
         /* Custom Button Style */
@@ -29,7 +39,7 @@
             background: #fff;
             color: #18181b;
             border: 1.5px solid #ececec;
-            border-radius: 0.375rem; /*Changed from 0.375rem to */
+            border-radius: 0.75rem; 
             font-weight: 700;
             font-size: 1.15rem;
             letter-spacing: 0.02em;
@@ -41,6 +51,33 @@
             outline: none;
             cursor: pointer;
             display: inline-block;
+        }
+        
+        /* Mobile responsive styles */
+        @media (max-width: 768px) {
+            .showcase-btn {
+                font-size: 1rem;
+                padding: 0.75rem 1.5rem;
+            }
+            .content .osmo-hero-title {
+                font-size: 3rem !important;
+            }
+            .content .osmo-hero-desc {
+                font-size: 1.2rem !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .showcase-btn {
+                font-size: 0.9rem;
+                padding: 0.6rem 1.2rem;
+            }
+            .content .osmo-hero-title {
+                font-size: 2.5rem !important;
+            }
+            .content .osmo-hero-desc {
+                font-size: 1rem !important;
+            }
         }
         
         .showcase-btn:hover, .showcase-btn:focus {

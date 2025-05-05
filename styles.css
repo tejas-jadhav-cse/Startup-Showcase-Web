@@ -643,20 +643,214 @@ html, body, * {
    7. Responsive Styles
    ========================================================================== */
 
+/* Mobile Navigation Styles */
 @media (max-width: 768px) {
     .gradient-navbar {
         padding: 1rem;
     }
     
     .gradient-navbar .container {
-        flex-direction: column;
-        align-items: flex-start;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
     }
     
     .gradient-navbar .nav-links {
-        margin-top: 1rem;
+        margin-top: 0;
         gap: 1rem;
     }
+    
+    .osmo-hero-title {
+        font-size: 2.5rem !important;
+        line-height: 1.2;
+    }
+    
+    .osmo-hero-desc {
+        font-size: 1.1rem !important;
+    }
+    
+    #liveStats {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    /* Featured Startup Layout */
+    #featuredStartup {
+        padding: 1.5rem;
+    }
+    
+    /* Timeline Adjustments */
+    .timeline-item {
+        padding-left: 2rem;
+    }
+    
+    .timeline-point {
+        left: 0;
+        transform: none;
+    }
+    
+    /* Testimonial Cards */
+    .testimonial-slide {
+        padding: 0 0.5rem;
+    }
+    
+    /* Subscription Form */
+    .glass {
+        padding: 1.5rem;
+    }
+}
+
+/* Extra Small Devices */
+@media (max-width: 480px) {
+    .osmo-card {
+        padding: 1rem;
+    }
+    
+    .card-btn {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.75rem;
+    }
+    
+    .card-btn .btn-text {
+        display: none;
+    }
+    
+    .card-btn .btn-icon {
+        margin: 0;
+        font-size: 1rem;
+    }
+    
+    .upvote-btn svg {
+        height: 1rem;
+        width: 1rem;
+    }
+    
+    .card-actions {
+        justify-content: space-around;
+    }
+    
+    .showcase-btn {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+    }
+    
+    .glass {
+        border-radius: 1.25rem;
+        padding: 1.25rem;
+    }
+    
+    /* Featured startup adjustments */
+    #featuredStartup .absolute {
+        top: -10px;
+        left: -10px;
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+    
+    /* Testimonials */
+    .testimonial-slide .w-16 {
+        width: 3rem;
+        height: 3rem;
+    }
+    
+    /* FAQ Accordion */
+    .faq-question {
+        padding: 1rem;
+    }
+    
+    .faq-answer {
+        padding: 0 1rem 1rem;
+    }
+    
+    /* Timeline */
+    .timeline-item {
+        margin-left: 0;
+    }
+    
+    .timeline-point {
+        width: 2rem;
+        height: 2rem;
+    }
+    
+    /* Return to top button */
+    #returnToTop {
+        right: 1rem;
+        bottom: 1rem;
+    }
+}
+
+/* Better Tablet Support */
+@media (min-width: 481px) and (max-width: 768px) {
+    .osmo-hero-title {
+        font-size: 3.5rem !important;
+    }
+    
+    .osmo-hero-desc {
+        font-size: 1.25rem !important;
+    }
+    
+    .startupGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .card-btn .btn-text {
+        display: inline;
+    }
+}
+
+/* Larger Desktop Screens */
+@media (min-width: 1440px) {
+    .container {
+        max-width: 1320px;
+        margin: 0 auto;
+    }
+    
+    .osmo-hero-title {
+        font-size: 5.5rem;
+    }
+    
+    .osmo-hero-desc {
+        font-size: 1.75rem;
+    }
+    
+    #startupGrid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* Disable cursor for touch devices */
+@media (pointer: coarse) {
+    html, body, * {
+        cursor: auto !important;
+    }
+    
+    .cursor-dot,
+    .cursor-dot-outline {
+        display: none !important;
+    }
+}
+
+/* Better dark mode contrast for readability */
+.dark .text-[#52525b] {
+    color: #a1a1aa !important;
+}
+
+/* Animation for interaction feedback */
+.osmo-card {
+    transform: translateY(0);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.osmo-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Accessible focus styles */
+a:focus, button:focus, input:focus, textarea:focus, select:focus {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
 }
 
 /* ==========================================================================
