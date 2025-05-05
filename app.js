@@ -1075,17 +1075,19 @@ if (subscriptionForm) {
  * Initialize mobile navigation menu
  */
 function initMobileNav() {
-    const navLinks = document.querySelector('.nav-links');
+    const navLinks = document.getElementById('nav-links');
     const mobileMenuToggle = document.getElementById('mobileMenuToggle');
     
     if (mobileMenuToggle && navLinks) {
-        // Set initial state: always hidden on mobile, visible on desktop
-        if (window.innerWidth < 768) {
+        // Ensure menu is hidden on mobile and visible on desktop at page load
+        const isMobile = window.innerWidth < 768;
+        if (isMobile) {
             navLinks.classList.add('hidden');
+            navLinks.classList.remove('showing');
         } else {
-            // Remove 'fixed' positioning style for desktop
-            navLinks.classList.remove('fixed');
+            // Desktop view - always show the menu
             navLinks.classList.remove('hidden');
+            navLinks.classList.remove('fixed');
         }
         
         // Toggle menu on hamburger click
@@ -1129,12 +1131,12 @@ function initMobileNav() {
         
         // Handle window resize
         window.addEventListener('resize', () => {
-            if (window.innerWidth >= 768) {
-                // For desktop: Show menu and remove fixed positioning
-                navLinks.classList.remove('hidden');
-                navLinks.classList.remove('hiding', 'showing');
+            const isMobile = window.innerWidth < 768;
+            if (!isMobile) {
+                // Desktop view - always show the menu
+                navLinks.classList.remove('hiding', 'showing', 'hidden', 'fixed');
             } else if (!navLinks.classList.contains('showing') && !navLinks.classList.contains('hiding')) {
-                // For mobile: Hide menu when resizing from desktop to mobile
+                // Mobile view - hide menu unless actively showing or hiding
                 navLinks.classList.add('hidden');
             }
         });
