@@ -240,20 +240,112 @@ function closeModal() {
 // Move form into modal for startup idea submission
 openSubmitModalBtn.addEventListener('click', () => {
     openModal(`
-        <h3 class='text-2xl mb-4 text-gray-100'>Submit Your Startup Idea</h3>
+        <div class="flex flex-col items-center mb-6">
+            <label for="modalLogoUpload" class="w-20 h-20 flex items-center justify-center bg-gray-100 dark:bg-gray-800 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-full cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 transition-all relative overflow-hidden group">
+                <input type="file" id="modalLogoUpload" accept="image/*" class="hidden" />
+                <img id="modalLogoPreview" class="absolute inset-0 w-full h-full object-cover rounded-full hidden" alt="Logo Preview" />
+                <span id="modalLogoPlaceholder" class="text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300 text-3xl flex items-center justify-center w-full h-full">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 16.5v-9m-4.5 4.5h9"/></svg>
+                </span>
+            </label>
+            <h3 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mt-4 mb-1">Submit Your Startup Idea</h3>
+            <p class="text-sm text-gray-400">Share your vision and inspire the community!</p>
+        </div>
         <form id='modalStartupForm'>
             <div class='grid grid-cols-1 gap-4'>
-                <input type='text' id='modalStartupName' placeholder='Startup Name' required class='px-4 py-2 rounded-lg bg-gray-900 text-white border border-gray-700 focus:ring-2 focus:ring-pink-500 transition-theme'>
-                <input type='text' id='modalFounderName' placeholder='Founder Name' required class='px-4 py-2 rounded-lg bg-gray-900 text-white border border-gray-700 focus:ring-2 focus:ring-pink-500 transition-theme'>
-                <textarea id='modalDescription' placeholder='Description' required rows='3' class='px-4 py-2 rounded-lg bg-gray-900 text-white border border-gray-700 focus:ring-2 focus:ring-pink-500 transition-theme'></textarea>
-                <input type='text' id='modalTags' placeholder='Tags (comma-separated)' required class='px-4 py-2 rounded-lg bg-gray-900 text-white border border-gray-700 focus:ring-2 focus:ring-pink-500 transition-theme'>
+                <div>
+                    <label for='modalStartupName' class='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1'>Startup Name</label>
+                    <input type='text' id='modalStartupName' placeholder='e.g. EcoLearn' required class='px-4 py-2 rounded-lg bg-white dark:bg-gray-900 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-700 focus:ring-2 focus:ring-blue-400 transition-all w-full' autocomplete='off'>
+                </div>
+                <div>
+                    <label for='modalFounderName' class='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1'>Founder Name</label>
+                    <input type='text' id='modalFounderName' placeholder='e.g. Jamie Chen' required class='px-4 py-2 rounded-lg bg-white dark:bg-gray-900 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-700 focus:ring-2 focus:ring-blue-400 transition-all w-full' autocomplete='off'>
+                </div>
+                <div>
+                    <label for='modalDescription' class='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1'>Description</label>
+                    <textarea id='modalDescription' placeholder='Describe your idea in a few sentences...' required rows='3' maxlength='300' class='px-4 py-2 rounded-lg bg-white dark:bg-gray-900 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-700 focus:ring-2 focus:ring-blue-400 transition-all w-full'></textarea>
+                    <span class='text-xs text-gray-400'>Max 300 characters</span>
+                </div>
+                <div>
+                    <label for='modalTags' class='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1'>Tags <span class='text-gray-400'>(comma-separated)</span></label>
+                    <input type='text' id='modalTags' placeholder='e.g. education, tech, sustainability' required class='px-4 py-2 rounded-lg bg-white dark:bg-gray-900 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-700 focus:ring-2 focus:ring-blue-400 transition-all w-full' autocomplete='off'>
+                </div>
+                <div class="flex items-center gap-2 mt-2">
+                    <span class="text-sm text-gray-700 dark:text-gray-300">Want to share social media?</span>
+                    <button type="button" id="toggleSocialMedia" class="relative w-10 h-6 bg-gray-200 dark:bg-gray-700 rounded-full transition-colors duration-300 focus:outline-none">
+                        <span id="toggleDot" class="absolute left-1 top-1 w-4 h-4 bg-white dark:bg-gray-900 rounded-full shadow transition-all duration-300"></span>
+                    </button>
+                </div>
+                <div id="socialFields" class="grid grid-cols-1 gap-3 mt-2 overflow-hidden transition-all duration-500 max-h-0 opacity-0 pointer-events-none">
+                    <div class="flex items-center gap-2">
+                        <span class="w-5 h-5 text-pink-500"> <svg fill="currentColor" viewBox="0 0 24 24"><path d="M7.5 2C4.462 2 2 4.462 2 7.5v9C2 19.538 4.462 22 7.5 22h9c3.038 0 5.5-2.462 5.5-5.5v-9C22 4.462 19.538 2 16.5 2h-9zm0 1.5h9A4 4 0 0 1 20.5 7.5v9a4 4 0 0 1-4 4h-9a4 4 0 0 1-4-4v-9A4 4 0 0 1 7.5 3.5zm4.5 2.25a4.25 4.25 0 1 0 0 8.5 4.25 4.25 0 0 0 0-8.5zm0 1.5a2.75 2.75 0 1 1 0 5.5 2.75 2.75 0 0 1 0-5.5zm5.25 1.25a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/></svg></span>
+                        <input type="url" id="socialInstagram" placeholder="Instagram profile URL" class="flex-1 px-3 py-2 rounded bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-400 transition-all" autocomplete="off">
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="w-5 h-5 text-blue-500"> <svg fill="currentColor" viewBox="0 0 24 24"><path d="M22.162 5.656c-.793.352-1.645.59-2.54.698a4.48 4.48 0 0 0 1.963-2.475 8.94 8.94 0 0 1-2.828 1.08A4.48 4.48 0 0 0 11.07 9.03c0 .352.04.695.116 1.022C7.728 9.89 4.1 8.1 1.67 5.149a4.48 4.48 0 0 0-.606 2.254c0 1.555.792 2.927 2.002 3.732a4.48 4.48 0 0 1-2.03-.561v.057a4.48 4.48 0 0 0 3.6 4.393c-.193.053-.397.082-.607.082-.148 0-.292-.014-.432-.04a4.48 4.48 0 0 0 4.18 3.11A8.98 8.98 0 0 1 2 19.54a12.7 12.7 0 0 0 6.88 2.017c8.26 0 12.78-6.84 12.78-12.78 0-.195-.004-.39-.013-.583a9.13 9.13 0 0 0 2.24-2.34z"/></svg></span>
+                        <input type="url" id="socialX" placeholder="X (Twitter) profile URL" class="flex-1 px-3 py-2 rounded bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-400 transition-all" autocomplete="off">
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="w-5 h-5 text-blue-700"> <svg fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11.75 19h-2.25v-8.5h2.25v8.5zm-1.125-9.75c-.828 0-1.5-.672-1.5-1.5s.672-1.5 1.5-1.5 1.5.672 1.5 1.5-.672 1.5-1.5 1.5zm15.375 9.75h-2.25v-4.25c0-1.012-.018-2.312-1.409-2.312-1.409 0-1.625 1.1-1.625 2.236v4.326h-2.25v-8.5h2.162v1.162h.031c.301-.57 1.035-1.168 2.131-1.168 2.279 0 2.7 1.5 2.7 3.448v5.058zm-12.25-8.5h-.018v8.5h2.25v-8.5h-2.232zm0 0"/></svg></span>
+                        <input type="url" id="socialLinkedin" placeholder="LinkedIn profile URL" class="flex-1 px-3 py-2 rounded bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-400 transition-all" autocomplete="off">
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="w-5 h-5 text-red-500"> <svg fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a2.999 2.999 0 0 0-2.112-2.112C19.163 3.5 12 3.5 12 3.5s-7.163 0-9.386.574a2.999 2.999 0 0 0-2.112 2.112C0 8.409 0 12 0 12s0 3.591.502 5.814a2.999 2.999 0 0 0 2.112 2.112C4.837 20.5 12 20.5 12 20.5s7.163 0 9.386-.574a2.999 2.999 0 0 0 2.112-2.112C24 15.591 24 12 24 12s0-3.591-.502-5.814zM9.545 15.568V8.432l6.545 3.568-6.545 3.568z"/></svg></span>
+                        <input type="url" id="socialYoutube" placeholder="YouTube channel URL" class="flex-1 px-3 py-2 rounded bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-400 transition-all" autocomplete="off">
+                    </div>
+                </div>
             </div>
-            <div class='mt-6 flex justify-end'>
-                <button type='submit' class='px-6 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-medium rounded-2xl shadow-md hover:scale-105 transition-all'>Submit Idea</button>
+            <div class='mt-8 flex justify-end'>
+                <button type='submit' class='px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-2xl shadow-md hover:scale-105 transition-all text-lg'>
+                    Submit Idea
+                </button>
             </div>
         </form>
     `);
-    
+
+    // Logo upload preview logic
+    const logoInput = document.getElementById('modalLogoUpload');
+    const logoPreview = document.getElementById('modalLogoPreview');
+    const logoPlaceholder = document.getElementById('modalLogoPlaceholder');
+    logoInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (ev) => {
+                logoPreview.src = ev.target.result;
+                logoPreview.classList.remove('hidden');
+                logoPlaceholder.classList.add('hidden');
+            };
+            reader.readAsDataURL(file);
+        } else {
+            logoPreview.src = '';
+            logoPreview.classList.add('hidden');
+            logoPlaceholder.classList.remove('hidden');
+        }
+    });
+
+    // Social media toggle logic
+    const toggleBtn = document.getElementById('toggleSocialMedia');
+    const toggleDot = document.getElementById('toggleDot');
+    const socialFields = document.getElementById('socialFields');
+    let socialOpen = false;
+    toggleBtn.addEventListener('click', () => {
+        socialOpen = !socialOpen;
+        if (socialOpen) {
+            socialFields.style.maxHeight = '500px';
+            socialFields.style.opacity = '1';
+            socialFields.style.pointerEvents = 'auto';
+            toggleBtn.classList.add('bg-blue-500');
+            toggleDot.style.transform = 'translateX(16px)';
+        } else {
+            socialFields.style.maxHeight = '0';
+            socialFields.style.opacity = '0';
+            socialFields.style.pointerEvents = 'none';
+            toggleBtn.classList.remove('bg-blue-500');
+            toggleDot.style.transform = 'translateX(0)';
+        }
+    });
+
     // Handle form submission
     document.getElementById('modalStartupForm').onsubmit = (e) => {
         e.preventDefault();
@@ -263,7 +355,16 @@ openSubmitModalBtn.addEventListener('click', () => {
         const description = document.getElementById('modalDescription').value.trim();
         const tagsInput = document.getElementById('modalTags').value.trim();
         const tags = tagsInput.split(',').map(tag => tag.trim()).filter(tag => tag !== '');
-        
+        // Socials (optional)
+        const socialInstagram = document.getElementById('socialInstagram').value.trim();
+        const socialX = document.getElementById('socialX').value.trim();
+        const socialLinkedin = document.getElementById('socialLinkedin').value.trim();
+        const socialYoutube = document.getElementById('socialYoutube').value.trim();
+        // Logo (optional)
+        let logoData = '';
+        if (logoInput.files[0]) {
+            logoData = logoPreview.src;
+        }
         const newStartup = {
             id: nextId++,
             startupName,
@@ -271,7 +372,14 @@ openSubmitModalBtn.addEventListener('click', () => {
             description,
             tags,
             upvotes: 0,
-            timestamp: new Date().toISOString()
+            timestamp: new Date().toISOString(),
+            logo: logoData,
+            socials: {
+                instagram: socialInstagram,
+                x: socialX,
+                linkedin: socialLinkedin,
+                youtube: socialYoutube
+            }
         };
         
         startupIdeas.unshift(newStartup);
