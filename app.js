@@ -212,13 +212,14 @@ function openModal(contentHtml) {
     modalBg.innerHTML = `
         <div id="modalCardBox" class="glass rounded-2xl shadow-2xl max-w-lg w-full relative animate-fade-in-up m-4 p-0" style="max-height:80vh; min-height:60vh; display:flex; flex-direction:column;">
             <button class="absolute top-3 right-3 text-gray-400 hover:text-pink-400 text-2xl z-10" id="closeModalBtn">&times;</button>
-            <div class="overflow-y-auto px-8 py-8" style="flex:1; margin:0; scrollbar-width:thin; scrollbar-color:#7f5af0 #e0e7ef; border-radius:1rem;">
+            <div class="overflow-y-auto px-8 py-8" style="flex:1; margin:0; scrollbar-width:thin; scrollbar-color:#7f5af0 transparent; border-radius:1rem;">
                 ${contentHtml}
             </div>
         </div>
     `;
     
     document.body.appendChild(modalBg);
+    // Always disable outer scroll while modal is open
     document.body.style.overflow = 'hidden';
     activeModal = modalBg;
     modalBg.querySelector('#closeModalBtn').onclick = closeModal;
@@ -246,22 +247,61 @@ function closeModal() {
     }
 }
 
-// Add gradient scrollbar CSS
+// Update gradient scrollbar CSS for transparent background and toggle animation
 (function(){
     const style = document.createElement('style');
     style.innerHTML = `
     #modalCardBox .overflow-y-auto::-webkit-scrollbar {
         width: 8px;
         border-radius: 8px;
-        background: #e0e7ef;
+        background: transparent;
     }
     #modalCardBox .overflow-y-auto::-webkit-scrollbar-thumb {
         border-radius: 8px;
         background: linear-gradient(180deg, #7f5af0 0%, #43e6fc 100%);
+        min-height: 40px;
+    }
+    #modalCardBox .overflow-y-auto::-webkit-scrollbar-button {
+        display: none;
+        height: 0;
+        width: 0;
     }
     #modalCardBox .overflow-y-auto {
         scrollbar-width: thin;
-        scrollbar-color: #7f5af0 #e0e7ef;
+        scrollbar-color: #7f5af0 transparent;
+    }
+    /* Modern toggle switch animation */
+    #toggleSocialMedia {
+        transition: background 0.3s cubic-bezier(.4,2,.6,1);
+        box-shadow: 0 1px 4px 0 rgba(60,60,60,0.04);
+    }
+    #toggleSocialMedia .toggle-dot-anim {
+        transition: transform 0.28s cubic-bezier(.4,2,.6,1), background 0.28s cubic-bezier(.4,2,.6,1);
+        box-shadow: 0 1px 4px 0 rgba(60,60,60,0.08);
+    }
+    #toggleSocialMedia.bg-blue-500 {
+        background: linear-gradient(90deg, #7f5af0 0%, #43e6fc 100%);
+    }
+    .modal-error-message {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-top: 1.5rem;
+        border: 1.5px solid #ef4444;
+        background: rgba(255, 0, 0, 0.06);
+        color: #ef4444;
+        border-radius: 0.75rem;
+        padding: 0.75rem 1rem;
+        font-size: 0.97rem;
+        font-weight: 500;
+        box-shadow: 0 2px 8px 0 rgba(239,68,68,0.04);
+        transition: opacity 0.2s;
+    }
+    .modal-error-message svg {
+        flex-shrink: 0;
+        width: 1.25em;
+        height: 1.25em;
+        color: #ef4444;
     }
     `;
     document.head.appendChild(style);
@@ -307,7 +347,7 @@ openSubmitModalBtn.addEventListener('click', () => {
                 <div class="flex items-center gap-2 mt-2">
                     <span class="text-sm text-gray-700 dark:text-gray-300">Want to share social media?</span>
                     <button type="button" id="toggleSocialMedia" class="relative w-10 h-6 bg-gray-200 dark:bg-gray-700 rounded-full transition-colors duration-300 focus:outline-none">
-                        <span id="toggleDot" class="absolute left-1 top-1 w-4 h-4 bg-white dark:bg-gray-900 rounded-full shadow transition-all duration-300"></span>
+                        <span id="toggleDot" class="absolute left-1 top-1 w-4 h-4 bg-white dark:bg-gray-900 rounded-full shadow toggle-dot-anim transition-all duration-300"></span>
                     </button>
                 </div>
                 <div id="socialFields" class="grid grid-cols-1 gap-3 mt-2 overflow-hidden transition-all duration-500 max-h-0 opacity-0 pointer-events-none">
@@ -329,10 +369,11 @@ openSubmitModalBtn.addEventListener('click', () => {
                     </div>
                 </div>
             </div>
-            <div class='mt-8 flex justify-end'>
+            <div class='mt-8 flex flex-col items-end'>
                 <button type='submit' class='px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-2xl shadow-md hover:scale-105 transition-all text-lg'>
                     Submit Idea
                 </button>
+                <div id="modalErrorMsg" style="display:none;"></div>
             </div>
         </form>
     `);
@@ -370,13 +411,15 @@ openSubmitModalBtn.addEventListener('click', () => {
             socialFields.style.opacity = '1';
             socialFields.style.pointerEvents = 'auto';
             toggleBtn.classList.add('bg-blue-500');
-            toggleDot.style.transform = 'translateX(16px)';
+            toggleDot.style.transform = 'translateX(16px) scale(1.08)';
+            toggleDot.style.background = 'linear-gradient(90deg, #7f5af0 0%, #43e6fc 100%)';
         } else {
             socialFields.style.maxHeight = '0';
             socialFields.style.opacity = '0';
             socialFields.style.pointerEvents = 'none';
             toggleBtn.classList.remove('bg-blue-500');
-            toggleDot.style.transform = 'translateX(0)';
+            toggleDot.style.transform = 'translateX(0) scale(1)';
+            toggleDot.style.background = '';
         }
     });
 
@@ -416,6 +459,21 @@ openSubmitModalBtn.addEventListener('click', () => {
             }
         };
         
+        // Validation for required fields
+        const errorMsg = document.getElementById('modalErrorMsg');
+        errorMsg.style.display = 'none';
+        errorMsg.innerHTML = '';
+        if (!startupName || !founderName || !description || !tags.length) {
+            errorMsg.innerHTML = `
+                <div class="modal-error-message">
+                    <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm.75-11.25a.75.75 0 00-1.5 0v4.5a.75.75 0 001.5 0v-4.5zm-.75 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/></svg>
+                    <span>Please fill out all required fields before submitting.</span>
+                </div>
+            `;
+            errorMsg.style.display = 'flex';
+            return;
+        }
+
         startupIdeas.unshift(newStartup);
         localStorage.setItem('startupIdeas', JSON.stringify(startupIdeas));
         renderAllStartups();
