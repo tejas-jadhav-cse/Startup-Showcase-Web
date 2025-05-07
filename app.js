@@ -575,24 +575,26 @@ filterInput.addEventListener('input', () => {
 // Return to Top button implementation
 const returnToTopBtn = document.getElementById('returnToTop');
 
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 300) {
-        returnToTopBtn.style.opacity = '1';
-        returnToTopBtn.style.transform = 'translateY(0)';
-        returnToTopBtn.style.pointerEvents = 'auto';
-    } else {
-        returnToTopBtn.style.opacity = '0';
-        returnToTopBtn.style.transform = 'translateY(20px)';
-        returnToTopBtn.style.pointerEvents = 'none';
-    }
-});
-
-returnToTopBtn.addEventListener('click', () => {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
+if (returnToTopBtn) {
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            returnToTopBtn.style.opacity = '1';
+            returnToTopBtn.style.transform = 'translateY(0)';
+            returnToTopBtn.style.pointerEvents = 'auto';
+        } else {
+            returnToTopBtn.style.opacity = '0';
+            returnToTopBtn.style.transform = 'translateY(20px)';
+            returnToTopBtn.style.pointerEvents = 'none';
+        }
     });
-});
+
+    returnToTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+}
 
 // Enable smooth scrolling
 document.documentElement.style.scrollBehavior = 'smooth';

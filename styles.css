@@ -649,13 +649,6 @@ html, body, * {
 }
 
 /* --- 5.6 Animation Utility Classes --- */
-.animate-bird-float {
-    /* JS animation, class for targeting */
-}
-
-.animate-text-scramble {
-    /* JS animation, class for targeting */
-}
 
 /* --- 5.7 Canvas Elements --- */
 #confettiCanvas {
@@ -909,11 +902,6 @@ html, body, * {
     .cursor-dot-outline {
         display: none !important;
     }
-}
-
-/* Better dark mode contrast for readability */
-.dark .text-[#52525b] {
-    color: #a1a1aa !important;
 }
 
 /* Animation for interaction feedback */
@@ -1373,5 +1361,25 @@ a:focus, button:focus, input:focus, textarea:focus, select:focus {
 }
 .highlight-pulse {
     animation: highlight-pulse 1s ease-in-out 2;
+}
+
+@font-face {
+    font-family: 'PP Neue Montreal';
+    src: url('Assets/PPNeueMontreal-Regular.woff2') format('woff2'),
+         url('Assets/PPNeueMontreal-Regular.woff') format('woff'),
+         url('Assets/PPNeueMontreal-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'PP Neue Montreal';
+    src: url('Assets/PPNeueMontreal-Bold.woff2') format('woff2'),
+         url('Assets/PPNeueMontreal-Bold.woff') format('woff'),
+         url('Assets/PPNeueMontreal-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
 }
 
