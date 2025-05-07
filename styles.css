@@ -1211,3 +1211,92 @@ a:focus, button:focus, input:focus, textarea:focus, select:focus {
     }
 }
 
+.showcase-btn {
+    background: #fff;
+    color: #18181b;
+    border: 1.5px solid #ececec;
+    border-radius: 0.75rem;
+    font-weight: 700;
+    font-size: 1.15rem;
+    letter-spacing: 0.02em;
+    padding: 0.85rem 2.2rem;
+    box-shadow: 0 2px 8px 0 rgba(16, 30, 54, 0.07);
+    transition: box-shadow 0.22s cubic-bezier(.4,1.2,.6,1),
+                transform 0.22s cubic-bezier(.4,1.2,.6,1),
+                background 0.18s, color 0.18s;
+    outline: none;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.showcase-btn:hover, .showcase-btn:focus {
+    box-shadow: 0 8px 24px 0 rgba(59, 130, 246, 0.10);
+    transform: translateY(-3px) scale(0.97);
+    background: #f3f4f6;
+    color: #111827;
+    border-color: #bdbdbd;
+}
+
+.showcase-btn:active {
+    transform: scale(0.96);
+}
+
+@media (max-width: 768px) {
+    .showcase-btn {
+        font-size: 1rem;
+        padding: 0.75rem 1.5rem;
+    }
+    .content .osmo-hero-title {
+        font-size: 3rem !important;
+    }
+    .content .osmo-hero-desc {
+        font-size: 1.2rem !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .showcase-btn {
+        font-size: 0.9rem;
+        padding: 0.6rem 1.2rem;
+    }
+    .content .osmo-hero-title {
+        font-size: 2.5rem !important;
+    }
+    .content .osmo-hero-desc {
+        font-size: 1rem !important;
+    }
+}
+
+.content .osmo-hero-title {
+    color: #ffffff;
+    margin-bottom: 1.5rem;
+    filter: none;
+    mix-blend-mode: normal;
+}
+
+.content .osmo-hero-desc {
+    color: #ffffff;
+    opacity: 0.9;
+    margin-bottom: 2rem;
+}
+
+.content #liveStats {
+    color: #ffffff;
+    opacity: 0.9;
+    font-weight: 500;
+}
+
+.content .showcase-btn {
+    background: #ffffff;
+    color: #18181b;
+    border: none;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+}
+
+.content .showcase-btn:hover {
+    background: #f0f0f0;
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
