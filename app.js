@@ -210,9 +210,11 @@ function openModal(contentHtml) {
     const modalBg = document.createElement('div');
     modalBg.className = 'fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60 backdrop-blur-sm animate-fade-in-up';
     modalBg.innerHTML = `
-        <div class="glass rounded-2xl shadow-2xl p-8 max-w-lg w-full relative animate-fade-in-up">
-            <button class="absolute top-3 right-3 text-gray-400 hover:text-pink-400 text-2xl" id="closeModalBtn">&times;</button>
-            ${contentHtml}
+        <div id="modalCardBox" class="glass rounded-2xl shadow-2xl max-w-lg w-full relative animate-fade-in-up m-4 p-0" style="max-height:80vh; min-height:60vh; display:flex; flex-direction:column;">
+            <button class="absolute top-3 right-3 text-gray-400 hover:text-pink-400 text-2xl z-10" id="closeModalBtn">&times;</button>
+            <div class="overflow-y-auto px-8 py-8" style="flex:1; margin:0; scrollbar-width:thin; scrollbar-color:#7f5af0 #e0e7ef; border-radius:1rem;">
+                ${contentHtml}
+            </div>
         </div>
     `;
     
@@ -220,6 +222,17 @@ function openModal(contentHtml) {
     document.body.style.overflow = 'hidden';
     activeModal = modalBg;
     modalBg.querySelector('#closeModalBtn').onclick = closeModal;
+    // Close on outside click
+    modalBg.addEventListener('mousedown', function(e) {
+        const card = document.getElementById('modalCardBox');
+        if (e.target === modalBg) {
+            card.classList.remove('animate-fade-in-up');
+            card.style.transition = 'transform 0.18s cubic-bezier(.4,2,.6,1), opacity 0.18s cubic-bezier(.4,2,.6,1)';
+            card.style.transform = 'scale(0.92) translateY(40px)';
+            card.style.opacity = '0';
+            setTimeout(closeModal, 180);
+        }
+    });
 }
 
 /**
@@ -232,6 +245,27 @@ function closeModal() {
         activeModal = null;
     }
 }
+
+// Add gradient scrollbar CSS
+(function(){
+    const style = document.createElement('style');
+    style.innerHTML = `
+    #modalCardBox .overflow-y-auto::-webkit-scrollbar {
+        width: 8px;
+        border-radius: 8px;
+        background: #e0e7ef;
+    }
+    #modalCardBox .overflow-y-auto::-webkit-scrollbar-thumb {
+        border-radius: 8px;
+        background: linear-gradient(180deg, #7f5af0 0%, #43e6fc 100%);
+    }
+    #modalCardBox .overflow-y-auto {
+        scrollbar-width: thin;
+        scrollbar-color: #7f5af0 #e0e7ef;
+    }
+    `;
+    document.head.appendChild(style);
+})();
 
 // ==========================================================================
 // 4. Form Handling & Submission
