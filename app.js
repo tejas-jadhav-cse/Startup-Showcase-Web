@@ -247,66 +247,6 @@ function closeModal() {
     }
 }
 
-// Update gradient scrollbar CSS for transparent background and toggle animation
-(function(){
-    const style = document.createElement('style');
-    style.innerHTML = `
-    #modalCardBox .overflow-y-auto::-webkit-scrollbar {
-        width: 8px;
-        border-radius: 8px;
-        background: transparent;
-    }
-    #modalCardBox .overflow-y-auto::-webkit-scrollbar-thumb {
-        border-radius: 8px;
-        background: linear-gradient(180deg, #7f5af0 0%, #43e6fc 100%);
-        min-height: 40px;
-    }
-    #modalCardBox .overflow-y-auto::-webkit-scrollbar-button {
-        display: none;
-        height: 0;
-        width: 0;
-    }
-    #modalCardBox .overflow-y-auto {
-        scrollbar-width: thin;
-        scrollbar-color: #7f5af0 transparent;
-    }
-    /* Modern toggle switch animation */
-    #toggleSocialMedia {
-        transition: background 0.3s cubic-bezier(.4,2,.6,1);
-        box-shadow: 0 1px 4px 0 rgba(60,60,60,0.04);
-    }
-    #toggleSocialMedia .toggle-dot-anim {
-        transition: transform 0.28s cubic-bezier(.4,2,.6,1), background 0.28s cubic-bezier(.4,2,.6,1);
-        box-shadow: 0 1px 4px 0 rgba(60,60,60,0.08);
-    }
-    #toggleSocialMedia.bg-blue-500 {
-        background: linear-gradient(90deg, #7f5af0 0%, #43e6fc 100%);
-    }
-    .modal-error-message {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        margin-top: 1.5rem;
-        border: 1.5px solid #ef4444;
-        background: rgba(255, 0, 0, 0.06);
-        color: #ef4444;
-        border-radius: 0.75rem;
-        padding: 0.75rem 1rem;
-        font-size: 0.97rem;
-        font-weight: 500;
-        box-shadow: 0 2px 8px 0 rgba(239,68,68,0.04);
-        transition: opacity 0.2s;
-    }
-    .modal-error-message svg {
-        flex-shrink: 0;
-        width: 1.25em;
-        height: 1.25em;
-        color: #ef4444;
-    }
-    `;
-    document.head.appendChild(style);
-})();
-
 // ==========================================================================
 // 4. Form Handling & Submission
 // ==========================================================================
@@ -861,14 +801,6 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Entrance animation utility - add to document head
-const style = document.createElement('style');
-style.innerHTML = `
-@keyframes fade-in-up {0%{opacity:0;transform:translateY(40px);}100%{opacity:1;transform:translateY(0);}}
-.animate-fade-in-up {animation: fade-in-up 0.7s cubic-bezier(.39,.575,.565,1) both;}
-`;
-document.head.appendChild(style);
-
 // Initialize with sample data if empty
 window.addEventListener('DOMContentLoaded', () => {
     if (startupIdeas.length === 0) {
@@ -1413,17 +1345,4 @@ window.addEventListener('DOMContentLoaded', () => {
     initMobileNav();
     updateDashboard();
     updateThemeVariables();
-    
-    // Add CSS for the highlight pulse effect
-    const style = document.createElement('style');
-    style.innerHTML = `
-        @keyframes highlight-pulse {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(127, 90, 240, 0); }
-            50% { box-shadow: 0 0 0 10px rgba(127, 90, 240, 0.3); }
-        }
-        .highlight-pulse {
-            animation: highlight-pulse 1s ease-in-out 2;
-        }
-    `;
-    document.head.appendChild(style);
 });
