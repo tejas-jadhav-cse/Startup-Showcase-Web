@@ -1383,3 +1383,14 @@ a:focus, button:focus, input:focus, textarea:focus, select:focus {
     font-display: swap;
 }
 
+/* ========================================================================== 
+   FAQ Accordion Styles (Questions & Answers)
+   ========================================================================== */
+
+/* Set FAQ question and answer text color to #efeeec */
+.faq-question,
+.faq-question span,
+.faq-answer p {
+    color: #efeeec !important;
+}
+
