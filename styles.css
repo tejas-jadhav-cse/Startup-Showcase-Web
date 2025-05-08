@@ -1125,6 +1125,15 @@ a:focus, button:focus, input:focus, textarea:focus, select:focus {
     filter: blur(10px) opacity(50%) saturate(200%);
 }
 
+/* ========================================================================== 
+   Global Heading Color (All Headings)
+   ========================================================================== */
+
+/* Set all heading (h1-h6) colors to #efeeec for easy global control */
+h1, h2, h3, h4, h5, h6 {
+    color: #efeeec !important;
+}
+
 /* ==========================================================================
    9. Image Responsiveness Fixes
    ========================================================================== */
@@ -1392,5 +1401,37 @@ a:focus, button:focus, input:focus, textarea:focus, select:focus {
 .faq-question span,
 .faq-answer p {
     color: #efeeec !important;
+}
+
+/* ========================================================================== 
+   Global Subheading & Text Color Adjustments
+   ========================================================================== */
+
+/* Subheadings (h2, h3, h4, h5, h6) - slightly lighter for visual hierarchy */
+h2, h3, h4, h5, h6 {
+    color: #f5f5f3 !important;
+}
+
+/* Main body text, paragraphs, and labels for better readability */
+body, p, label, .text-base, .text-lg, .text-sm, .text-gray-700, .text-gray-900, .text-[#52525b], .dark\:text-gray-300 {
+    color: #e0dfdb !important;
+}
+
+/* Muted/secondary text for less emphasis */
+.text-muted, .text-gray-500, .text-gray-400, .dark\:text-gray-400 {
+    color: #bdbdb7 !important;
+}
+
+/*
+  - h1 remains #efeeec for main headings (already set above)
+  - h2-h6 are slightly lighter for hierarchy
+  - Body and paragraph text is a soft off-white for readability
+  - Muted/secondary text is a gentle gray for less emphasis
+  Adjust these values as needed for your brand and accessibility.
+*/
+
+/* Paragraphs - custom color for better readability and visual consistency */
+p {
+    color: #a8a7a5 !important;
 }
 
