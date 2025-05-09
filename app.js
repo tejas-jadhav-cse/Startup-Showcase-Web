@@ -247,30 +247,30 @@ openSubmitModalBtn.addEventListener('click', () => {
                     <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 16.5v-9m-4.5 4.5h9"/></svg>
                 </span>
             </label>
-            <h3 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mt-4 mb-1">Submit Your Startup Idea</h3>
-            <p class="text-sm text-gray-400">Share your vision and inspire the community!</p>
+            <h3 class="text-2xl font-bold mt-4 mb-1" style="color:#efeeec;">Submit Your Startup Idea</h3>
+            <p class="text-sm" style="color:#efeeec;">Share your vision and inspire the community!</p>
         </div>
         <form id='modalStartupForm'>
             <div class='grid grid-cols-1 gap-4'>
                 <div>
-                    <label for='modalStartupName' class='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1'>Startup Name</label>
+                    <label for='modalStartupName' class='block text-sm font-medium mb-1' style="color:#efeeec;">Startup Name</label>
                     <input type='text' id='modalStartupName' placeholder='e.g. EcoLearn' required class='px-4 py-2 rounded-lg bg-white dark:bg-gray-900 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-700 focus:ring-2 focus:ring-blue-400 transition-all w-full' autocomplete='off'>
                 </div>
                 <div>
-                    <label for='modalFounderName' class='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1'>Founder Name</label>
+                    <label for='modalFounderName' class='block text-sm font-medium mb-1' style="color:#efeeec;">Founder Name</label>
                     <input type='text' id='modalFounderName' placeholder='e.g. Jamie Chen' required class='px-4 py-2 rounded-lg bg-white dark:bg-gray-900 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-700 focus:ring-2 focus:ring-blue-400 transition-all w-full' autocomplete='off'>
                 </div>
                 <div>
-                    <label for='modalDescription' class='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1'>Description</label>
+                    <label for='modalDescription' class='block text-sm font-medium mb-1' style="color:#efeeec;">Description</label>
                     <textarea id='modalDescription' placeholder='Describe your idea in a few sentences...' required rows='3' maxlength='300' class='px-4 py-2 rounded-lg bg-white dark:bg-gray-900 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-700 focus:ring-2 focus:ring-blue-400 transition-all w-full'></textarea>
-                    <span class='text-xs text-gray-400'>Max 300 characters</span>
+                    <span class='text-xs' style="color:#efeeec;">Max 300 characters</span>
                 </div>
                 <div>
-                    <label for='modalTags' class='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1'>Tags <span class='text-gray-400'>(comma-separated)</span></label>
+                    <label for='modalTags' class='block text-sm font-medium mb-1' style="color:#efeeec;">Tags <span style="color:#bdbdb7;">(comma-separated)</span></label>
                     <input type='text' id='modalTags' placeholder='e.g. education, tech, sustainability' required class='px-4 py-2 rounded-lg bg-white dark:bg-gray-900 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-700 focus:ring-2 focus:ring-blue-400 transition-all w-full' autocomplete='off'>
                 </div>
                 <div class="flex items-center gap-2 mt-2">
-                    <span class="text-sm text-gray-700 dark:text-gray-300">Want to share social media?</span>
+                    <span class="text-sm" style="color:#efeeec;">Want to share social media?</span>
                     <button type="button" id="toggleSocialMedia" class="relative w-10 h-6 bg-gray-200 dark:bg-gray-700 rounded-full transition-colors duration-300 focus:outline-none">
                         <span id="toggleDot" class="absolute left-1 top-1 w-4 h-4 bg-white dark:bg-gray-900 rounded-full shadow toggle-dot-anim transition-all duration-300"></span>
                     </button>
