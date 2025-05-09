@@ -19,6 +19,25 @@ meta.name = 'referrer';
 meta.content = 'no-referrer';
 document.head.appendChild(meta);
 
+// Block common dev tools shortcuts (F12, Ctrl+Shift+I/C/J/U)
+document.addEventListener('keydown', function(e) {
+    // F12
+    if (e.key === 'F12') {
+        e.preventDefault();
+        return false;
+    }
+    // Ctrl+Shift+I, Ctrl+Shift+C, Ctrl+Shift+J
+    if (e.ctrlKey && e.shiftKey && ['I', 'C', 'J'].includes(e.key.toUpperCase())) {
+        e.preventDefault();
+        return false;
+    }
+    // Ctrl+U
+    if (e.ctrlKey && e.key.toUpperCase() === 'U') {
+        e.preventDefault();
+        return false;
+    }
+});
+
 // ==========================================================================
 // 0. Custom Cursor Implementation
 // ==========================================================================
