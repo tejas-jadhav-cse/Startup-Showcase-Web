@@ -835,6 +835,44 @@ window.addEventListener('DOMContentLoaded', () => {
     renderAllStartups();
 });
 
+// Ensure startup cards are always rendered on DOMContentLoaded
+window.addEventListener('DOMContentLoaded', () => {
+    if (!startupIdeas || !Array.isArray(startupIdeas) || startupIdeas.length === 0) {
+        // If no data, load sample data
+        const samples = [
+            {
+                startupName: "EcoLearn",
+                founderName: "Jamie Chen",
+                description: "An interactive platform that teaches environmental sustainability through gamified learning experiences.",
+                tags: ["education", "environment", "tech"],
+                upvotes: 15
+            },
+            {
+                startupName: "MealMatch",
+                founderName: "Priya Singh",
+                description: "An app that reduces food waste by connecting restaurants with surplus food to students on a budget.",
+                tags: ["food", "sustainability", "mobile"],
+                upvotes: 23
+            },
+            {
+                startupName: "CodeBuddy",
+                founderName: "Marcus Johnson",
+                description: "AI-powered programming assistant that helps students debug their code and learn programming concepts.",
+                tags: ["tech", "education", "AI"],
+                upvotes: 18
+            }
+        ];
+        startupIdeas = samples.map((sample, i) => ({
+            ...sample,
+            id: i + 1,
+            timestamp: new Date().toISOString()
+        }));
+        nextId = samples.length + 1;
+        localStorage.setItem('startupIdeas', JSON.stringify(startupIdeas));
+    }
+    renderAllStartups();
+});
+
 // ==========================================================================
 // 10. Featured Startup Functionality
 // ==========================================================================
