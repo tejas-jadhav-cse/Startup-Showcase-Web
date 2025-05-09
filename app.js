@@ -168,50 +168,16 @@ let nextId = startupIdeas.length ? Math.max(...startupIdeas.map(s => s.id)) + 1 
 const startupForm = document.getElementById('startupForm');
 const startupGrid = document.getElementById('startupGrid');
 const filterInput = document.getElementById('filter');
-const darkModeToggle = document.getElementById('darkModeToggle');
 const openSubmitModalBtn = document.getElementById('openSubmitModal');
 
 // ==========================================================================
-// 2. Theme Management (Light/Dark Mode)
+// 2. Theme Management (Dark Mode Only)
 // ==========================================================================
 
-// Make dark mode default
-if (!localStorage.getItem('darkMode') || localStorage.getItem('darkMode') === 'enabled') {
+// Always enable dark mode
+if (!document.documentElement.classList.contains('dark')) {
     document.documentElement.classList.add('dark');
-    localStorage.setItem('darkMode', 'enabled');
-} else {
-    document.documentElement.classList.remove('dark');
 }
-
-// Dark mode toggle functionality with animation
-const darkModeIcon = document.getElementById('darkModeIcon');
-darkModeToggle.addEventListener('click', () => {
-    // Animate button
-    darkModeToggle.animate([
-        { transform: 'rotate(0deg) scale(1)' },
-        { transform: 'rotate(20deg) scale(1.2)' },
-        { transform: 'rotate(-20deg) scale(1.2)' },
-        { transform: 'rotate(0deg) scale(1)' }
-    ], { duration: 400 });
-    
-    // Animate icon
-    if (darkModeIcon) {
-        darkModeIcon.animate([
-            { transform: 'scale(1)' },
-            { transform: 'scale(1.3) rotate(15deg)' },
-            { transform: 'scale(1)' }
-        ], { duration: 400 });
-    }
-    
-    // Toggle dark mode class and save preference
-    if (document.documentElement.classList.contains('dark')) {
-        document.documentElement.classList.remove('dark');
-        localStorage.setItem('darkMode', 'disabled');
-    } else {
-        document.documentElement.classList.add('dark');
-        localStorage.setItem('darkMode', 'enabled');
-    }
-});
 
 // ==========================================================================
 // 3. Modal System
@@ -1333,31 +1299,6 @@ document.addEventListener('DOMContentLoaded', function() {
 // 16. Theme-Specific CSS Variable Updater
 // ==========================================================================
 
-/**
- * Update CSS variables based on current theme
- */
-function updateThemeVariables() {
-    const isDark = document.documentElement.classList.contains('dark');
-    
-    // Update chart if it exists
-    const growthChartEl = document.getElementById('growthChart');
-    if (growthChartEl) {
-        const activeButton = document.querySelector('.bg-blue-500');
-        if (activeButton) {
-            const timeframe = activeButton.id.replace('View', '');
-            renderGrowthChart(growthChartEl, timeframe);
-        } else {
-            renderGrowthChart(growthChartEl, 'weekly');
-        }
-    }
-}
-
-// Listen for dark mode toggle to update theme-specific elements
-document.getElementById('darkModeToggle')?.addEventListener('click', () => {
-    // Wait for the DOM to update with the new theme
-    setTimeout(updateThemeVariables, 100);
-});
-
 // ==========================================================================
 // 17. Initialize Additional Features
 // ==========================================================================
@@ -1370,5 +1311,4 @@ window.addEventListener('DOMContentLoaded', () => {
     updateFeaturedStartup();
     initMobileNav();
     updateDashboard();
-    updateThemeVariables();
 });
