@@ -574,6 +574,7 @@ filterInput.addEventListener('input', () => {
 
 // Return to Top button implementation
 const returnToTopBtn = document.getElementById('returnToTop');
+const returnToTopButton = returnToTopBtn ? returnToTopBtn.querySelector('button') : null;
 
 if (returnToTopBtn) {
     window.addEventListener('scroll', () => {
@@ -588,12 +589,16 @@ if (returnToTopBtn) {
         }
     });
 
-    returnToTopBtn.addEventListener('click', () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
+    // Attach click event to the button only, not the whole div
+    if (returnToTopButton) {
+        returnToTopButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         });
-    });
+    }
 }
 
 // Enable smooth scrolling
