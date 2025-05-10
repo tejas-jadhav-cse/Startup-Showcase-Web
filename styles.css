@@ -325,6 +325,46 @@ html, body, * {
     animation: slideOut 0.3s forwards;
 }
 
+/* Mobile navigation overlay */
+#mobileNavOverlay {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+#mobileNavOverlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Mobile menu styles */
+.nav-links {
+    display: none; /* Hide by default on mobile */
+    opacity: 0;
+    transform: translateX(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+@media (min-width: 768px) {
+    .nav-links {
+        display: flex; /* Always show on desktop */
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.nav-links.active {
+    display: flex;
+    opacity: 1;
+    transform: translateX(0);
+    animation: slideIn 0.3s forwards;
+}
+
+/* Body styles for when navigation is open */
+body.nav-open {
+    overflow: hidden;
+}
+
 /* ==========================================================================
    6. Hero Section & Background Animations
    ========================================================================== */

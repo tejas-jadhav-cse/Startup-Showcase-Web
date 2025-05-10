@@ -3,6 +3,11 @@
  * Main application JavaScript
  */
 
+// Disable scroll restoration to prevent the page from loading at a previous scroll position
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+
 // ==========================================================================
 // Security Features - Disable right-click and backlink tracking
 // ==========================================================================
@@ -792,8 +797,29 @@ function launchConfetti() {
 // 9. Initial Setup & Initialization
 // ==========================================================================
 
+// Function to handle initial page scroll position
+function handleInitialScroll() {
+    // If there's a hash in the URL, let the browser scroll to that section
+    // Otherwise, make sure we're at the top
+    if (!window.location.hash) {
+        // Force scroll to top if no hash present
+        window.scrollTo(0, 0);
+    } else {
+        // If there is a hash, let's scroll to it properly
+        const targetElement = document.querySelector(window.location.hash);
+        if (targetElement) {
+            setTimeout(() => {
+                targetElement.scrollIntoView({ behavior: 'smooth' });
+            }, 300); // Small delay to ensure all content is loaded
+        }
+    }
+}
+
 // Combine all DOMContentLoaded logic into a single listener
 window.addEventListener('DOMContentLoaded', () => {
+    // Handle initial scroll position
+    handleInitialScroll();
+    
     // 1. Text scramble animation for hero title
     const scrambleEl = document.querySelector('.animate-text-scramble');
     if (scrambleEl) {
@@ -1249,72 +1275,60 @@ if (subscriptionForm) {
  * Initialize mobile navigation menu
  */
 function initMobileNav() {
-    if (mobileMenuToggle && navLinks) {
-        // Ensure menu is hidden on mobile and visible on desktop at page load
-        const isMobile = window.innerWidth < 768;
-        if (isMobile) {
-            navLinks.classList.add('hidden');
-            navLinks.classList.remove('showing');
-        } else {
-            // Desktop view - always show the menu
-            navLinks.classList.remove('hidden');
-            navLinks.classList.remove('fixed');
+    const navLinks = document.getElementById('nav-links');
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const mobileNavOverlay = document.getElementById('mobileNavOverlay');
+    
+    if (!navLinks || !mobileMenuToggle || !mobileNavOverlay) {
+        console.error('Mobile navigation elements not found');
+        return;
+    }
+
+    // Ensure menu is closed on load (mobile)
+    function resetMenuState() {
+        if (window.innerWidth < 768) {
+            navLinks.classList.remove('active');
+            mobileNavOverlay.classList.remove('active');
+            document.body.classList.remove('nav-open');
         }
-        
-        // Toggle menu on hamburger click
-        mobileMenuToggle.addEventListener('click', () => {
-            if (navLinks.classList.contains('hidden')) {
-                // Show menu
-                navLinks.classList.remove('hidden');
-                navLinks.classList.add('showing');
-                setTimeout(() => {
-                    navLinks.classList.remove('showing');
-                }, 300);
-            } else {
-                // Hide menu
-                navLinks.classList.add('hiding');
-                setTimeout(() => {
-                    navLinks.classList.add('hidden');
-                    navLinks.classList.remove('hiding');
-                }, 300);
-            }
-            
-            // Animate hamburger button
-            mobileMenuToggle.animate([
-                { transform: 'scale(1)' },
-                { transform: 'scale(1.2)' },
-                { transform: 'scale(1)' }
-            ], { duration: 300 });
-        });
-        
-        // Close mobile menu when clicking a nav link
-        navLinks.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', () => {
-                if (window.innerWidth < 768) {
-                    navLinks.classList.add('hiding');
-                    setTimeout(() => {
-                        navLinks.classList.add('hidden');
-                        navLinks.classList.remove('hiding');
-                    }, 300);
-                }
-            });
-        });
-        
-        // Handle window resize
-        window.addEventListener('resize', () => {
-            const isMobile = window.innerWidth < 768;
-            if (!isMobile) {
-                // Desktop view - always show the menu
-                navLinks.classList.remove('hiding', 'showing', 'hidden', 'fixed');
-            } else if (!navLinks.classList.contains('showing') && !navLinks.classList.contains('hiding')) {
-                // Mobile view - hide menu unless actively showing or hiding
-                navLinks.classList.add('hidden');
-            }
-        });
+    }
+    resetMenuState();
+
+    // Open mobile menu
+    function openMenu() {
+        navLinks.classList.add('active');
+        mobileNavOverlay.classList.add('active');
+        document.body.classList.add('nav-open');
     }
     
-    // Initialize nav scroll effect
-    initNavScroll();
+    // Close mobile menu
+    function closeMenu() {
+        navLinks.classList.remove('active');
+        mobileNavOverlay.classList.remove('active');
+        document.body.classList.remove('nav-open');
+    }
+    
+    // Toggle menu on hamburger button click
+    mobileMenuToggle.addEventListener('click', () => {
+        if (navLinks.classList.contains('active')) {
+            closeMenu();
+        } else {
+            openMenu();
+        }
+    });
+    
+    // Close on overlay click
+    mobileNavOverlay.addEventListener('click', closeMenu);
+    
+    // Close on nav link click (mobile only)
+    navLinks.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth < 768) closeMenu();
+        });
+    });
+    
+    // Responsive: reset menu state on resize
+    window.addEventListener('resize', resetMenuState);
 }
 
 /**

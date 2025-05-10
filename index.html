@@ -33,7 +33,7 @@
     <div class="cursor-dot"></div>
     
     <!-- Hero Section with Background Effect -->
-    <section class="wrapper">
+    <section id="home" class="wrapper">
         <div class="hero"></div>
         
         <!-- Navigation Bar -->
@@ -63,8 +63,10 @@
                             </svg>
                         </button>
                         
-                        <!-- Navigation Links - Always hidden on mobile, visible on desktop -->
-                        <div id="nav-links" class="nav-links hidden md:flex md:relative md:top-auto md:right-auto md:bg-transparent md:backdrop-filter-none md:p-0 md:rounded-none md:shadow-none md:flex-row md:space-x-6 md:w-auto md:border-0 flex-col space-y-3 w-48 border border-gray-700 bg-gray-900 bg-opacity-90 backdrop-blur-md p-4 rounded-lg shadow-xl z-50 top-16 right-4 fixed">
+                        <!-- Mobile Nav Overlay for mobile menu -->
+                        <div id="mobileNavOverlay" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 opacity-0 pointer-events-none transition-all duration-300"></div>
+                        <!-- Navigation Links - Only controlled by JS/CSS, not hidden by default -->
+                        <div id="nav-links" class="nav-links md:flex md:relative md:top-auto md:right-auto md:bg-transparent md:backdrop-filter-none md:p-0 md:rounded-none md:shadow-none md:flex-row md:space-x-6 md:w-auto md:border-0 flex-col space-y-3 w-48 border border-gray-700 bg-gray-900 bg-opacity-90 backdrop-blur-md p-4 rounded-lg shadow-xl z-50 top-16 right-4 fixed">
                             <a href="#home" class="nav-link">Home</a>
                             <a href="#ideas" class="nav-link">Ideas</a>
                             <a href="#submit" class="nav-link">Submit</a>
@@ -545,7 +547,7 @@
     </section>
 
     <!-- Main Content Area -->
-    <main class="container mx-auto px-4 py-8">
+    <main id="ideas" class="container mx-auto px-4 py-8">
         <!-- Filter Input -->
         <div class="mb-8">
             <label for="filter" class="block text-sm font-medium text-[#18181b] mb-1">Filter by tag or keyword:</label>
@@ -569,7 +571,7 @@
     </div>
     
     <!-- Footer -->
-    <footer class="osmo-footer mt-8">
+    <footer id="contact" class="osmo-footer mt-8">
         <div class="container mx-auto px-4 text-center">
             <p class="text-lg mb-2">Thank you for watching!</p>
             <div class="flex justify-center space-x-4 mb-2">
@@ -599,6 +601,11 @@
     <canvas id="confettiCanvas" class="fixed inset-0 pointer-events-none z-[9999]" style="display:none;"></canvas>
     
     <!-- JavaScript -->
+    <script>
+        window.onload = function() {
+            window.scrollTo(0, 0);
+        };
+    </script>
     <script src="app.js"></script>
     
 </body>
