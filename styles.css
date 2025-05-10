@@ -1,7 +1,32 @@
 /* ==========================================================================
-   Startup Showcase Web - Main Stylesheet
-   Organized by component types and functionality
+   0. Fonts & Root Variables
    ========================================================================== */
+
+@font-face {
+    font-family: 'PP Neue Montreal';
+    src: url('Assets/PPNeueMontreal-Regular.woff2') format('woff2'),
+         url('Assets/PPNeueMontreal-Regular.woff') format('woff'),
+         url('Assets/PPNeueMontreal-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'PP Neue Montreal';
+    src: url('Assets/PPNeueMontreal-Bold.woff2') format('woff2'),
+         url('Assets/PPNeueMontreal-Bold.woff') format('woff'),
+         url('Assets/PPNeueMontreal-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root {
+    --stripe-color: #000000;
+    --bg: var(--stripe-color);
+    --maincolor: var(--bg);
+}
 
 /* ==========================================================================
    1. Base & Utility Styles
@@ -32,6 +57,14 @@
     }
 }
 
+body, html {
+    font-family: 'PP Neue Montreal', 'Inter', 'Segoe UI', Arial, sans-serif !important;
+}
+
+h1, h2, h3, h4, h5, h6, button, input, textarea, select, label, .osmo-btn, .showcase-btn, .framer-btn, .card-btn, .osmo-badge, .date-badge, .sect-craft-badge {
+    font-family: 'PP Neue Montreal', 'Inter', 'Segoe UI', Arial, sans-serif !important;
+}
+
 /* Text selection style */
 ::selection {
     background-color: #ff4c24;
@@ -44,7 +77,43 @@
 }
 
 /* ==========================================================================
-   1.1 Custom Cursor
+   2. Typography & Global Text Colors
+   ========================================================================== */
+
+/* Set all heading (h1-h6) colors to #efeeec for easy global control */
+h1, h2, h3, h4, h5, h6 {
+    color: #efeeec !important;
+}
+
+/* Subheadings (h2, h3, h4, h5, h6) - slightly lighter for visual hierarchy */
+h2, h3, h4, h5, h6 {
+    color: #f5f5f3 !important;
+}
+
+/* Main body text, paragraphs, and labels for better readability */
+body, p, label, .text-base, .text-lg, .text-sm, .text-gray-700, .text-gray-900, .text-[#52525b], .dark\:text-gray-300 {
+    color: #e0dfdb !important;
+}
+
+/* Muted/secondary text for less emphasis */
+.text-muted, .text-gray-500, .text-gray-400, .dark\:text-gray-400 {
+    color: #bdbdb7 !important;
+}
+
+/* Paragraphs - custom color for better readability and visual consistency */
+p {
+    color: #a8a7a5 !important;
+}
+
+/* FAQ Accordion text color */
+.faq-question,
+.faq-question span,
+.faq-answer p {
+    color: #efeeec !important;
+}
+
+/* ==========================================================================
+   3. Custom Cursor Styles
    ========================================================================== */
 
 /* Hide the default cursor */
@@ -106,371 +175,23 @@ html, body, * {
 }
 
 /* ==========================================================================
-   2. Component Styles - Visual Elements
+   4. Layout & Structure
    ========================================================================== */
 
-/* --- 2.1 Glass Effect --- */
-.glass {
-    background: rgba(30, 41, 59, 0.55);
-    backdrop-filter: blur(24px) saturate(180%);
-    -webkit-backdrop-filter: blur(24px) saturate(180%);
-    border-radius: 2rem;
-    border: 1.5px solid rgba(255, 255, 255, 0.18);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
-}
-
-/* --- 2.2 Gradient Animations --- */
-.gradient-animate {
-    background: linear-gradient(270deg, #7f5af0, #43e6fc, #ff6ac1, #7f5af0);
-    background-size: 600% 600%;
-    animation: gradientBG 16s ease infinite;
-}
-
-@keyframes gradientBG {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
-
-/* ==========================================================================
-   3. Card Components
-   ========================================================================== */
-
-/* --- 3.1 Framer-style Card --- */
-.framer-card {
-    border-radius: 2rem;
-    border: 2px solid rgba(255, 255, 255, 0.18);
-    background: rgba(30, 41, 59, 0.55);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18), 0 0 0 2px transparent;
-    transition: box-shadow 0.3s, border 0.3s, transform 0.3s;
-}
-
-.framer-card:hover {
-    box-shadow: 0 12px 40px 0 rgba(127, 90, 240, 0.18), 0 0 0 2px #ff6ac1;
-    border-color: #ff6ac1;
-    transform: translateY(-4px) scale(1.03);
-}
-
-/* --- 3.2 Osmo-style Card --- */
-.osmo-card {
-    background: #fff;
-    border-radius: 1.5rem;
-    box-shadow: 0 4px 24px 0 rgba(16, 30, 54, 0.07);
-    border: 1px solid #ececec;
-    transition: box-shadow 0.2s, transform 0.2s;
-}
-
-.osmo-card:hover {
-    box-shadow: 0 8px 32px 0 rgba(16, 30, 54, 0.12);
-    transform: translateY(-2px) scale(1.01);
-}
-
-/* ==========================================================================
-   4. Button Components
-   ========================================================================== */
-
-/* --- 4.1 Framer-style Button --- */
-.framer-btn {
-    border-radius: 2rem;
-    background: linear-gradient(90deg, #7f5af0 0%, #43e6fc 50%, #ff6ac1 100%);
-    background-size: 200% 200%;
-    color: #fff;
-    font-weight: 700;
-    box-shadow: 0 4px 24px 0 rgba(127, 90, 240, 0.18);
-    border: 2px solid transparent;
-    transition: background 0.4s, box-shadow 0.3s, border 0.3s, transform 0.3s;
-}
-
-.framer-btn:hover {
-    background-position: 100% 0;
-    box-shadow: 0 8px 32px 0 rgba(255, 106, 193, 0.18);
-    border-color: #43e6fc;
-    transform: scale(1.05);
-}
-
-/* --- 4.2 Osmo-style Button --- */
-.osmo-btn {
-    background: #18181b;
-    color: #fff;
-    border-radius: 9999px;
-    font-weight: 700;
-    font-size: 1.1rem;
-    padding: 0.75rem 2.5rem;
-    box-shadow: 0 2px 8px 0 rgba(16, 30, 54, 0.07);
-    border: none;
-    transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
-}
-
-.osmo-btn:hover {
-    background: #3b82f6;
-    color: #fff;
-    box-shadow: 0 4px 16px 0 rgba(59, 130, 246, 0.12);
-    transform: scale(1.04);
-}
-
-/* --- 4.2.1 Card Action Buttons --- */
-.card-actions {
-    flex-wrap: nowrap;
-    width: 100%;
-}
-
-.card-btn {
-    background: #efeeec;
-    color: #374151;
-    font-size: 0.875rem;
-    font-weight: 500;
-    padding: 0.5rem 0.75rem;
-    border-radius: 0.5rem;
-    border: none;
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.375rem;
-    transition: all 0.2s ease;
-    white-space: nowrap;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-}
-
-.card-btn:hover {
-    background: #e6e6e3; /* Slightly darker shade of white for hover */
-    color: #3b82f6;
-    transform: translateY(-1px);
-    box-shadow: 0 2px 4px rgba(59, 130, 246, 0.15);
-}
-
-.card-btn:active {
-    transform: translateY(1px);
-}
-
-.card-btn .btn-icon {
-    font-size: 0.9rem;
-}
-
-.upvote-btn {
-    background: #efeeec;
-    color: #4f46e5;
-}
-
-.upvote-btn:hover {
-    background: #e6e6e3;
-    color: #4338ca;
-}
-
-.contact-btn {
-    background: #efeeec;
-    color: #047857;
-}
-
-.contact-btn:hover {
-    background: #e6e6e3;
-    color: #065f46;
-}
-
-.partner-btn {
-    background: #efeeec;
-    color: #1d4ed8;
-}
-
-.partner-btn:hover {
-    background: #e6e6e3;
-    color: #1e40af;
-}
-
-/* Dark mode styles for card buttons */
-.dark .card-btn {
-    background: #27272a;
-    color: #efeeec;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-}
-
-.dark .card-btn:hover {
-    background: #3f3f46;
-    color: #93c5fd;
-}
-
-.dark .upvote-btn {
-    background: #27272a;
-    color: #a5b4fc;
-}
-
-.dark .upvote-btn:hover {
-    background: #3730a3;
-    color: #c7d2fe;
-}
-
-.dark .contact-btn {
-    background: #27272a;
-    color: #a7f3d0;
-}
-
-.dark .contact-btn:hover {
-    background: #065f46;
-    color: #d1fae5;
-}
-
-.dark .partner-btn {
-    background: #27272a;
-    color: #93c5fd;
-}
-
-.dark .partner-btn:hover {
-    background: #1e40af;
-    color: #bfdbfe;
-}
-
-/* Responsive styles for buttons */
-@media (max-width: 480px) {
-    .card-btn {
-        padding: 0.375rem 0.5rem;
-        font-size: 0.75rem;
-    }
-    
-    .card-btn .btn-text {
-        display: none;
-    }
-    
-    .card-btn .btn-icon {
-        margin: 0;
-        font-size: 1rem;
-    }
-    
-    .upvote-btn svg {
-        height: 1rem;
-        width: 1rem;
-    }
-    
-    .card-actions {
-        justify-content: space-around;
-    }
-}
-
-/* --- 4.3 Badge Styles --- */
-.osmo-badge {
-    background: #f3f4f6;
-    color: #18181b;
-    border-radius: 9999px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    padding: 0.25rem 1rem;
-    margin-right: 0.5rem;
-    margin-bottom: 0.5rem;
-    display: inline-block;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    transition: box-shadow 0.2s, background 0.2s, color 0.2s;
-}
-
-/* New styles for date badge */
-.date-badge {
-    font-size: 0.8rem;
-    color: #6b7280;
-    background: #f3f4f6;
-    padding: 0.2rem 0.8rem;
-    border-radius: 0.5rem;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 500;
-    transition: all 0.2s ease;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-}
-
-.date-badge:before {
-    content: "🗓️";
-    margin-right: 0.35rem;
-    font-size: 0.9rem;
-}
-
-.osmo-card:hover .date-badge {
-    background: #e6effe;
-    color: #3b82f6;
-}
-
-/* Dark mode styles for date badge */
-.dark .date-badge {
-    background: #27272a;
-    color: #d1d5db;
-}
-
-.dark .osmo-card:hover .date-badge {
-    background: #3b82f620;
-    color: #93c5fd;
-}
-
-@media (max-width: 640px) {
-    .date-badge {
-        padding: 0.15rem 0.5rem;
-        font-size: 0.75rem;
-    }
-    
-    .date-badge:before {
-        margin-right: 0.25rem;
-        font-size: 0.8rem;
-    }
-}
-
-.osmo-badge:active::after {
-    content: '';
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 200%;
-    height: 200%;
-    background: rgba(59, 130, 246, 0.15);
-    border-radius: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    animation: ripple-badge 0.4s linear;
-    z-index: 1;
-}
-
-@keyframes ripple-badge {
-    to {
-        transform: translate(-50%, -50%) scale(1);
-        opacity: 0;
-    }
-}
-
-/* --- 4.4 SECT Badge --- */
-.sect-craft-badge {
-    background: #3b82f6; /* Changed from #ff4c24 (ORANGE) to #357DED (BLUE) */
-    color: #fff;
-    border-radius: 0.6rem;
-    font-size: 0.82rem;
-    font-weight: 400;
-    padding: 0.18rem 0.7rem 0.18rem 0.7rem;
-    display: flex;
-    align-items: center;
-    height: 1.5rem;
-    box-shadow: 0 1px 4px 0 rgba(255, 76, 36, 0.08);
-    letter-spacing: 0.01em;
-    margin-right: 0.2rem;
-    margin-left: 0.1rem;
-    transition: box-shadow 0.18s, background 0.18s;
-}
-
-.sect-craft-badge:hover {
-    box-shadow: 0 2px 8px 0 rgba(255, 76, 36, 0.18);
-    background: #ff6a47;
-}
-
-/* ==========================================================================
-   5. Layout & Structural Components
-   ========================================================================== */
-
-/* --- 5.1 Background Styles --- */
+/* Background Styles */
 .osmo-bg {
     background: #f8f9fb;
 }
 
-/* --- 5.2 Navbar Styles --- */
+.container {
+    max-width: 1320px;
+    margin: 0 auto;
+}
+
+/* ==========================================================================
+   5. Navbar & Navigation
+   ========================================================================== */
+
 .osmo-navbar {
     background: #fff;
     border-bottom: 1px solid #e5e7eb;
@@ -488,8 +209,6 @@ html, body, * {
     background: none;
     transition: background 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
-
-
 
 .gradient-navbar::before {
     content: '';
@@ -509,7 +228,6 @@ html, body, * {
         transparent 100%);
     transition: opacity 0.3s ease;
 }
-
 
 .gradient-navbar .container {
     display: flex;
@@ -607,32 +325,421 @@ html, body, * {
     animation: slideOut 0.3s forwards;
 }
 
-/* --- 5.3 Typography Components --- */
-.osmo-hero-title {
-    font-size: 6.0rem; /* Increased from 3rem to 6.0rem */
-    font-weight: 400; /* Changed from 900 (bold) to 400 (normal) */
-    color: #18181b;
-    letter-spacing: -0.03em;
-    line-height: 1.1;
+/* ==========================================================================
+   6. Hero Section & Background Animations
+   ========================================================================== */
+
+.wrapper {
+    width: 100%;
+    height: auto;
+    position: relative;
 }
 
-.osmo-hero-desc {
-    font-size: 1.35rem;
-    color: #52525b;
+.hero {
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    place-content: center;
+    place-items: center;
+    --stripes: repeating-linear-gradient(
+        100deg,
+        var(--stripe-color) 0%,
+        var(--stripe-color) 7%,
+        transparent 10%,
+        transparent 12%,
+        var(--stripe-color) 16%
+    );
+    --rainbow: repeating-linear-gradient(
+        100deg,
+        #60a5fa 10%,
+        #e879f9 15%,
+        #60a5fa 20%,
+        #5eead4 25%,
+        #60a5fa 30%
+    );
+    background-image: var(--stripes), var(--rainbow);
+    background-size: 300%, 200%;
+    background-position: 50% 50%, 50% 50%;
+    filter: blur(10px)
+        opacity(50%)
+        saturate(200%)
+        brightness(0.8);
+    mask-image: radial-gradient(ellipse at 100% 0%, black 40%, transparent 70%);
+    animation: smoothBg 60s linear infinite;
+    background-attachment: fixed;
+    mix-blend-mode: difference;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: var(--stripes), var(--rainbow);
+    background-size: 200%, 00%;
+    background-position: 50% 50%, 50% 50%;
+    filter: blur(10px) opacity(50%) saturate(200%);
+    pointer-events: none;
+}
+
+@keyframes smoothBg {
+    from {
+        background-position: 50% 50%, 50% 50%;
+    }
+    to {
+        background-position: 350% 50%, 350% 50%;
+    }
+}
+
+/* Hero Content */
+.content {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    place-content: center;
+    place-items: center;
+    flex-flow: column;
+    gap: 4.5%;
+    text-align: center;
+    z-index: 10; /* Ensures content is above the gradient background but below the navbar */
+    padding-top: 6rem; /* Adds space below the fixed navbar */
+}
+
+.content .osmo-hero-title {
+    color: #ffffff;
+    margin-bottom: 1.5rem;
+    filter: none; /* Remove any existing filter */
+    mix-blend-mode: normal; /* Override any existing blend mode */
+}
+
+.content .osmo-hero-desc {
+    color: #ffffff;
+    opacity: 0.9;
+    margin-bottom: 2rem;
+}
+
+.content #liveStats {
+    color: #ffffff;
+    opacity: 0.9;
     font-weight: 500;
-    margin-bottom: 2.5rem;
 }
 
-/* --- 5.4 Footer --- */
-.osmo-footer {
+/* Adjust button to stand out on gradient background */
+.content .showcase-btn {
+    background: #ffffff;
+    color: #18181b;
+    border: none;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+}
+
+.content .showcase-btn:hover {
+    background: #f0f0f0;
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.h1--scalingSize {
+    font-size: calc(1rem - -5vw);
+    position: relative;
+}
+
+.h1--scalingSize::before {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    background: white;
+    text-shadow: 0 0 1px #ffffff;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-color: white;
+    -webkit-mask: linear-gradient(#000 0 0) luminance;
+    mask: linear-gradient(#000 0 0) luminance, alpha;
+    backdrop-filter: blur(19px) brightness(12.5);
+    -webkit-text-stroke: 1px white;
+    display: flex;
+    margin: auto;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* ==========================================================================
+   7. Card Components
+   ========================================================================== */
+
+/* Framer-style Card */
+.framer-card {
+    border-radius: 2rem;
+    border: 2px solid rgba(255, 255, 255, 0.18);
+    background: rgba(30, 41, 59, 0.55);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18), 0 0 0 2px transparent;
+    transition: box-shadow 0.3s, border 0.3s, transform 0.3s;
+}
+
+.framer-card:hover {
+    box-shadow: 0 12px 40px 0 rgba(127, 90, 240, 0.18), 0 0 0 2px #ff6ac1;
+    border-color: #ff6ac1;
+    transform: translateY(-4px) scale(1.03);
+}
+
+/* Osmo-style Card */
+.osmo-card {
     background: #fff;
-    color: #52525b;
-    border-top: 1px solid #ececec;
-    font-size: 1rem;
-    padding: 2rem 0;
+    border-radius: 1.5rem;
+    box-shadow: 0 4px 24px 0 rgba(16, 30, 54, 0.07);
+    border: 1px solid #ececec;
+    transition: box-shadow 0.2s, transform 0.2s;
+    transform: translateY(0);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* --- 5.5 Form Elements --- */
+.osmo-card:hover {
+    box-shadow: 0 8px 32px 0 rgba(16, 30, 54, 0.12);
+    transform: translateY(-8px);
+}
+
+/* ==========================================================================
+   8. Button Components
+   ========================================================================== */
+
+/* Framer-style Button */
+.framer-btn {
+    border-radius: 2rem;
+    background: linear-gradient(90deg, #7f5af0 0%, #43e6fc 50%, #ff6ac1 100%);
+    background-size: 200% 200%;
+    color: #fff;
+    font-weight: 700;
+    box-shadow: 0 4px 24px 0 rgba(127, 90, 240, 0.18);
+    border: 2px solid transparent;
+    transition: background 0.4s, box-shadow 0.3s, border 0.3s, transform 0.3s;
+}
+
+.framer-btn:hover {
+    background-position: 100% 0;
+    box-shadow: 0 8px 32px 0 rgba(255, 106, 193, 0.18);
+    border-color: #43e6fc;
+    transform: scale(1.05);
+}
+
+/* Osmo-style Button */
+.osmo-btn {
+    background: #18181b;
+    color: #fff;
+    border-radius: 9999px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    padding: 0.75rem 2.5rem;
+    box-shadow: 0 2px 8px 0 rgba(16, 30, 54, 0.07);
+    border: none;
+    transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+
+.osmo-btn:hover {
+    background: #3b82f6;
+    color: #fff;
+    box-shadow: 0 4px 16px 0 rgba(59, 130, 246, 0.12);
+    transform: scale(1.04);
+}
+
+/* Showcase Button */
+.showcase-btn {
+    background: #fff;
+    color: #18181b;
+    border: 1.5px solid #ececec;
+    border-radius: 0.75rem;
+    font-weight: 700;
+    font-size: 1.15rem;
+    letter-spacing: 0.02em;
+    padding: 0.85rem 2.2rem;
+    box-shadow: 0 2px 8px 0 rgba(16, 30, 54, 0.07);
+    transition: box-shadow 0.22s cubic-bezier(.4,1.2,.6,1),
+                transform 0.22s cubic-bezier(.4,1.2,.6,1),
+                background 0.18s, color 0.18s;
+    outline: none;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.showcase-btn:hover, .showcase-btn:focus {
+    box-shadow: 0 8px 24px 0 rgba(59, 130, 246, 0.10);
+    transform: translateY(-3px) scale(0.97);
+    background: #f3f4f6;
+    color: #111827;
+    border-color: #bdbdbd;
+}
+
+.showcase-btn:active {
+    transform: scale(0.96);
+}
+
+/* Card Action Buttons */
+.card-actions {
+    flex-wrap: nowrap;
+    width: 100%;
+}
+
+.card-btn {
+    background: #efeeec;
+    color: #374151;
+    font-size: 0.875rem;
+    font-weight: 500;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.5rem;
+    border: none;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.375rem;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.card-btn:hover {
+    background: #e6e6e3; /* Slightly darker shade of white for hover */
+    color: #3b82f6;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(59, 130, 246, 0.15);
+}
+
+.card-btn:active {
+    transform: translateY(1px);
+}
+
+.card-btn .btn-icon {
+    font-size: 0.9rem;
+}
+
+.upvote-btn {
+    background: #efeeec;
+    color: #4f46e5;
+}
+
+.upvote-btn:hover {
+    background: #e6e6e3;
+    color: #4338ca;
+}
+
+.contact-btn {
+    background: #efeeec;
+    color: #047857;
+}
+
+.contact-btn:hover {
+    background: #e6e6e3;
+    color: #065f46;
+}
+
+.partner-btn {
+    background: #efeeec;
+    color: #1d4ed8;
+}
+
+.partner-btn:hover {
+    background: #e6e6e3;
+    color: #1e40af;
+}
+
+/* ==========================================================================
+   9. Badges
+   ========================================================================== */
+
+/* Osmo Badge */
+.osmo-badge {
+    background: #f3f4f6;
+    color: #18181b;
+    border-radius: 9999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 0.25rem 1rem;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    display: inline-block;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: box-shadow 0.2s, background 0.2s, color 0.2s;
+}
+
+.osmo-badge:active::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 200%;
+    height: 200%;
+    background: rgba(59, 130, 246, 0.15);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    animation: ripple-badge 0.4s linear;
+    z-index: 1;
+}
+
+@keyframes ripple-badge {
+    to {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0;
+    }
+}
+
+/* Date Badge */
+.date-badge {
+    font-size: 0.8rem;
+    color: #6b7280;
+    background: #f3f4f6;
+    padding: 0.2rem 0.8rem;
+    border-radius: 0.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.date-badge:before {
+    content: "🗓️";
+    margin-right: 0.35rem;
+    font-size: 0.9rem;
+}
+
+.osmo-card:hover .date-badge {
+    background: #e6effe;
+    color: #3b82f6;
+}
+
+/* SECT Badge */
+.sect-craft-badge {
+    background: #3b82f6; /* Changed from #ff4c24 (ORANGE) to #357DED (BLUE) */
+    color: #fff;
+    border-radius: 0.6rem;
+    font-size: 0.82rem;
+    font-weight: 400;
+    padding: 0.18rem 0.7rem 0.18rem 0.7rem;
+    display: flex;
+    align-items: center;
+    height: 1.5rem;
+    box-shadow: 0 1px 4px 0 rgba(255, 76, 36, 0.08);
+    letter-spacing: 0.01em;
+    margin-right: 0.2rem;
+    margin-left: 0.1rem;
+    transition: box-shadow 0.18s, background 0.18s;
+}
+
+.sect-craft-badge:hover {
+    box-shadow: 0 2px 8px 0 rgba(255, 76, 36, 0.18);
+    background: #ff6a47;
+}
+
+/* ==========================================================================
+   10. Forms
+   ========================================================================== */
+
+/* Input Styles */
 .osmo-input {
     background: #fff;
     border: 1px solid #ececec;
@@ -648,72 +755,146 @@ html, body, * {
     outline: none;
 }
 
-/* --- 5.6 Animation Utility Classes --- */
+/* ==========================================================================
+   11. Footer
+   ========================================================================== */
 
-/* --- 5.7 Canvas Elements --- */
+/* Footer Styles */
+.osmo-footer {
+    background: #fff;
+    color: #52525b;
+    border-top: 1px solid #ececec;
+    font-size: 1rem;
+    padding: 2rem 0;
+}
+
+/* ==========================================================================
+   12. Utilities & Effects
+   ========================================================================== */
+
+/* Glass Effect */
+.glass {
+    background: rgba(30, 41, 59, 0.55);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border-radius: 2rem;
+    border: 1.5px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+}
+
+/* Gradient Animations */
+.gradient-animate {
+    background: linear-gradient(270deg, #7f5af0, #43e6fc, #ff6ac1, #7f5af0);
+    background-size: 600% 600%;
+    animation: gradientBG 16s ease infinite;
+}
+
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Canvas Elements */
 #confettiCanvas {
     pointer-events: none;
 }
 
 /* ==========================================================================
-   6. Dark Mode Styles
+   13. Modal & Animation Utilities
    ========================================================================== */
 
-.dark .osmo-bg {
-    background: #000 !important;
+/* Modal Scrollbar Styles */
+#modalCardBox .overflow-y-auto::-webkit-scrollbar {
+    width: 8px;
+    border-radius: 8px;
+    background: transparent;
 }
 
-.dark .osmo-navbar,
-.dark .osmo-footer {
-    background: #000 !important;
-    color: #efeeec !important;
-    border-color: #222 !important;
+#modalCardBox .overflow-y-auto::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background: linear-gradient(180deg, #7f5af0 0%, #43e6fc 100%);
+    min-height: 40px;
 }
 
-.dark .osmo-card {
-    background: #18181b !important;
-    color: #efeeec !important;
-    border-color: #222 !important;
+#modalCardBox .overflow-y-auto::-webkit-scrollbar-button {
+    display: none;
+    height: 0;
+    width: 0;
 }
 
-.dark .osmo-btn,
-.dark .showcase-btn {
-    background: #efeeec !important;
-    color: #000 !important;
-    border: none !important;
+#modalCardBox .overflow-y-auto {
+    scrollbar-width: thin;
+    scrollbar-color: #7f5af0 transparent;
 }
 
-.dark .osmo-btn:hover,
-.dark .showcase-btn:hover {
-    background: #fff !important;
-    color: #000 !important;
+/* Modern toggle switch animation */
+#toggleSocialMedia {
+    transition: background 0.3s cubic-bezier(.4,2,.6,1);
+    box-shadow: 0 1px 4px 0 rgba(60,60,60,0.04);
 }
 
-.dark .osmo-input {
-    background: #18181b !important;
-    color: #efeeec !important;
-    border-color: #333 !important;
+#toggleSocialMedia .toggle-dot-anim {
+    transition: transform 0.28s cubic-bezier(.4,2,.6,1), background 0.28s cubic-bezier(.4,2,.6,1);
+    box-shadow: 0 1px 4px 0 rgba(60,60,60,0.08);
 }
 
-.dark .osmo-badge {
-    background: #222 !important;
-    color: #efeeec !important;
+#toggleSocialMedia.bg-blue-500 {
+    background: linear-gradient(90deg, #7f5af0 0%, #43e6fc 100%);
 }
 
-.dark .osmo-hero-title {
-    color: #efeeec !important;
+/* Modal error message */
+.modal-error-message {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+    border: 1.5px solid #ef4444;
+    background: rgba(255, 0, 0, 0.06);
+    color: #ef4444;
+    border-radius: 0.75rem;
+    padding: 0.75rem 1rem;
+    font-size: 0.97rem;
+    font-weight: 500;
+    box-shadow: 0 2px 8px 0 rgba(239,68,68,0.04);
+    transition: opacity 0.2s;
 }
 
-.dark .osmo-hero-desc {
-    color: #bdbdbd !important;
+.modal-error-message svg {
+    flex-shrink: 0;
+    width: 1.25em;
+    height: 1.25em;
+    color: #ef4444;
 }
 
-.dark #heroGradientBg {
-    opacity: 0.18;
+/* Fade-in-up animation */
+@keyframes fade-in-up {
+    0% { opacity: 0; transform: translateY(40px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in-up {
+    animation: fade-in-up 0.7s cubic-bezier(.39,.575,.565,1) both;
+}
+
+/* Highlight pulse effect for featured card */
+@keyframes highlight-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(127, 90, 240, 0); }
+    50% { box-shadow: 0 0 0 10px rgba(127, 90, 240, 0.3); }
+}
+
+.highlight-pulse {
+    animation: highlight-pulse 1s ease-in-out 2;
 }
 
 /* ==========================================================================
-   7. Responsive Styles
+   14. Responsive & Accessibility
    ========================================================================== */
 
 /* Mobile Navigation Styles */
@@ -770,6 +951,30 @@ html, body, * {
     /* Subscription Form */
     .glass {
         padding: 1.5rem;
+    }
+    
+    #featuredLogo {
+        max-width: 80px;
+        max-height: 80px;
+    }
+    
+    .testimonial-slide .rounded-full {
+        max-width: 3rem;
+        max-height: 3rem;
+    }
+    
+    /* Adjust SVG sizes on mobile */
+    svg.w-32, svg.h-32 {
+        width: 5rem !important;
+        height: 5rem !important;
+    }
+    
+    .content .osmo-hero-title {
+        font-size: 3rem !important;
+    }
+    
+    .content .osmo-hero-desc {
+        font-size: 1.2rem !important;
     }
 }
 
@@ -851,6 +1056,30 @@ html, body, * {
         right: 1rem;
         bottom: 1rem;
     }
+    
+    #featuredLogo {
+        max-width: 60px;
+        max-height: 60px;
+    }
+    
+    .testimonial-slide .rounded-full {
+        max-width: 2.5rem;
+        max-height: 2.5rem;
+    }
+    
+    /* Adjust SVG sizes on small mobile */
+    svg.w-32, svg.h-32 {
+        width: 4rem !important;
+        height: 4rem !important;
+    }
+    
+    .content .osmo-hero-title {
+        font-size: 2.5rem !important;
+    }
+    
+    .content .osmo-hero-desc {
+        font-size: 1rem !important;
+    }
 }
 
 /* Better Tablet Support */
@@ -904,16 +1133,117 @@ html, body, * {
     }
 }
 
-/* Animation for interaction feedback */
-.osmo-card {
-    transform: translateY(0);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+/* ==========================================================================
+   15. Dark Mode
+   ========================================================================== */
+
+.dark .osmo-bg {
+    background: #000 !important;
 }
 
-.osmo-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+.dark .osmo-navbar,
+.dark .osmo-footer {
+    background: #000 !important;
+    color: #efeeec !important;
+    border-color: #222 !important;
 }
+
+.dark .osmo-card {
+    background: #18181b !important;
+    color: #efeeec !important;
+    border-color: #222 !important;
+}
+
+.dark .osmo-btn,
+.dark .showcase-btn {
+    background: #efeeec !important;
+    color: #000 !important;
+    border: none !important;
+}
+
+.dark .osmo-btn:hover,
+.dark .showcase-btn:hover {
+    background: #fff !important;
+    color: #000 !important;
+}
+
+.dark .osmo-input {
+    background: #18181b !important;
+    color: #efeeec !important;
+    border-color: #333 !important;
+}
+
+.dark .osmo-badge {
+    background: #222 !important;
+    color: #efeeec !important;
+}
+
+.dark .osmo-hero-title {
+    color: #efeeec !important;
+}
+
+.dark .osmo-hero-desc {
+    color: #bdbdbd !important;
+}
+
+.dark #heroGradientBg {
+    opacity: 0.18;
+}
+
+.dark .card-btn {
+    background: #27272a;
+    color: #efeeec;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.dark .card-btn:hover {
+    background: #3f3f46;
+    color: #93c5fd;
+}
+
+.dark .upvote-btn {
+    background: #27272a;
+    color: #a5b4fc;
+}
+
+.dark .upvote-btn:hover {
+    background: #3730a3;
+    color: #c7d2fe;
+}
+
+.dark .contact-btn {
+    background: #27272a;
+    color: #a7f3d0;
+}
+
+.dark .contact-btn:hover {
+    background: #065f46;
+    color: #d1fae5;
+}
+
+.dark .partner-btn {
+    background: #27272a;
+    color: #93c5fd;
+}
+
+.dark .partner-btn:hover {
+    background: #1e40af;
+    color: #bfdbfe;
+}
+
+.dark .date-badge {
+    background: #27272a;
+    color: #d1d5db;
+}
+
+.dark .osmo-card:hover .date-badge {
+    background: #3b82f620;
+    color: #93c5fd;
+}
+
+/* ==========================================================================
+   16. Miscellaneous
+   ========================================================================== */
 
 /* Accessible focus styles */
 a:focus, button:focus, input:focus, textarea:focus, select:focus {
@@ -921,152 +1251,40 @@ a:focus, button:focus, input:focus, textarea:focus, select:focus {
     outline-offset: 2px;
 }
 
-/* ==========================================================================
-   8. Hero Background Styles (From CodePen)
-   ========================================================================== */
-
-:root {
-    --stripe-color: #000000;
-    --bg: var(--stripe-color);
-    --maincolor: var(--bg);
+/* Image Responsiveness Fixes */
+.aspect-square svg {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto !important;
+    height: auto !important;
+    object-fit: contain;
 }
 
-@keyframes smoothBg {
-    from {
-        background-position: 50% 50%, 50% 50%;
-    }
-    to {
-        background-position: 350% 50%, 350% 50%;
-    }
+/* Fix for SVG scaling */
+#featuredLogo {
+    width: 100%;
+    height: 100%;
+    max-width: 120px;
+    max-height: 120px;
 }
 
-.wrapper {
+/* Responsive testimonial profile images */
+.testimonial-slide .rounded-full {
     width: 100%;
     height: auto;
-    position: relative;
+    max-width: 4rem;
+    max-height: 4rem;
+    object-fit: cover;
 }
 
-.hero {
-    width: 100%;
-    height: 100%;
-    min-height: 100vh;
-    position: relative;
-    display: flex;
-    place-content: center;
-    place-items: center;
-    --stripes: repeating-linear-gradient(
-        100deg,
-        var(--stripe-color) 0%,
-        var(--stripe-color) 7%,
-        transparent 10%,
-        transparent 12%,
-        var(--stripe-color) 16%
-    );
-    --rainbow: repeating-linear-gradient(
-        100deg,
-        #60a5fa 10%,
-        #e879f9 15%,
-        #60a5fa 20%,
-        #5eead4 25%,
-        #60a5fa 30%
-    );
-    background-image: var(--stripes), var(--rainbow);
-    background-size: 300%, 200%;
-    background-position: 50% 50%, 50% 50%;
-    filter: blur(10px)
-        opacity(50%)
-        saturate(200%)
-        brightness(0.8);
-    mask-image: radial-gradient(ellipse at 100% 0%, black 40%, transparent 70%);
-    animation: smoothBg 60s linear infinite;
-    background-attachment: fixed;
-    mix-blend-mode: difference;
+/* Timeline event icons */
+.timeline-point svg {
+    width: 1rem;
+    height: 1rem;
+    max-width: 100%;
 }
 
-.hero::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image: var(--stripes), var(--rainbow);
-    background-size: 200%, 00%;
-    background-position: 50% 50%, 50% 50%;
-    filter: blur(10px) opacity(50%) saturate(200%);
-    pointer-events: none;
-}
-
-.content {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    place-content: center;
-    place-items: center;
-    flex-flow: column;
-    gap: 4.5%;
-    text-align: center;
-    z-index: 10; /* Ensures content is above the gradient background but below the navbar */
-    padding-top: 6rem; /* Adds space below the fixed navbar */
-}
-
-.content .osmo-hero-title {
-    color: #ffffff;
-    margin-bottom: 1.5rem;
-    filter: none; /* Remove any existing filter */
-    mix-blend-mode: normal; /* Override any existing blend mode */
-}
-
-.content .osmo-hero-desc {
-    color: #ffffff;
-    opacity: 0.9;
-    margin-bottom: 2rem;
-}
-
-.content #liveStats {
-    color: #ffffff;
-    opacity: 0.9;
-    font-weight: 500;
-}
-
-/* Adjust button to stand out on gradient background */
-.content .showcase-btn {
-    background: #ffffff;
-    color: #18181b;
-    border: none;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-    transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
-}
-
-.content .showcase-btn:hover {
-    background: #f0f0f0;
-    transform: translateY(-5px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-}
-
-.h1--scalingSize {
-    font-size: calc(1rem - -5vw);
-    position: relative;
-}
-
-.h1--scalingSize::before {
-    content: attr(data-text);
-    position: absolute;
-    inset: 0;
-    background: white;
-    text-shadow: 0 0 1px #ffffff;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-color: white;
-    -webkit-mask: linear-gradient(#000 0 0) luminance;
-    mask: linear-gradient(#000 0 0) luminance, alpha;
-    backdrop-filter: blur(19px) brightness(12.5);
-    -webkit-text-stroke: 1px white;
-    display: flex;
-    margin: auto;
-    z-index: 1;
-    pointer-events: none;
-}
-
+/* Modern toggle switch and icon */
 #switch {
     appearance: none;
     -webkit-appearance: none;
@@ -1123,315 +1341,5 @@ a:focus, button:focus, input:focus, textarea:focus, select:focus {
 :has(:checked) .hero,
 :has(:checked) .hero::after {
     filter: blur(10px) opacity(50%) saturate(200%);
-}
-
-/* ========================================================================== 
-   Global Heading Color (All Headings)
-   ========================================================================== */
-
-/* Set all heading (h1-h6) colors to #efeeec for easy global control */
-h1, h2, h3, h4, h5, h6 {
-    color: #efeeec !important;
-}
-
-/* ==========================================================================
-   9. Image Responsiveness Fixes
-   ========================================================================== */
-
-/* Featured startup logo container */
-.aspect-square svg {
-    max-width: 100%;
-    max-height: 100%;
-    width: auto !important;
-    height: auto !important;
-    object-fit: contain;
-}
-
-/* Fix for SVG scaling */
-#featuredLogo {
-    width: 100%;
-    height: 100%;
-    max-width: 120px;
-    max-height: 120px;
-}
-
-/* Responsive testimonial profile images */
-.testimonial-slide .rounded-full {
-    width: 100%;
-    height: auto;
-    max-width: 4rem;
-    max-height: 4rem;
-    object-fit: cover;
-}
-
-/* Timeline event icons */
-.timeline-point svg {
-    width: 1rem;
-    height: 1rem;
-    max-width: 100%;
-}
-
-/* Mobile responsive adjustments for images */
-@media (max-width: 768px) {
-    #featuredLogo {
-        max-width: 80px;
-        max-height: 80px;
-    }
-    
-    .testimonial-slide .rounded-full {
-        max-width: 3rem;
-        max-height: 3rem;
-    }
-    
-    /* Adjust SVG sizes on mobile */
-    svg.w-32, svg.h-32 {
-        width: 5rem !important;
-        height: 5rem !important;
-    }
-}
-
-@media (max-width: 480px) {
-    #featuredLogo {
-        max-width: 60px;
-        max-height: 60px;
-    }
-    
-    .testimonial-slide .rounded-full {
-        max-width: 2.5rem;
-        max-height: 2.5rem;
-    }
-    
-    /* Adjust SVG sizes on small mobile */
-    svg.w-32, svg.h-32 {
-        width: 4rem !important;
-        height: 4rem !important;
-    }
-}
-
-.showcase-btn {
-    background: #fff;
-    color: #18181b;
-    border: 1.5px solid #ececec;
-    border-radius: 0.75rem;
-    font-weight: 700;
-    font-size: 1.15rem;
-    letter-spacing: 0.02em;
-    padding: 0.85rem 2.2rem;
-    box-shadow: 0 2px 8px 0 rgba(16, 30, 54, 0.07);
-    transition: box-shadow 0.22s cubic-bezier(.4,1.2,.6,1),
-                transform 0.22s cubic-bezier(.4,1.2,.6,1),
-                background 0.18s, color 0.18s;
-    outline: none;
-    cursor: pointer;
-    display: inline-block;
-}
-
-.showcase-btn:hover, .showcase-btn:focus {
-    box-shadow: 0 8px 24px 0 rgba(59, 130, 246, 0.10);
-    transform: translateY(-3px) scale(0.97);
-    background: #f3f4f6;
-    color: #111827;
-    border-color: #bdbdbd;
-}
-
-.showcase-btn:active {
-    transform: scale(0.96);
-}
-
-@media (max-width: 768px) {
-    .showcase-btn {
-        font-size: 1rem;
-        padding: 0.75rem 1.5rem;
-    }
-    .content .osmo-hero-title {
-        font-size: 3rem !important;
-    }
-    .content .osmo-hero-desc {
-        font-size: 1.2rem !important;
-    }
-}
-
-@media (max-width: 480px) {
-    .showcase-btn {
-        font-size: 0.9rem;
-        padding: 0.6rem 1.2rem;
-    }
-    .content .osmo-hero-title {
-        font-size: 2.5rem !important;
-    }
-    .content .osmo-hero-desc {
-        font-size: 1rem !important;
-    }
-}
-
-.content .osmo-hero-title {
-    color: #ffffff;
-    margin-bottom: 1.5rem;
-    filter: none;
-    mix-blend-mode: normal;
-}
-
-.content .osmo-hero-desc {
-    color: #ffffff;
-    opacity: 0.9;
-    margin-bottom: 2rem;
-}
-
-.content #liveStats {
-    color: #ffffff;
-    opacity: 0.9;
-    font-weight: 500;
-}
-
-.content .showcase-btn {
-    background: #ffffff;
-    color: #18181b;
-    border: none;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-    transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
-}
-
-.content .showcase-btn:hover {
-    background: #f0f0f0;
-    transform: translateY(-5px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-}
-
-/* Modal Scrollbar Styles */
-#modalCardBox .overflow-y-auto::-webkit-scrollbar {
-    width: 8px;
-    border-radius: 8px;
-    background: transparent;
-}
-#modalCardBox .overflow-y-auto::-webkit-scrollbar-thumb {
-    border-radius: 8px;
-    background: linear-gradient(180deg, #7f5af0 0%, #43e6fc 100%);
-    min-height: 40px;
-}
-#modalCardBox .overflow-y-auto::-webkit-scrollbar-button {
-    display: none;
-    height: 0;
-    width: 0;
-}
-#modalCardBox .overflow-y-auto {
-    scrollbar-width: thin;
-    scrollbar-color: #7f5af0 transparent;
-}
-
-/* Modern toggle switch animation */
-#toggleSocialMedia {
-    transition: background 0.3s cubic-bezier(.4,2,.6,1);
-    box-shadow: 0 1px 4px 0 rgba(60,60,60,0.04);
-}
-#toggleSocialMedia .toggle-dot-anim {
-    transition: transform 0.28s cubic-bezier(.4,2,.6,1), background 0.28s cubic-bezier(.4,2,.6,1);
-    box-shadow: 0 1px 4px 0 rgba(60,60,60,0.08);
-}
-#toggleSocialMedia.bg-blue-500 {
-    background: linear-gradient(90deg, #7f5af0 0%, #43e6fc 100%);
-}
-
-/* Modal error message */
-.modal-error-message {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-top: 1.5rem;
-    border: 1.5px solid #ef4444;
-    background: rgba(255, 0, 0, 0.06);
-    color: #ef4444;
-    border-radius: 0.75rem;
-    padding: 0.75rem 1rem;
-    font-size: 0.97rem;
-    font-weight: 500;
-    box-shadow: 0 2px 8px 0 rgba(239,68,68,0.04);
-    transition: opacity 0.2s;
-}
-.modal-error-message svg {
-    flex-shrink: 0;
-    width: 1.25em;
-    height: 1.25em;
-    color: #ef4444;
-}
-
-/* Fade-in-up animation */
-@keyframes fade-in-up {
-    0% { opacity: 0; transform: translateY(40px); }
-    100% { opacity: 1; transform: translateY(0); }
-}
-.animate-fade-in-up {
-    animation: fade-in-up 0.7s cubic-bezier(.39,.575,.565,1) both;
-}
-
-/* Highlight pulse effect for featured card */
-@keyframes highlight-pulse {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(127, 90, 240, 0); }
-    50% { box-shadow: 0 0 0 10px rgba(127, 90, 240, 0.3); }
-}
-.highlight-pulse {
-    animation: highlight-pulse 1s ease-in-out 2;
-}
-
-@font-face {
-    font-family: 'PP Neue Montreal';
-    src: url('Assets/PPNeueMontreal-Regular.woff2') format('woff2'),
-         url('Assets/PPNeueMontreal-Regular.woff') format('woff'),
-         url('Assets/PPNeueMontreal-Regular.ttf') format('truetype');
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'PP Neue Montreal';
-    src: url('Assets/PPNeueMontreal-Bold.woff2') format('woff2'),
-         url('Assets/PPNeueMontreal-Bold.woff') format('woff'),
-         url('Assets/PPNeueMontreal-Bold.ttf') format('truetype');
-    font-weight: 700;
-    font-style: normal;
-    font-display: swap;
-}
-
-/* ========================================================================== 
-   FAQ Accordion Styles (Questions & Answers)
-   ========================================================================== */
-
-/* Set FAQ question and answer text color to #efeeec */
-.faq-question,
-.faq-question span,
-.faq-answer p {
-    color: #efeeec !important;
-}
-
-/* ========================================================================== 
-   Global Subheading & Text Color Adjustments
-   ========================================================================== */
-
-/* Subheadings (h2, h3, h4, h5, h6) - slightly lighter for visual hierarchy */
-h2, h3, h4, h5, h6 {
-    color: #f5f5f3 !important;
-}
-
-/* Main body text, paragraphs, and labels for better readability */
-body, p, label, .text-base, .text-lg, .text-sm, .text-gray-700, .text-gray-900, .text-[#52525b], .dark\:text-gray-300 {
-    color: #e0dfdb !important;
-}
-
-/* Muted/secondary text for less emphasis */
-.text-muted, .text-gray-500, .text-gray-400, .dark\:text-gray-400 {
-    color: #bdbdb7 !important;
-}
-
-/*
-  - h1 remains #efeeec for main headings (already set above)
-  - h2-h6 are slightly lighter for hierarchy
-  - Body and paragraph text is a soft off-white for readability
-  - Muted/secondary text is a gentle gray for less emphasis
-  Adjust these values as needed for your brand and accessibility.
-*/
-
-/* Paragraphs - custom color for better readability and visual consistency */
-p {
-    color: #a8a7a5 !important;
 }
 

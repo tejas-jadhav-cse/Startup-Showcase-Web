@@ -55,10 +55,11 @@ const cursor = {
     $outline: document.querySelector('.cursor-dot-outline'),
     
     init: function() {
+        // Safety check: Only initialize if both cursor elements exist
+        if (!this.$dot || !this.$outline) return;
         // Set up element sizes
         this.dotSize = this.$dot.offsetWidth;
         this.outlineSize = this.$outline.offsetWidth;
-        
         this.setupEventListeners();
         this.animateDotOutline();
     },
@@ -164,11 +165,35 @@ cursor.init();
 let startupIdeas = JSON.parse(localStorage.getItem('startupIdeas') || '[]');
 let nextId = startupIdeas.length ? Math.max(...startupIdeas.map(s => s.id)) + 1 : 1;
 
-// DOM Elements
+// DOM Elements (cache all frequently used elements)
 const startupForm = document.getElementById('startupForm');
 const startupGrid = document.getElementById('startupGrid');
 const filterInput = document.getElementById('filter');
 const openSubmitModalBtn = document.getElementById('openSubmitModal');
+const statStartups = document.getElementById('statStartups');
+const statUpvotes = document.getElementById('statUpvotes');
+const dashboardTotalStartups = document.getElementById('dashboardTotalStartups');
+const dashboardTotalUpvotes = document.getElementById('dashboardTotalUpvotes');
+const dashboardTotalViews = document.getElementById('dashboardTotalViews');
+const dashboardTotalPartnerships = document.getElementById('dashboardTotalPartnerships');
+const growthChartEl = document.getElementById('growthChart');
+const featuredName = document.getElementById('featuredName');
+const featuredFounder = document.getElementById('featuredFounder');
+const featuredDesc = document.getElementById('featuredDesc');
+const featuredMetric = document.getElementById('featuredMetric');
+const featuredTags = document.getElementById('featuredTags');
+const viewFeaturedBtn = document.getElementById('viewFeaturedBtn');
+const testimonialSlider = document.getElementById('testimonialSlider');
+const testimonialDots = document.getElementById('testimonialDots');
+const prevTestimonial = document.getElementById('prevTestimonial');
+const nextTestimonial = document.getElementById('nextTestimonial');
+const returnToTopBtn = document.getElementById('returnToTop');
+const returnToTopButton = returnToTopBtn ? returnToTopBtn.querySelector('button') : null;
+const subscriptionForm = document.getElementById('subscriptionForm');
+const navLinks = document.getElementById('nav-links');
+const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+const navbar = document.querySelector('.gradient-navbar');
+const testimonialSlides = document.querySelectorAll('.testimonial-slide'); // <-- FIXED
 
 // ==========================================================================
 // 2. Theme Management (Dark Mode Only)
@@ -207,11 +232,17 @@ function openModal(contentHtml) {
     // Always disable outer scroll while modal is open
     document.body.style.overflow = 'hidden';
     activeModal = modalBg;
-    modalBg.querySelector('#closeModalBtn').onclick = closeModal;
-    // Close on outside click
-    modalBg.addEventListener('mousedown', function(e) {
+    // Remove previous event listeners by cloning the node
+    const closeBtn = modalBg.querySelector('#closeModalBtn');
+    const newCloseBtn = closeBtn.cloneNode(true);
+    closeBtn.parentNode.replaceChild(newCloseBtn, closeBtn);
+    newCloseBtn.onclick = closeModal;
+    // Remove previous mousedown listeners by cloning the node
+    const newModalBg = modalBg.cloneNode(true);
+    modalBg.parentNode.replaceChild(newModalBg, modalBg);
+    newModalBg.addEventListener('mousedown', function(e) {
         const card = document.getElementById('modalCardBox');
-        if (e.target === modalBg) {
+        if (e.target === newModalBg) {
             card.classList.remove('animate-fade-in-up');
             card.style.transition = 'transform 0.18s cubic-bezier(.4,2,.6,1), opacity 0.18s cubic-bezier(.4,2,.6,1)';
             card.style.transform = 'scale(0.92) translateY(40px)';
@@ -219,6 +250,7 @@ function openModal(contentHtml) {
             setTimeout(closeModal, 180);
         }
     });
+    activeModal = newModalBg;
 }
 
 /**
@@ -441,8 +473,8 @@ function renderAllStartups() {
     
     startupIdeas.forEach(renderStartupCard);
     
-    animateCounter(document.getElementById('statStartups'), startupIdeas.length, 'Startups');
-    animateCounter(document.getElementById('statUpvotes'), totalUpvotes, 'Upvotes');
+    animateCounter(statStartups, startupIdeas.length, 'Startups');
+    animateCounter(statUpvotes, totalUpvotes, 'Upvotes');
 }
 
 /**
@@ -517,17 +549,17 @@ function handleUpvote(e) {
     const button = e.currentTarget;
     const id = parseInt(button.getAttribute('data-id'));
     const startup = startupIdeas.find(s => s.id === id);
-    
     if (startup) {
         startup.upvotes++;
         localStorage.setItem('startupIdeas', JSON.stringify(startupIdeas));
         button.querySelector('.upvote-count').textContent = startup.upvotes;
-        
-        // Animation
+        // Animation using requestAnimationFrame for smoother effect
         button.classList.add('scale-125', 'text-pink-500');
-        setTimeout(() => {
+        function removeAnimation() {
             button.classList.remove('scale-125', 'text-pink-500');
-        }, 300);
+            button.removeEventListener('transitionend', removeAnimation);
+        }
+        button.addEventListener('transitionend', removeAnimation);
     }
 }
 
@@ -558,9 +590,6 @@ filterInput.addEventListener('input', () => {
 // ==========================================================================
 
 // Return to Top button implementation
-const returnToTopBtn = document.getElementById('returnToTop');
-const returnToTopButton = returnToTopBtn ? returnToTopBtn.querySelector('button') : null;
-
 if (returnToTopBtn) {
     window.addEventListener('scroll', () => {
         if (window.scrollY > 300) {
@@ -763,82 +792,33 @@ function launchConfetti() {
 // 9. Initial Setup & Initialization
 // ==========================================================================
 
-// Text scramble animation for hero title
+// Combine all DOMContentLoaded logic into a single listener
 window.addEventListener('DOMContentLoaded', () => {
-    // Text scramble effect
+    // 1. Text scramble animation for hero title
     const scrambleEl = document.querySelector('.animate-text-scramble');
     if (scrambleEl) {
         const chars = '!<>-_\/[]{}—=+*^?#________';
         const text = scrambleEl.textContent;
         let frame = 0;
         let scramble = '';
-        
         function scrambleStep() {
             scramble = text.split('').map((c, i) => {
                 if (i < frame) return c;
                 return chars[Math.floor(Math.random() * chars.length)];
             }).join('');
-            
             scrambleEl.textContent = scramble;
             frame++;
-            
             if (frame <= text.length) {
                 setTimeout(scrambleStep, 30);
             } else {
                 scrambleEl.textContent = text;
             }
         }
-        
         scrambleStep();
     }
-});
 
-// Initialize with sample data if empty
-window.addEventListener('DOMContentLoaded', () => {
-    if (startupIdeas.length === 0) {
-        const samples = [
-            {
-                startupName: "EcoLearn",
-                founderName: "Jamie Chen",
-                description: "An interactive platform that teaches environmental sustainability through gamified learning experiences.",
-                tags: ["education", "environment", "tech"],
-                upvotes: 15
-            },
-            {
-                startupName: "MealMatch",
-                founderName: "Priya Singh",
-                description: "An app that reduces food waste by connecting restaurants with surplus food to students on a budget.",
-                tags: ["food", "sustainability", "mobile"],
-                upvotes: 23
-            },
-            {
-                startupName: "CodeBuddy",
-                founderName: "Marcus Johnson",
-                description: "AI-powered programming assistant that helps students debug their code and learn programming concepts.",
-                tags: ["tech", "education", "AI"],
-                upvotes: 18
-            }
-        ];
-        
-        samples.forEach(sample => {
-            const startup = {
-                ...sample,
-                id: nextId++,
-                timestamp: new Date().toISOString()
-            };
-            startupIdeas.push(startup);
-        });
-        
-        localStorage.setItem('startupIdeas', JSON.stringify(startupIdeas));
-    }
-    
-    renderAllStartups();
-});
-
-// Ensure startup cards are always rendered on DOMContentLoaded
-window.addEventListener('DOMContentLoaded', () => {
+    // 2. Initialize with sample data if empty
     if (!startupIdeas || !Array.isArray(startupIdeas) || startupIdeas.length === 0) {
-        // If no data, load sample data
         const samples = [
             {
                 startupName: "EcoLearn",
@@ -870,7 +850,72 @@ window.addEventListener('DOMContentLoaded', () => {
         nextId = samples.length + 1;
         localStorage.setItem('startupIdeas', JSON.stringify(startupIdeas));
     }
+
+    // 3. Render all startups
     renderAllStartups();
+
+    // 4. Initialize new features
+    updateFeaturedStartup();
+    initMobileNav();
+    updateDashboard();
+
+    // FAQ Accordion logic (moved inside DOMContentLoaded for safety)
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        const answer = item.querySelector('.faq-answer');
+        const icon = item.querySelector('.faq-icon');
+        question.addEventListener('click', () => {
+            answer.classList.toggle('hidden');
+            icon.style.transform = answer.classList.contains('hidden') ? 'rotate(0)' : 'rotate(180deg)';
+            faqItems.forEach(otherItem => {
+                if (otherItem !== item) {
+                    const otherAnswer = otherItem.querySelector('.faq-answer');
+                    const otherIcon = otherItem.querySelector('.faq-icon');
+                    if (!otherAnswer.classList.contains('hidden')) {
+                        otherAnswer.classList.add('hidden');
+                        otherIcon.style.transform = 'rotate(0)';
+                    }
+                }
+            });
+        });
+    });
+
+    // Testimonials Carousel logic (moved inside DOMContentLoaded for safety)
+    let currentTestimonial = 0;
+    const totalTestimonials = testimonialSlides.length;
+    if (testimonialDots) {
+        testimonialDots.innerHTML = '';
+        for (let i = 0; i < totalTestimonials; i++) {
+            const dot = document.createElement('button');
+            dot.className = `w-3 h-3 rounded-full ${i === 0 ? 'bg-purple-500' : 'bg-gray-300 dark:bg-gray-600'}`;
+            dot.onclick = () => moveToTestimonial(i);
+            testimonialDots.appendChild(dot);
+        }
+    }
+    function moveToTestimonial(index) {
+        if (index < 0) index = totalTestimonials - 1;
+        if (index >= totalTestimonials) index = 0;
+        currentTestimonial = index;
+        if (testimonialSlider) {
+            testimonialSlider.style.transform = `translateX(-${currentTestimonial * 100}%)`;
+            const dots = testimonialDots.querySelectorAll('button');
+            dots.forEach((dot, i) => {
+                dot.className = `w-3 h-3 rounded-full ${i === currentTestimonial ? 'bg-purple-500' : 'bg-gray-300 dark:bg-gray-600'}`;
+            });
+        }
+    }
+    prevTestimonial?.addEventListener('click', () => {
+        moveToTestimonial(currentTestimonial - 1);
+    });
+    nextTestimonial?.addEventListener('click', () => {
+        moveToTestimonial(currentTestimonial + 1);
+    });
+    setInterval(() => {
+        if (document.visibilityState === 'visible') {
+            moveToTestimonial(currentTestimonial + 1);
+        }
+    }, 6000);
 });
 
 // ==========================================================================
@@ -888,23 +933,22 @@ function updateFeaturedStartup() {
     const featured = sortedStartups[0];
     
     // Update the featured section
-    document.getElementById('featuredName').textContent = featured.startupName;
-    document.getElementById('featuredFounder').textContent = featured.founderName;
-    document.getElementById('featuredDesc').textContent = featured.description;
-    document.getElementById('featuredMetric').textContent = featured.upvotes;
+    featuredName.textContent = featured.startupName;
+    featuredFounder.textContent = featured.founderName;
+    featuredDesc.textContent = featured.description;
+    featuredMetric.textContent = featured.upvotes;
     
     // Clear and update tags
-    const tagsContainer = document.getElementById('featuredTags');
-    tagsContainer.innerHTML = '';
+    featuredTags.innerHTML = '';
     featured.tags.forEach(tag => {
         const tagEl = document.createElement('span');
         tagEl.className = 'osmo-badge';
         tagEl.textContent = tag;
-        tagsContainer.appendChild(tagEl);
+        featuredTags.appendChild(tagEl);
     });
     
     // Set up view details button
-    document.getElementById('viewFeaturedBtn').onclick = () => {
+    viewFeaturedBtn.onclick = () => {
         // Find and scroll to the featured startup card
         const card = document.getElementById(`startup-${featured.id}`);
         if (card) {
@@ -922,9 +966,6 @@ function updateFeaturedStartup() {
 // ==========================================================================
 
 let currentTestimonial = 0;
-const testimonialSlider = document.getElementById('testimonialSlider');
-const testimonialSlides = document.querySelectorAll('.testimonial-slide');
-const testimonialDots = document.getElementById('testimonialDots');
 const totalTestimonials = testimonialSlides.length;
 
 // Initialize testimonial dots
@@ -960,11 +1001,11 @@ function moveToTestimonial(index) {
 }
 
 // Set up testimonial carousel navigation
-document.getElementById('prevTestimonial')?.addEventListener('click', () => {
+prevTestimonial?.addEventListener('click', () => {
     moveToTestimonial(currentTestimonial - 1);
 });
 
-document.getElementById('nextTestimonial')?.addEventListener('click', () => {
+nextTestimonial?.addEventListener('click', () => {
     moveToTestimonial(currentTestimonial + 1);
 });
 
@@ -978,33 +1019,7 @@ setInterval(() => {
 // ==========================================================================
 // 12. FAQ Accordion
 // ==========================================================================
-
-const faqItems = document.querySelectorAll('.faq-item');
-
-faqItems.forEach(item => {
-    const question = item.querySelector('.faq-question');
-    const answer = item.querySelector('.faq-answer');
-    const icon = item.querySelector('.faq-icon');
-    
-    question.addEventListener('click', () => {
-        // Toggle current FAQ item
-        answer.classList.toggle('hidden');
-        icon.style.transform = answer.classList.contains('hidden') ? 'rotate(0)' : 'rotate(180deg)';
-        
-        // Close other FAQ items
-        faqItems.forEach(otherItem => {
-            if (otherItem !== item) {
-                const otherAnswer = otherItem.querySelector('.faq-answer');
-                const otherIcon = otherItem.querySelector('.faq-icon');
-                
-                if (!otherAnswer.classList.contains('hidden')) {
-                    otherAnswer.classList.add('hidden');
-                    otherIcon.style.transform = 'rotate(0)';
-                }
-            }
-        });
-    });
-});
+// (Removed global FAQ logic here; now only inside DOMContentLoaded)
 
 // ==========================================================================
 // 13. Analytics Dashboard
@@ -1031,13 +1046,12 @@ function updateDashboard() {
     });
     
     // Update dashboard metrics with animation
-    animateCounter(document.getElementById('dashboardTotalStartups'), totalStartups, '');
-    animateCounter(document.getElementById('dashboardTotalUpvotes'), totalUpvotes, '');
-    animateCounter(document.getElementById('dashboardTotalViews'), totalViews, '');
-    animateCounter(document.getElementById('dashboardTotalPartnerships'), totalPartnerships, '');
+    animateCounter(dashboardTotalStartups, totalStartups, '');
+    animateCounter(dashboardTotalUpvotes, totalUpvotes, '');
+    animateCounter(dashboardTotalViews, totalViews, '');
+    animateCounter(dashboardTotalPartnerships, totalPartnerships, '');
     
     // If we have a growth chart element, update it
-    const growthChartEl = document.getElementById('growthChart');
     if (growthChartEl) {
         renderGrowthChart(growthChartEl, 'weekly');
     }
@@ -1201,8 +1215,6 @@ function renderGrowthChart(canvas, timeframe) {
 // 14. Subscription Form
 // ==========================================================================
 
-const subscriptionForm = document.getElementById('subscriptionForm');
-
 if (subscriptionForm) {
     subscriptionForm.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -1237,9 +1249,6 @@ if (subscriptionForm) {
  * Initialize mobile navigation menu
  */
 function initMobileNav() {
-    const navLinks = document.getElementById('nav-links');
-    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-    
     if (mobileMenuToggle && navLinks) {
         // Ensure menu is hidden on mobile and visible on desktop at page load
         const isMobile = window.innerWidth < 768;
@@ -1312,8 +1321,6 @@ function initMobileNav() {
  * Add scroll effect to the navigation bar
  */
 function initNavScroll() {
-    const navbar = document.querySelector('.gradient-navbar');
-    
     window.addEventListener('scroll', () => {
         if (window.scrollY > 50) {
             navbar.classList.add('scrolled');
